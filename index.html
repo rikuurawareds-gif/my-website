@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>スマブラ賭けカウンター</title>
+<style>
+  :root {
+    --bg-page: #f5f4ef;
+    --bg-card: #ffffff;
+    --bg-soft: #ecebe4;
+    --bg-info: #e6f1fb;
+    --bg-success: #eaf3de;
+    --bg-stripe: #f7f6f1;
+    --bg-row-alt: #f4f6fa;
+    --bg-row-weekend: #fbeeee;
+    --border: rgba(60, 55, 45, 0.12);
+    --border-strong: rgba(60, 55, 45, 0.25);
+    --border-info: #378add;
+    --border-success: #97c459;
+    --text: #2c2c2a;
+    --text-secondary: #5f5e5a;
+    --text-tertiary: #888780;
+    --text-info: #0c447c;
+    --text-success: #3b6d11;
+    --text-danger: #a32d2d;
+    --text-purple: #6b2891;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-page: #1a1916;
+      --bg-card: #25241f;
+      --bg-soft: #2f2e28;
+      --bg-info: #042c53;
+      --bg-success: #173404;
+      --bg-stripe: #1f1e1a;
+      --bg-row-alt: #1c2433;
+      --bg-row-weekend: #2e1818;
+      --border: rgba(255, 250, 240, 0.12);
+      --border-strong: rgba(255, 250, 240, 0.25);
+      --border-info: #85b7eb;
+      --border-success: #c0dd97;
+      --text: #f1efe8;
+      --text-secondary: #b4b2a9;
+      --text-tertiary: #888780;
+      --text-info: #b5d4f4;
+      --text-success: #c0dd97;
+      --text-danger: #f0999a;
+      --text-purple: #d4a3f0;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg-page);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  .app { max-width: 600px; margin: 0 auto; padding: 8px; }
+  h1 { font-size: 14px; font-weight: 500; margin: 2px 0 8px; color: var(--text-secondary); text-align: center; }
+
+  .tabs {
+    display: flex; gap: 4px; margin-bottom: 8px;
+    background: var(--bg-soft);
+    padding: 3px;
+    border-radius: var(--radius-md);
+  }
+  .tab-btn {
+    flex: 1; height: 30px;
+    border: none; background: transparent;
+    border-radius: var(--radius-sm);
+    font-size: 12px; font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+  .tab-btn.active {
+    background: var(--bg-card);
+    color: var(--text);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .top-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 6px; margin-bottom: 8px; flex-wrap: wrap;
+  }
+  .date-bar {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 6px; flex-wrap: wrap;
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 5px 8px;
+  }
+  .date-input {
+    height: 28px; padding: 0 6px;
+    font-size: 13px;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    font-family: inherit;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+  .date-input:focus { outline: none; box-shadow: 0 0 0 2px var(--border-info); }
+  .date-warning {
+    font-size: 11px;
+    color: var(--text-info);
+    font-weight: 500;
+    margin-left: auto;
+  }
+  .date-warning.past { color: var(--text-danger); }
+  .top-left { display: flex; align-items: center; gap: 8px; }
+  .top-right { display: flex; gap: 6px; }
+  .label-sm { font-size: 13px; color: var(--text-secondary); }
+  .round-label { font-size: 12px; color: var(--text-tertiary); }
+
+  select, input, button { font-family: inherit; color: var(--text); }
+  select {
+    height: 28px; padding: 0 6px; font-size: 13px;
+    border: 0.5px solid var(--border); border-radius: var(--radius-sm);
+    background: var(--bg-card); min-width: 60px;
+  }
+  button {
+    border: 0.5px solid var(--border);
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    -webkit-appearance: none; appearance: none;
+  }
+  button:active { transform: scale(0.97); }
+  button:disabled { cursor: not-allowed; }
+  .btn-sm { height: 28px; padding: 0 8px; font-size: 12px; font-weight: 500; }
+  .btn-sm:hover { background: var(--bg-soft); }
+
+  .rate-section {
+    background: var(--bg-soft);
+    border-radius: var(--radius-md);
+    padding: 6px 10px; margin-bottom: 8px;
+  }
+  .rate-header {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 6px; margin-bottom: 4px; flex-wrap: wrap;
+  }
+  .rate-header-label { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+  .preset-row { display: flex; gap: 3px; flex-wrap: wrap; }
+  .preset-btn { height: 26px; padding: 0 8px; font-size: 11px; font-weight: 500; }
+  .preset-btn.active {
+    background: var(--bg-info); border-color: var(--border-info); color: var(--text-info);
+  }
+  .rate-display {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    font-size: 12px; font-variant-numeric: tabular-nums;
+  }
+  .scale-item { display: inline-flex; align-items: center; gap: 4px; }
+  .scale-rank { color: var(--text-tertiary); }
+  .rate-editor { display: none; margin-top: 10px; }
+  .rate-inputs {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 10px;
+  }
+  .rate-input-group {
+    display: flex; align-items: center; gap: 4px;
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 4px 8px;
+  }
+  .rate-input-group .label { font-size: 12px; color: var(--text-tertiary); font-weight: 500; }
+  .rate-input {
+    width: 60px; height: 30px; padding: 0 6px;
+    font-size: 14px;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+  .rate-input:focus { outline: none; box-shadow: 0 0 0 2px var(--border-info); }
+  .editor-actions { display: flex; gap: 8px; justify-content: flex-end; }
+  .btn-primary {
+    background: var(--bg-info); border-color: var(--border-info);
+    color: var(--text-info); font-weight: 500;
+  }
+
+  .players { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+  .player-row {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 6px 8px;
+  }
+  .player-row.inactive { opacity: 0.5; }
+  .player-top { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+  .toggle-btn {
+    width: 26px; height: 26px;
+    border-radius: var(--radius-sm); font-size: 14px;
+    color: var(--text-secondary);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; padding: 0;
+  }
+  .toggle-btn.active {
+    background: var(--bg-success); border-color: var(--border-success); color: var(--text-success);
+  }
+  .name-input {
+    flex: 1; min-width: 0; height: 30px; padding: 0 8px;
+    font-size: 14px;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: transparent;
+  }
+  .name-input:focus { outline: none; box-shadow: 0 0 0 2px var(--border-info); }
+  .totals {
+    display: flex; flex-direction: column; align-items: flex-end;
+    min-width: 50px; gap: 0; flex-shrink: 0;
+  }
+  .total-pts {
+    font-size: 17px; font-weight: 500;
+    font-variant-numeric: tabular-nums; line-height: 1.1;
+  }
+  .last-pts {
+    font-size: 10px; color: var(--text-tertiary);
+    font-variant-numeric: tabular-nums; line-height: 1.1;
+  }
+  .pt-positive { color: var(--text-success); }
+  .pt-negative { color: var(--text-danger); }
+  .pt-zero { color: var(--text-tertiary); }
+
+  /* Bottom row: name chips + rank buttons side-by-side */
+  .player-bottom {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .name-presets {
+    display: flex; gap: 3px; flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .name-chip {
+    height: 22px; padding: 0 7px; font-size: 11px;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 0.5px solid var(--border);
+  }
+  .name-chip:hover { background: var(--bg-soft); }
+  .name-chip.used { opacity: 0.4; }
+  .name-chip.add-chip { color: var(--text-info); border-style: dashed; padding: 0 6px; }
+
+  .rank-buttons {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px;
+    flex: 1;
+  }
+  .rank-buttons.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .rank-buttons.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .rank-buttons.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .rank-buttons.cols-5 { grid-template-columns: repeat(5, 1fr); }
+  .rank-btn {
+    height: 32px; padding: 0 4px;
+    font-size: 13px; font-weight: 500;
+    border-radius: var(--radius-sm);
+    background: transparent;
+  }
+  .rank-btn:hover { background: var(--bg-soft); }
+  .rank-btn.selected {
+    background: var(--bg-info); border-color: var(--border-info); color: var(--text-info);
+  }
+  .rank-btn:disabled { opacity: 0.3; }
+  .inactive-msg {
+    text-align: center; font-size: 12px;
+    color: var(--text-tertiary); padding: 4px 0;
+  }
+
+  .confirm-btn {
+    width: 100%; height: 40px;
+    font-size: 15px; font-weight: 500;
+    border-radius: var(--radius-md);
+    background: var(--bg-info); border-color: var(--border-info); color: var(--text-info);
+    margin-bottom: 4px;
+  }
+  .confirm-btn:disabled { opacity: 0.4; }
+  .save-status {
+    font-size: 10px; color: var(--text-tertiary);
+    text-align: center; min-height: 12px; margin-bottom: 10px;
+  }
+  .add-player-btn {
+    width: 100%; height: 32px;
+    font-size: 12px; font-weight: 500;
+    color: var(--text-info);
+    border-style: dashed;
+    background: transparent;
+    margin-top: 2px;
+  }
+  .add-player-btn:hover { background: var(--bg-info); }
+
+  .history-section { margin-top: 8px; }
+  .history-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 8px; padding: 0 4px;
+  }
+  .history-title { font-size: 14px; font-weight: 500; color: var(--text-secondary); }
+  .history-meta { font-size: 11px; color: var(--text-tertiary); }
+  .history-list { display: flex; flex-direction: column; gap: 6px; }
+  .history-row {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 8px 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .history-round {
+    font-size: 11px; color: var(--text-tertiary);
+    font-weight: 500; min-width: 28px; flex-shrink: 0;
+  }
+  .history-time {
+    font-size: 10px; color: var(--text-tertiary);
+    font-variant-numeric: tabular-nums;
+    min-width: 38px; flex-shrink: 0;
+  }
+  .history-entries {
+    display: flex; flex-wrap: wrap; gap: 6px 10px; flex: 1; font-size: 12px;
+  }
+  .history-entry {
+    display: inline-flex; align-items: center; gap: 3px;
+    font-variant-numeric: tabular-nums;
+  }
+  .history-rank { color: var(--text-tertiary); font-size: 10px; }
+  .history-name { color: var(--text); }
+  .history-pt { font-weight: 500; }
+  .history-empty {
+    text-align: center; font-size: 12px;
+    color: var(--text-tertiary);
+    padding: 12px 0;
+  }
+
+  .stats-toolbar {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px; flex-wrap: wrap;
+  }
+  .stats-toolbar .spacer { flex: 1; }
+  .stats-rate-input {
+    width: 80px; height: 32px; padding: 0 8px; font-size: 13px;
+    border: 0.5px solid var(--border); border-radius: var(--radius-md);
+    background: var(--bg-card); font-variant-numeric: tabular-nums; text-align: right;
+  }
+  .stats-summary {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 8px 10px; margin-bottom: 12px;
+    font-size: 12px; color: var(--text-secondary); text-align: center;
+  }
+  .stats-summary b { color: var(--text); font-weight: 500; }
+
+  .stats-table-wrap {
+    overflow-x: auto;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    -webkit-overflow-scrolling: touch;
+  }
+  .stats-table {
+    border-collapse: collapse;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    width: 100%;
+    min-width: max-content;
+  }
+  .stats-table th, .stats-table td {
+    padding: 5px 8px;
+    border-bottom: 0.5px solid var(--border);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .stats-table th {
+    font-weight: 500;
+    color: var(--text-purple);
+    background: var(--bg-stripe);
+    position: sticky; top: 0;
+    z-index: 2;
+  }
+  .stats-table th:first-child, .stats-table td:first-child {
+    text-align: left;
+    color: var(--text-purple);
+    font-weight: 500;
+    background: var(--bg-card);
+    position: sticky; left: 0;
+    z-index: 1;
+    min-width: 96px;
+  }
+  .stats-table th:first-child { z-index: 3; background: var(--bg-stripe); }
+  .stats-table tbody tr.row-sat td:first-child,
+  .stats-table tbody tr.row-sat td { background: var(--bg-row-alt); }
+  .stats-table tbody tr.row-sun td:first-child,
+  .stats-table tbody tr.row-sun td { background: var(--bg-row-weekend); }
+  .stats-table .row-summary td {
+    font-weight: 500;
+    border-top: 1.5px solid var(--border-strong);
+    background: var(--bg-stripe) !important;
+  }
+  .stats-table .row-summary td:first-child { color: var(--text-secondary); }
+  .stats-table .label-row td {
+    color: var(--text-secondary); font-weight: 500;
+    background: var(--bg-stripe) !important;
+  }
+  .stats-table .label-row td:first-child { color: var(--text-secondary); }
+
+  .empty-stats {
+    text-align: center; font-size: 13px;
+    color: var(--text-tertiary); padding: 30px 12px;
+  }
+
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4); z-index: 100;
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 16px; width: 100%; max-width: 360px;
+  }
+  .modal h3 { margin: 0 0 12px; font-size: 15px; font-weight: 500; }
+  .modal input {
+    width: 100%; height: 38px; padding: 0 10px; font-size: 15px;
+    border: 0.5px solid var(--border); border-radius: var(--radius-md);
+    background: transparent; margin-bottom: 12px;
+  }
+  .modal input:focus { outline: none; box-shadow: 0 0 0 2px var(--border-info); }
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+</style>
+</head>
+<body>
+<div class="app">
+  <h1>スマブラ賭けカウンター</h1>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="match">対戦</button>
+    <button class="tab-btn" data-tab="stats">デイリー集計</button>
+  </div>
+
+  <div id="tab-match" class="tab-panel active">
+    <div class="date-bar">
+      <span class="label-sm">記録日</span>
+      <input id="record-date" type="date" class="date-input" />
+      <button id="date-today-btn" class="btn-sm">今日</button>
+      <span id="date-warning" class="date-warning"></span>
+    </div>
+    <div class="top-bar">
+      <div class="top-left">
+        <span class="label-sm">人数</span>
+        <select id="player-count">
+          <option value="2">2人</option>
+          <option value="3">3人</option>
+          <option value="4">4人</option>
+          <option value="5">5人</option>
+        </select>
+        <span id="round-label" class="round-label">R 1</span>
+      </div>
+      <div class="top-right">
+        <button id="undo-btn" class="btn-sm">取消</button>
+        <button id="reset-btn" class="btn-sm">リセット</button>
+      </div>
+    </div>
+
+    <div class="rate-section">
+      <div class="rate-header">
+        <span class="rate-header-label">レート</span>
+        <div class="preset-row">
+          <button class="preset-btn" data-preset="standard">標準</button>
+          <button class="preset-btn" data-preset="double">2倍</button>
+          <button class="preset-btn" data-preset="half">半分</button>
+          <button id="edit-btn" class="preset-btn">編集</button>
+        </div>
+      </div>
+      <div id="rate-display" class="rate-display"></div>
+      <div id="rate-editor" class="rate-editor">
+        <div id="rate-inputs" class="rate-inputs"></div>
+        <div class="editor-actions">
+          <button id="rate-cancel" class="btn-sm">キャンセル</button>
+          <button id="rate-save" class="btn-sm btn-primary">保存</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="players" class="players"></div>
+    <button id="confirm-btn" class="confirm-btn">この順位で確定</button>
+    <div id="save-status" class="save-status">&nbsp;</div>
+
+    <div class="history-section">
+      <div class="history-header">
+        <span id="history-title" class="history-title">今日の試合</span>
+        <span id="history-meta" class="history-meta"></span>
+      </div>
+      <div id="history-list" class="history-list"></div>
+    </div>
+  </div>
+
+  <div id="tab-stats" class="tab-panel">
+    <div class="stats-toolbar">
+      <span class="label-sm">月</span>
+      <select id="stats-month"></select>
+      <span class="spacer"></span>
+      <span class="label-sm">1pt =</span>
+      <input id="stats-rate" class="stats-rate-input" type="number" inputmode="numeric" min="0" />
+      <span class="label-sm">円</span>
+    </div>
+    <div id="stats-summary" class="stats-summary"></div>
+    <div id="stats-content"></div>
+  </div>
+</div>
+
+<div id="name-modal" class="modal-overlay">
+  <div class="modal">
+    <h3>名前を追加</h3>
+    <input id="name-modal-input" type="text" placeholder="プレイヤー名" />
+    <div class="modal-actions">
+      <button id="name-modal-cancel" class="btn-sm">キャンセル</button>
+      <button id="name-modal-save" class="btn-sm btn-primary">追加</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'smash_betting_counter_v6';
+  const DEFAULT_NAME_PRESETS = ['キルア', 'ごり', 'tom', 'さとう', '丸山', '尾關'];
+
+  const PRESETS = {
+    standard: {
+      2: [10, -10],
+      3: [10, -3, -7],
+      4: [10, 5, -5, -10],
+      5: [20, 10, 0, -10, -20]
+    },
+    double: {
+      2: [20, -20],
+      3: [20, -6, -14],
+      4: [20, 10, -10, -20],
+      5: [40, 20, 0, -20, -40]
+    },
+    half: {
+      2: [5, -5],
+      3: [5, -1, -4],
+      4: [5, 3, -3, -5],
+      5: [10, 5, 0, -5, -10]
+    }
+  };
+
+  // ----- April 2026 imported daily totals -----
+  // Each entry is a "daily" record: { type: 'daily', dateKey: 'YYYY-M-D', entries: [{name, pt}], ts }
+  const APRIL_2026_DATA = [
+    { date: '2026-04-01', entries: [{name:'上原', pt:2}, {name:'五十嵐', pt:-2}] },
+    { date: '2026-04-02', entries: [{name:'上原', pt:18}, {name:'池田', pt:-18}] },
+    { date: '2026-04-06', entries: [{name:'上原', pt:34}, {name:'五十嵐', pt:-15}, {name:'市村', pt:-7}, {name:'池田', pt:-12}] },
+    { date: '2026-04-08', entries: [{name:'上原', pt:-36}, {name:'五十嵐', pt:36}, {name:'池田', pt:0}] },
+    { date: '2026-04-15', entries: [{name:'上原', pt:35}, {name:'五十嵐', pt:-62}, {name:'市村', pt:23}, {name:'池田', pt:4}] },
+    { date: '2026-04-17', entries: [{name:'上原', pt:9}, {name:'五十嵐', pt:32}, {name:'市村', pt:-41}] },
+    { date: '2026-04-18', entries: [{name:'上原', pt:-38}, {name:'五十嵐', pt:32}, {name:'市村', pt:-6}, {name:'丸山', pt:-5}, {name:'尾關', pt:17}] },
+    { date: '2026-04-20', entries: [{name:'上原', pt:0}, {name:'五十嵐', pt:17}, {name:'池田', pt:-17}] },
+    { date: '2026-04-22', entries: [{name:'五十嵐', pt:-37}, {name:'池田', pt:37}] },
+    { date: '2026-04-23', entries: [{name:'上原', pt:-9}, {name:'五十嵐', pt:1}, {name:'池田', pt:8}] },
+    { date: '2026-04-28', entries: [{name:'五十嵐', pt:18}, {name:'池田', pt:-18}] },
+    { date: '2026-04-30', entries: [{name:'上原', pt:-13}, {name:'五十嵐', pt:15}, {name:'池田', pt:-2}] }
+  ];
+
+  function buildAprilHistory() {
+    return APRIL_2026_DATA.map((d, i) => {
+      const [y, m, day] = d.date.split('-').map(Number);
+      // Use noon JST as timestamp; round number = i+1
+      const ts = new Date(y, m - 1, day, 12, 0, 0).getTime();
+      return {
+        type: 'daily',  // daily-totals import (not a normal round)
+        round: i + 1,
+        ts: ts,
+        entries: d.entries.map(e => ({ name: e.name, pt: e.pt, rank: null }))
+      };
+    });
+  }
+
+  function defaultState() {
+    return {
+      count: 4,
+      rates: {
+        2: PRESETS.standard[2].slice(),
+        3: PRESETS.standard[3].slice(),
+        4: PRESETS.standard[4].slice(),
+        5: PRESETS.standard[5].slice()
+      },
+      players: [
+        { name: 'P1', total: 0, last: null, active: true },
+        { name: 'P2', total: 0, last: null, active: true },
+        { name: 'P3', total: 0, last: null, active: true },
+        { name: 'P4', total: 0, last: null, active: true },
+        { name: 'P5', total: 0, last: null, active: false }
+      ],
+      currentRanks: [null, null, null, null, null],
+      history: buildAprilHistory(),  // pre-loaded April data
+      round: 1,
+      editing: false,
+      namePresets: DEFAULT_NAME_PRESETS.slice(),
+      yenPerPoint: 500,
+      statsMonth: null
+    };
+  }
+
+  // Helpers for the record date (in-memory only — defaults to today on each load)
+  function todayISO() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+  let recordDate = todayISO();
+  function recordDateTs(hour) {
+    const [y, m, d] = recordDate.split('-').map(Number);
+    const h = (typeof hour === 'number') ? hour : 12;
+    return new Date(y, m - 1, d, h, new Date().getMinutes(), new Date().getSeconds()).getTime();
+  }
+
+  let state = defaultState();
+  const $ = (id) => document.getElementById(id);
+
+  function saveState() {
+    try {
+      const toSave = {
+        count: state.count, rates: state.rates,
+        players: state.players, currentRanks: state.currentRanks,
+        history: state.history, round: state.round,
+        namePresets: state.namePresets,
+        yenPerPoint: state.yenPerPoint, statsMonth: state.statsMonth
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+      flashSaved();
+    } catch (e) {}
+  }
+  let saveTimer = null;
+  function scheduleSave() {
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveState, 250);
+  }
+  let flashTimer = null;
+  function flashSaved() {
+    const el = $('save-status');
+    if (!el) return;
+    el.textContent = '保存しました';
+    if (flashTimer) clearTimeout(flashTimer);
+    flashTimer = setTimeout(() => { el.innerHTML = '&nbsp;'; }, 1200);
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      const fresh = defaultState();
+      if (typeof data.count === 'number' && [2,3,4,5].includes(data.count)) fresh.count = data.count;
+      if (data.rates && typeof data.rates === 'object') {
+        for (const k of [2,3,4,5]) {
+          if (Array.isArray(data.rates[k]) && data.rates[k].length === k) {
+            fresh.rates[k] = data.rates[k].map(n => Number(n) || 0);
+          }
+        }
+      }
+      if (Array.isArray(data.players)) {
+        for (let i = 0; i < 5; i++) {
+          const src = data.players[i];
+          if (src && typeof src === 'object') {
+            fresh.players[i] = {
+              name: typeof src.name === 'string' ? src.name : `P${i+1}`,
+              total: Number(src.total) || 0,
+              last: (src.last === null || src.last === undefined) ? null : Number(src.last),
+              active: src.active === undefined ? (i < fresh.count) : !!src.active
+            };
+          }
+        }
+      }
+      if (Array.isArray(data.currentRanks)) {
+        for (let i = 0; i < 5; i++) {
+          const v = data.currentRanks[i];
+          fresh.currentRanks[i] = (typeof v === 'number') ? v : null;
+        }
+      }
+      if (Array.isArray(data.history)) fresh.history = data.history;
+      if (typeof data.round === 'number' && data.round >= 1) fresh.round = data.round;
+      if (Array.isArray(data.namePresets)) fresh.namePresets = data.namePresets.filter(s => typeof s === 'string');
+      if (typeof data.yenPerPoint === 'number') fresh.yenPerPoint = data.yenPerPoint;
+      if (typeof data.statsMonth === 'string') fresh.statsMonth = data.statsMonth;
+      state = fresh;
+    } catch (e) {}
+  }
+
+  function fmtPoint(n) { return n > 0 ? '+' + n : String(n); }
+  function ptClass(n) {
+    if (n > 0) return 'pt-positive';
+    if (n < 0) return 'pt-negative';
+    return 'pt-zero';
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function currentRate() { return state.rates[state.count]; }
+  function activeIndices() {
+    return state.players.map((p, i) => p.active ? i : -1).filter(i => i !== -1);
+  }
+  function detectPreset() {
+    for (const key of ['standard', 'double', 'half']) {
+      const preset = PRESETS[key][state.count];
+      const cur = state.rates[state.count];
+      if (preset.length === cur.length && preset.every((v, i) => v === cur[i])) return key;
+    }
+    return null;
+  }
+  function dayKey(ts) {
+    const d = ts ? new Date(ts) : new Date();
+    return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+  }
+  function todayHistory() {
+    // Filter by the currently-selected record date, not the actual today
+    const [y, m, d] = recordDate.split('-').map(Number);
+    const key = `${y}-${m-1}-${d}`;
+    return state.history.filter(h => h.ts && dayKey(h.ts) === key && h.type !== 'daily');
+  }
+  function fmtTime(ts) {
+    const d = new Date(ts);
+    const hh = String(d.getHours()).padStart(2, '0');
+    const mm = String(d.getMinutes()).padStart(2, '0');
+    return `${hh}:${mm}`;
+  }
+  function fmtYen(n) {
+    const sign = n < 0 ? '-' : '';
+    const abs = Math.abs(Math.round(n));
+    return sign + '¥' + abs.toLocaleString('ja-JP');
+  }
+  function monthKey(ts) {
+    const d = new Date(ts);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+  }
+  function currentMonth() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+  }
+
+  function showTab(name) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === 'tab-' + name));
+    if (name === 'stats') renderStats();
+  }
+
+  function renderRateDisplay() {
+    const rate = currentRate();
+    const items = rate.map((pt, i) => {
+      const cls = ptClass(pt);
+      return `<span class="scale-item"><span class="scale-rank">${i + 1}位</span><span class="${cls}" style="font-weight:500">${fmtPoint(pt)}</span></span>`;
+    }).join('');
+    $('rate-display').innerHTML = items;
+    const active = detectPreset();
+    document.querySelectorAll('.preset-btn[data-preset]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.preset === active);
+    });
+  }
+
+  function renderRateEditor() {
+    const rate = currentRate();
+    $('rate-inputs').innerHTML = rate.map((pt, i) => `
+      <div class="rate-input-group">
+        <span class="label">${i + 1}位</span>
+        <input type="number" inputmode="numeric" pattern="-?[0-9]*" class="rate-input" data-rank="${i}" value="${pt}" />
+      </div>
+    `).join('');
+  }
+
+  function openEditor() {
+    state.editing = true; renderRateEditor();
+    $('rate-editor').style.display = 'block';
+    $('edit-btn').style.opacity = '0.5';
+  }
+  function closeEditor() {
+    state.editing = false;
+    $('rate-editor').style.display = 'none';
+    $('edit-btn').style.opacity = '1';
+  }
+
+  function renderPlayers() {
+    const rate = currentRate();
+    const usedNames = new Set(state.players.filter(p => p.active).map(p => p.name));
+    const actives = activeIndices();
+    const canAddMore = actives.length < 5;
+
+    // Render only active players as cards; an "add" button appears at the bottom if room
+    const html = state.players.map((p, idx) => {
+      if (!p.active) return ''; // skip inactive — no card
+
+      const rankBtns = rate.map((pt, rIdx) => {
+        const rank = rIdx + 1;
+        const taken = state.currentRanks.indexOf(rank);
+        const isMine = state.currentRanks[idx] === rank;
+        const disabled = taken !== -1 && taken !== idx;
+        const cls = 'rank-btn' + (isMine ? ' selected' : '');
+        return `<button class="${cls}" data-player="${idx}" data-rank="${rank}" ${disabled ? 'disabled' : ''}>${rank}位</button>`;
+      }).join('');
+
+      const totalCls = ptClass(p.total);
+      const totalDisplay = p.total === 0 ? '0' : fmtPoint(p.total);
+      const lastHtml = p.last !== null
+        ? `<span class="last-pts">直近 <span class="${ptClass(p.last)}">${fmtPoint(p.last)}</span></span>`
+        : '';
+      const removeBtn = actives.length > 2
+        ? `<button class="toggle-btn active" data-toggle="${idx}" title="外す">✓</button>`
+        : `<button class="toggle-btn active" data-toggle="${idx}" disabled style="opacity:0.4">✓</button>`;
+
+      const nameChips = state.namePresets.map(name => {
+        const usedByOther = usedNames.has(name) && p.name !== name;
+        return `<button class="name-chip${usedByOther ? ' used' : ''}" data-name="${escapeHtml(name)}" data-player="${idx}">${escapeHtml(name)}</button>`;
+      }).join('') + `<button class="name-chip add-chip" data-add="${idx}">+</button>`;
+
+      return `
+        <div class="player-row">
+          <div class="player-top">
+            ${removeBtn}
+            <input class="name-input" data-player="${idx}" value="${escapeHtml(p.name)}" placeholder="名前" />
+            <div class="totals">
+              <span class="total-pts ${totalCls}">${totalDisplay}</span>
+              ${lastHtml}
+            </div>
+          </div>
+          <div class="name-presets">${nameChips}</div>
+          <div class="rank-buttons cols-${rate.length}">${rankBtns}</div>
+        </div>
+      `;
+    }).join('');
+
+    // Add-player button if we have room
+    const addPlayerBtn = canAddMore
+      ? `<button id="add-player-btn" class="add-player-btn">+ プレイヤー追加</button>`
+      : '';
+
+    $('players').innerHTML = html + addPlayerBtn;
+
+    $('players').querySelectorAll('.name-input').forEach(inp => {
+      inp.addEventListener('input', (e) => {
+        state.players[parseInt(e.target.dataset.player)].name = e.target.value;
+        scheduleSave();
+      });
+      inp.addEventListener('blur', () => renderPlayers());
+    });
+    $('players').querySelectorAll('.name-chip:not(.add-chip)').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const i = parseInt(e.currentTarget.dataset.player);
+        state.players[i].name = e.currentTarget.dataset.name;
+        renderPlayers(); scheduleSave();
+      });
+    });
+    $('players').querySelectorAll('.name-chip.add-chip').forEach(btn => {
+      btn.addEventListener('click', (e) => openAddNameModal(parseInt(e.currentTarget.dataset.add)));
+    });
+    $('players').querySelectorAll('.rank-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const i = parseInt(e.currentTarget.dataset.player);
+        const r = parseInt(e.currentTarget.dataset.rank);
+        if (state.currentRanks[i] === r) {
+          state.currentRanks[i] = null;
+        } else {
+          for (let j = 0; j < state.currentRanks.length; j++) {
+            if (state.currentRanks[j] === r) state.currentRanks[j] = null;
+          }
+          state.currentRanks[i] = r;
+        }
+        renderPlayers(); updateConfirmBtn(); scheduleSave();
+      });
+    });
+    $('players').querySelectorAll('.toggle-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        if (e.currentTarget.disabled) return;
+        toggleActive(parseInt(e.currentTarget.dataset.toggle));
+      });
+    });
+    const addBtn = $('add-player-btn');
+    if (addBtn) {
+      addBtn.addEventListener('click', () => {
+        // Find first inactive player slot and activate it
+        for (let i = 0; i < state.players.length; i++) {
+          if (!state.players[i].active) {
+            toggleActive(i);
+            return;
+          }
+        }
+      });
+    }
+  }
+
+  function renderHistory() {
+    // Update title based on whether record date is today
+    const titleEl = $('history-title');
+    if (titleEl) {
+      const isToday = recordDate === todayISO();
+      if (isToday) {
+        titleEl.textContent = '今日の試合';
+      } else {
+        const [y, m, d] = recordDate.split('-');
+        titleEl.textContent = `${parseInt(m)}/${parseInt(d)}の試合`;
+      }
+    }
+
+    const today = todayHistory();
+    const meta = $('history-meta');
+    if (today.length === 0) {
+      meta.textContent = '';
+      $('history-list').innerHTML = '<div class="history-empty">まだ試合がありません</div>';
+      return;
+    }
+    meta.textContent = `${today.length}試合`;
+    const html = today.slice().reverse().map(h => {
+      const entries = h.entries.slice().sort((a, b) => (a.rank || 99) - (b.rank || 99)).map(e => {
+        const cls = ptClass(e.pt);
+        const rankLabel = e.rank ? `${e.rank}位` : '';
+        return `<span class="history-entry"><span class="history-rank">${rankLabel}</span><span class="history-name">${escapeHtml(e.name)}</span><span class="history-pt ${cls}">${fmtPoint(e.pt)}</span></span>`;
+      }).join('');
+      const time = h.ts ? `<span class="history-time">${fmtTime(h.ts)}</span>` : '';
+      return `<div class="history-row"><span class="history-round">R${h.round}</span>${time}<div class="history-entries">${entries}</div></div>`;
+    }).join('');
+    $('history-list').innerHTML = html;
+  }
+
+  function updateConfirmBtn() {
+    const actives = activeIndices();
+    const allFilled = actives.length === state.count && actives.every(i => state.currentRanks[i] !== null);
+    $('confirm-btn').disabled = !allFilled;
+  }
+
+  function renderRoundLabel() { $('round-label').textContent = `R ${state.round}`; }
+
+  function setActiveCount(newCount) {
+    newCount = parseInt(newCount);
+    const cur = activeIndices();
+    if (cur.length === newCount) return;
+    if (cur.length > newCount) {
+      const toRemove = cur.length - newCount;
+      const reversed = cur.slice().reverse();
+      for (let k = 0; k < toRemove; k++) {
+        state.players[reversed[k]].active = false;
+        state.currentRanks[reversed[k]] = null;
+      }
+    } else {
+      const toAdd = newCount - cur.length;
+      let added = 0;
+      for (let i = 0; i < state.players.length && added < toAdd; i++) {
+        if (!state.players[i].active) { state.players[i].active = true; added++; }
+      }
+    }
+  }
+
+  function changeCount(newCount) {
+    newCount = parseInt(newCount);
+    if (newCount === state.count) return;
+    state.count = newCount;
+    setActiveCount(newCount);
+    for (let i = 0; i < state.currentRanks.length; i++) {
+      if (state.currentRanks[i] !== null && state.currentRanks[i] > newCount) state.currentRanks[i] = null;
+    }
+    if (state.editing) closeEditor();
+    renderRateDisplay(); renderPlayers(); updateConfirmBtn(); scheduleSave();
+  }
+
+  function toggleActive(idx) {
+    const p = state.players[idx];
+    if (p.active) {
+      if (activeIndices().length <= 2) return;
+      p.active = false;
+      state.currentRanks[idx] = null;
+      state.count = Math.max(2, state.count - 1);
+    } else {
+      if (activeIndices().length >= 5) return;
+      p.active = true;
+      state.count = Math.min(5, state.count + 1);
+    }
+    $('player-count').value = String(state.count);
+    for (let i = 0; i < state.currentRanks.length; i++) {
+      if (state.currentRanks[i] !== null && state.currentRanks[i] > state.count) state.currentRanks[i] = null;
+    }
+    if (state.editing) closeEditor();
+    renderRateDisplay(); renderPlayers(); updateConfirmBtn(); scheduleSave();
+  }
+
+  function saveRate() {
+    const inputs = $('rate-inputs').querySelectorAll('.rate-input');
+    const newRate = [];
+    for (const inp of inputs) {
+      const v = parseInt(inp.value);
+      if (isNaN(v)) { alert('全ての順位に数値を入力してください'); return; }
+      newRate.push(v);
+    }
+    state.rates[state.count] = newRate;
+    closeEditor(); renderRateDisplay(); scheduleSave();
+  }
+
+  function applyPreset(name) {
+    state.rates[state.count] = PRESETS[name][state.count].slice();
+    if (state.editing) closeEditor();
+    renderRateDisplay(); scheduleSave();
+  }
+
+  function confirmRound() {
+    const rate = currentRate();
+    const actives = activeIndices();
+    const entries = [];
+    actives.forEach(i => {
+      const r = state.currentRanks[i];
+      const pt = rate[r - 1];
+      entries.push({ name: state.players[i].name, rank: r, pt: pt });
+    });
+    const snapshot = {
+      type: 'round',
+      round: state.round, count: state.count,
+      activeIdx: actives.slice(),
+      ranks: actives.map(i => state.currentRanks[i]),
+      rate: rate.slice(),
+      prevLasts: state.players.map(p => p.last),
+      entries: entries, ts: recordDateTs()
+    };
+    actives.forEach(i => {
+      const r = state.currentRanks[i];
+      const pt = rate[r - 1];
+      state.players[i].total += pt;
+      state.players[i].last = pt;
+    });
+    state.players.forEach((p) => { if (!p.active) p.last = null; });
+    state.history.push(snapshot);
+    state.round++;
+    state.currentRanks = [null, null, null, null, null];
+    renderPlayers(); renderHistory(); renderRoundLabel(); updateConfirmBtn(); scheduleSave();
+  }
+
+  function undoLast() {
+    // Find the last "round" entry (skip imported daily)
+    let idx = -1;
+    for (let i = state.history.length - 1; i >= 0; i--) {
+      if (state.history[i].type !== 'daily') { idx = i; break; }
+    }
+    if (idx === -1) return;
+    const last = state.history[idx];
+    state.history.splice(idx, 1);
+    last.activeIdx.forEach((playerIdx, k) => {
+      const r = last.ranks[k];
+      state.players[playerIdx].total -= last.rate[r - 1];
+    });
+    last.prevLasts.forEach((v, i) => {
+      if (state.players[i]) state.players[i].last = v;
+    });
+    state.round = Math.max(1, state.round - 1);
+    renderPlayers(); renderHistory(); renderRoundLabel(); scheduleSave();
+  }
+
+  function resetAll() {
+    state.players.forEach(p => { p.total = 0; p.last = null; });
+    state.currentRanks = [null, null, null, null, null];
+    state.round = 1;
+    renderPlayers(); renderRoundLabel(); updateConfirmBtn(); scheduleSave();
+  }
+
+  let addNameTarget = null;
+  function openAddNameModal(playerIdx) {
+    addNameTarget = playerIdx;
+    $('name-modal-input').value = '';
+    $('name-modal').classList.add('show');
+    setTimeout(() => $('name-modal-input').focus(), 50);
+  }
+  function closeAddNameModal() {
+    $('name-modal').classList.remove('show');
+    addNameTarget = null;
+  }
+  function saveAddName() {
+    const v = $('name-modal-input').value.trim();
+    if (!v) { closeAddNameModal(); return; }
+    if (!state.namePresets.includes(v)) state.namePresets.push(v);
+    if (addNameTarget !== null && state.players[addNameTarget]) state.players[addNameTarget].name = v;
+    closeAddNameModal(); renderPlayers(); scheduleSave();
+  }
+
+  // ---------- Stats Tab ----------
+  function getAllNames() {
+    const seen = new Set();
+    const names = [];
+    state.history.forEach(h => {
+      (h.entries || []).forEach(e => {
+        if (!seen.has(e.name)) { seen.add(e.name); names.push(e.name); }
+      });
+    });
+    return names;
+  }
+
+  function getAvailableMonths() {
+    const set = new Set();
+    state.history.forEach(h => { if (h.ts) set.add(monthKey(h.ts)); });
+    const months = Array.from(set).sort();
+    if (months.length === 0) months.push(currentMonth());
+    return months;
+  }
+
+  function renderMonthSelector() {
+    const months = getAvailableMonths();
+    if (!state.statsMonth || !months.includes(state.statsMonth)) {
+      state.statsMonth = months[months.length - 1];
+    }
+    $('stats-month').innerHTML = months.map(m => {
+      const [y, mo] = m.split('-');
+      return `<option value="${m}" ${m === state.statsMonth ? 'selected' : ''}>${y}年${parseInt(mo)}月</option>`;
+    }).join('');
+  }
+
+  function renderStats() {
+    renderMonthSelector();
+    $('stats-rate').value = state.yenPerPoint;
+
+    const month = state.statsMonth;
+    const [yearStr, monthStr] = month.split('-');
+    const year = parseInt(yearStr);
+    const monthIdx = parseInt(monthStr) - 1;
+    const daysInMonth = new Date(year, monthIdx + 1, 0).getDate();
+
+    const monthHistory = state.history.filter(h => h.ts && monthKey(h.ts) === month);
+
+    if (monthHistory.length === 0) {
+      $('stats-summary').innerHTML = '';
+      $('stats-content').innerHTML = '<div class="empty-stats">この月の対戦データはまだありません</div>';
+      return;
+    }
+
+    // Build per-day, per-name aggregation
+    // Logic: aggregate ALL entries (round + daily) by date.
+    // For "win" definition: a player "wins" on a day if their day-total pt >= 0.
+    // (0 counts as a win as per user's spec.)
+    const dayPoints = {};
+    for (let d = 1; d <= daysInMonth; d++) dayPoints[d] = {};
+    monthHistory.forEach(h => {
+      const d = new Date(h.ts).getDate();
+      (h.entries || []).forEach(e => {
+        if (dayPoints[d][e.name] === undefined) dayPoints[d][e.name] = 0;
+        dayPoints[d][e.name] += e.pt;
+      });
+    });
+
+    // Collect names from this month's data only (in order of first appearance in month)
+    const nameSet = new Set();
+    const monthNames = [];
+    monthHistory.forEach(h => {
+      (h.entries || []).forEach(e => {
+        if (!nameSet.has(e.name)) { nameSet.add(e.name); monthNames.push(e.name); }
+      });
+    });
+
+    if (monthNames.length === 0) {
+      $('stats-summary').innerHTML = '';
+      $('stats-content').innerHTML = '<div class="empty-stats">この月の対戦データはまだありません</div>';
+      return;
+    }
+
+    // Totals
+    const totalPts = {}, daysPlayed = {}, daysWon = {};
+    monthNames.forEach(n => { totalPts[n] = 0; daysPlayed[n] = 0; daysWon[n] = 0; });
+    for (let d = 1; d <= daysInMonth; d++) {
+      monthNames.forEach(n => {
+        if (dayPoints[d][n] !== undefined) {
+          totalPts[n] += dayPoints[d][n];
+          daysPlayed[n] += 1;
+          if (dayPoints[d][n] >= 0) daysWon[n] += 1;
+        }
+      });
+    }
+
+    const totalMatches = monthHistory.length;
+    const playedDayCount = Object.keys(dayPoints).filter(d => Object.keys(dayPoints[d]).length > 0).length;
+    $('stats-summary').innerHTML = `<b>${parseInt(monthStr)}月</b> · ${totalMatches}記録 · ${playedDayCount}日 · 1pt = ¥${state.yenPerPoint.toLocaleString('ja-JP')}`;
+
+    const yen = state.yenPerPoint;
+    const headerCells = `
+      <tr>
+        <th>${year}年${parseInt(monthStr)}月</th>
+        ${monthNames.map(n => `<th>${escapeHtml(n)}</th>`).join('')}
+      </tr>
+    `;
+
+    const summaryRows = `
+      <tr class="row-summary">
+        <td>収支</td>
+        ${monthNames.map(n => {
+          const v = totalPts[n] * yen;
+          const cls = v > 0 ? 'pt-positive' : (v < 0 ? 'pt-negative' : 'pt-zero');
+          return `<td class="${cls}">${v === 0 ? '¥0' : fmtYen(v)}</td>`;
+        }).join('')}
+      </tr>
+      <tr class="label-row">
+        <td>ポイント</td>
+        ${monthNames.map(n => {
+          const v = totalPts[n];
+          return `<td class="${ptClass(v)}">${v === 0 ? '0' : fmtPoint(v)}</td>`;
+        }).join('')}
+      </tr>
+      <tr class="label-row">
+        <td>勝率</td>
+        ${monthNames.map(n => {
+          if (daysPlayed[n] === 0) return `<td>-</td>`;
+          const r = (daysWon[n] / daysPlayed[n]) * 100;
+          return `<td>${r.toFixed(1)}%</td>`;
+        }).join('')}
+      </tr>
+      <tr class="label-row">
+        <td>参加日数</td>
+        ${monthNames.map(n => `<td>${daysPlayed[n] || 0}</td>`).join('')}
+      </tr>
+    `;
+
+    const dailyRows = [];
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date = new Date(year, monthIdx, d);
+      const dow = date.getDay();
+      const rowClass = dow === 0 ? 'row-sun' : (dow === 6 ? 'row-sat' : '');
+      const cells = monthNames.map(n => {
+        if (dayPoints[d][n] === undefined) return `<td></td>`;
+        const v = dayPoints[d][n];
+        return `<td class="${ptClass(v)}">${v === 0 ? '0' : fmtPoint(v)}</td>`;
+      }).join('');
+      dailyRows.push(`<tr class="${rowClass}"><td>${year}/${String(monthIdx + 1).padStart(2,'0')}/${String(d).padStart(2,'0')}</td>${cells}</tr>`);
+    }
+
+    const totalRow = `
+      <tr class="row-summary">
+        <td>Total</td>
+        ${monthNames.map(n => {
+          const v = totalPts[n];
+          return `<td class="${ptClass(v)}">${v === 0 ? '0' : fmtPoint(v)}</td>`;
+        }).join('')}
+      </tr>
+    `;
+
+    $('stats-content').innerHTML = `
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <thead>
+            ${headerCells}
+            ${summaryRows}
+            <tr><td colspan="${monthNames.length + 1}" style="height: 6px; padding: 0; background: var(--bg-stripe);"></td></tr>
+            ${headerCells}
+          </thead>
+          <tbody>
+            ${dailyRows.join('')}
+            ${totalRow}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  function updateDateWarning() {
+    const el = $('date-warning');
+    if (!el) return;
+    const today = todayISO();
+    if (recordDate === today) {
+      el.textContent = '';
+      el.classList.remove('past');
+    } else if (recordDate < today) {
+      const [, m, d] = recordDate.split('-');
+      el.textContent = `${parseInt(m)}/${parseInt(d)}に記録`;
+      el.classList.add('past');
+    } else {
+      const [, m, d] = recordDate.split('-');
+      el.textContent = `${parseInt(m)}/${parseInt(d)}に記録`;
+      el.classList.remove('past');
+    }
+  }
+
+  function setRecordDate(iso) {
+    if (!iso) iso = todayISO();
+    recordDate = iso;
+    if ($('record-date')) $('record-date').value = iso;
+    updateDateWarning();
+    renderHistory();
+  }
+
+  function init() {
+    loadState();
+    $('player-count').value = String(state.count);
+    $('record-date').value = recordDate;
+    updateDateWarning();
+    renderRateDisplay(); renderPlayers(); renderHistory(); renderRoundLabel(); updateConfirmBtn();
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => showTab(e.currentTarget.dataset.tab));
+    });
+    $('record-date').addEventListener('change', (e) => {
+      setRecordDate(e.target.value || todayISO());
+    });
+    $('date-today-btn').addEventListener('click', () => setRecordDate(todayISO()));
+    $('player-count').addEventListener('change', (e) => changeCount(e.target.value));
+    $('confirm-btn').addEventListener('click', confirmRound);
+    $('undo-btn').addEventListener('click', undoLast);
+    $('reset-btn').addEventListener('click', () => {
+      if (confirm('今の累計と直近表示をリセットしますか?(履歴と集計データは残ります)')) resetAll();
+    });
+    document.querySelectorAll('.preset-btn[data-preset]').forEach(btn => {
+      btn.addEventListener('click', (e) => applyPreset(e.currentTarget.dataset.preset));
+    });
+    $('edit-btn').addEventListener('click', () => { if (state.editing) closeEditor(); else openEditor(); });
+    $('rate-cancel').addEventListener('click', closeEditor);
+    $('rate-save').addEventListener('click', saveRate);
+
+    $('name-modal-cancel').addEventListener('click', closeAddNameModal);
+    $('name-modal-save').addEventListener('click', saveAddName);
+    $('name-modal-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') saveAddName();
+      if (e.key === 'Escape') closeAddNameModal();
+    });
+    $('name-modal').addEventListener('click', (e) => {
+      if (e.target === $('name-modal')) closeAddNameModal();
+    });
+
+    $('stats-month').addEventListener('change', (e) => {
+      state.statsMonth = e.target.value;
+      renderStats(); scheduleSave();
+    });
+    $('stats-rate').addEventListener('input', (e) => {
+      const v = parseInt(e.target.value);
+      if (!isNaN(v) && v >= 0) {
+        state.yenPerPoint = v;
+        renderStats(); scheduleSave();
+      }
+    });
+  }
+  init();
+})();
+</script>
+</body>
+</html>
