@@ -168,26 +168,42 @@
   .scale-rank { color: var(--text-tertiary); }
   .rate-editor { display: none; margin-top: 10px; }
   .rate-inputs {
-    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 10px;
+    display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 10px;
   }
   .rate-input-group {
-    display: flex; align-items: center; gap: 4px;
+    display: flex; align-items: center; gap: 2px;
     background: var(--bg-card);
     border: 0.5px solid var(--border);
     border-radius: var(--radius-md);
-    padding: 4px 8px;
+    padding: 3px 4px 3px 8px;
   }
-  .rate-input-group .label { font-size: 12px; color: var(--text-tertiary); font-weight: 500; }
+  .rate-input-group .label { font-size: 12px; color: var(--text-tertiary); font-weight: 500; margin-right: 2px; }
   .rate-input {
-    width: 60px; height: 30px; padding: 0 6px;
+    width: 44px; height: 28px; padding: 0 4px;
     font-size: 14px;
     border: 0.5px solid var(--border);
     border-radius: var(--radius-sm);
     background: transparent;
     font-variant-numeric: tabular-nums;
-    text-align: right;
+    text-align: center;
+    -moz-appearance: textfield;
   }
+  .rate-input::-webkit-outer-spin-button,
+  .rate-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
   .rate-input:focus { outline: none; box-shadow: 0 0 0 2px var(--border-info); }
+  .rate-step-btn {
+    width: 24px; height: 28px;
+    padding: 0;
+    font-size: 14px; font-weight: 500;
+    line-height: 1;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-secondary);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .rate-step-btn:hover { background: var(--bg-soft); color: var(--text); }
+  .rate-step-btn:active { background: var(--bg-info); }
   .editor-actions { display: flex; gap: 8px; justify-content: flex-end; }
   .btn-primary {
     background: var(--bg-info); border-color: var(--border-info);
@@ -292,6 +308,7 @@
     font-size: 10px; color: var(--text-tertiary);
     text-align: center; min-height: 12px; margin-bottom: 10px;
   }
+  .save-status.error { color: var(--text-danger); font-weight: 500; }
   .add-player-btn {
     width: 100%; height: 32px;
     font-size: 12px; font-weight: 500;
@@ -468,6 +485,7 @@
         <span id="round-label" class="round-label">R 1</span>
       </div>
       <div class="top-right">
+        <button id="refresh-btn" class="btn-sm" title="Notionから再読込">↻</button>
         <button id="undo-btn" class="btn-sm">取消</button>
         <button id="reset-btn" class="btn-sm">リセット</button>
       </div>
@@ -533,6 +551,10 @@
 
 <script>
 (function() {
+  // ===== Notion sync configuration =====
+  // Google Apps Script Web App URL (acts as Notion API proxy)
+  const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwNQzkj4x6G4VkeYIAcsQWUvGqcb43bnMV3MUgYdnilnNQ-xumPuO6bjrjHaA4kPXeHTA/exec';
+
   const STORAGE_KEY = 'smash_betting_counter_v6';
   const DEFAULT_NAME_PRESETS = ['キルア', 'ごり', 'tom', 'さとう', '丸山', '尾關'];
 
@@ -649,11 +671,127 @@
   }
   let flashTimer = null;
   function flashSaved() {
+    setStatus('保存しました', 1200);
+  }
+  function setStatus(msg, autoClearMs) {
     const el = $('save-status');
     if (!el) return;
-    el.textContent = '保存しました';
-    if (flashTimer) clearTimeout(flashTimer);
-    flashTimer = setTimeout(() => { el.innerHTML = '&nbsp;'; }, 1200);
+    el.textContent = msg;
+    el.classList.remove('error');
+    if (flashTimer) { clearTimeout(flashTimer); flashTimer = null; }
+    if (autoClearMs) {
+      flashTimer = setTimeout(() => { el.innerHTML = '&nbsp;'; el.classList.remove('error'); }, autoClearMs);
+    }
+  }
+  function setStatusError(msg) {
+    const el = $('save-status');
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add('error');
+    if (flashTimer) { clearTimeout(flashTimer); flashTimer = null; }
+  }
+
+  // ========== Notion sync (via GAS proxy) ==========
+  const notionApi = {
+    list: function() {
+      return fetch(GAS_API_URL + '?action=list', { method: 'GET', redirect: 'follow' })
+        .then(r => r.json());
+    },
+    add: function(payload) {
+      return fetch(GAS_API_URL + '?action=add', {
+        method: 'POST',
+        // GAS doesn't care about content-type as long as we send the JSON in body.
+        // Using text/plain avoids CORS preflight on browsers.
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload),
+        redirect: 'follow'
+      }).then(r => r.json());
+    },
+    remove: function(pageId) {
+      return fetch(GAS_API_URL + '?action=delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ id: pageId }),
+        redirect: 'follow'
+      }).then(r => r.json());
+    }
+  };
+
+  // Pull all matches from Notion and merge into local history.
+  // Hardcoded April data (type: 'daily') is preserved as-is.
+  function syncFromNotion() {
+    setStatus('同期中…');
+    return notionApi.list().then(data => {
+      if (!data || !Array.isArray(data.matches)) {
+        throw new Error('invalid response');
+      }
+      // Keep the hardcoded daily entries (April data) and any not-yet-synced pending rounds
+      const dailyOnly = state.history.filter(h => h.type === 'daily');
+      const stillPending = state.history.filter(h => h.type === 'round' && h.pending && !h.remoteId);
+      // Append Notion matches, normalizing them to our internal "round" snapshot shape.
+      // We don't have the full snapshot details (activeIdx, prevLasts, rate) from Notion,
+      // because those are only needed for undoing. Reconstruct a minimal "remote" snapshot.
+      const remoteRounds = data.matches.map(m => ({
+        type: 'round',
+        remoteId: m.id,
+        round: m.round,
+        count: m.count,
+        ts: m.ts,
+        entries: m.entries || [],
+        // The fields below are only used by undoLast() for local rounds; remote ones
+        // get a different undo path that calls the API directly.
+        activeIdx: [],
+        ranks: [],
+        rate: [],
+        prevLasts: []
+      }));
+      state.history = dailyOnly.concat(remoteRounds).concat(stillPending);
+      // Recompute per-player totals & last from history (only for currently active players)
+      recomputeTotalsFromHistory();
+      // Update local round counter to be >= any in remote
+      const maxRoundToday = remoteRounds
+        .filter(r => sameLocalDay(r.ts, recordDateTs()))
+        .reduce((mx, r) => Math.max(mx, r.round || 0), 0);
+      state.round = Math.max(1, maxRoundToday + 1);
+      // Persist the cache
+      persistCache();
+      setStatus('読み込み完了', 1200);
+      return data;
+    }).catch(err => {
+      console.error('syncFromNotion failed', err);
+      setStatusError('読み込み失敗(キャッシュ表示中)');
+      throw err;
+    });
+  }
+
+  function sameLocalDay(tsA, tsB) {
+    const a = new Date(tsA), b = new Date(tsB);
+    return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  }
+
+  // Recalculate each active player's total + last from the entire history.
+  // Note: totals here represent the running session for the currently selected
+  // recordDate only — historical days are visible in the stats tab instead.
+  function recomputeTotalsFromHistory() {
+    state.players.forEach(p => { p.total = 0; p.last = null; });
+    // For each active player, sum entries from history that match by name AND record date
+    const dateTs = recordDateTs();
+    state.history.forEach(h => {
+      if (!sameLocalDay(h.ts, dateTs)) return;
+      if (h.type === 'daily') return; // skip imported daily totals from running tally
+      (h.entries || []).forEach(e => {
+        const idx = state.players.findIndex(p => p.active && p.name === e.name);
+        if (idx >= 0) {
+          state.players[idx].total += e.pt;
+          state.players[idx].last = e.pt;
+        }
+      });
+    });
+  }
+
+  function persistCache() {
+    // Lightweight cache to localStorage — used as a fallback when API is down.
+    saveState();
   }
 
   function loadState() {
@@ -773,9 +911,23 @@
     $('rate-inputs').innerHTML = rate.map((pt, i) => `
       <div class="rate-input-group">
         <span class="label">${i + 1}位</span>
+        <button type="button" class="rate-step-btn" data-step="-1" data-rank="${i}" aria-label="マイナス1">−</button>
         <input type="number" inputmode="numeric" pattern="-?[0-9]*" class="rate-input" data-rank="${i}" value="${pt}" />
+        <button type="button" class="rate-step-btn" data-step="1" data-rank="${i}" aria-label="プラス1">+</button>
       </div>
     `).join('');
+
+    // Wire up +/- buttons
+    $('rate-inputs').querySelectorAll('.rate-step-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const step = parseInt(e.currentTarget.dataset.step);
+        const rank = parseInt(e.currentTarget.dataset.rank);
+        const input = $('rate-inputs').querySelector(`.rate-input[data-rank="${rank}"]`);
+        if (!input) return;
+        const cur = parseInt(input.value);
+        input.value = String((isNaN(cur) ? 0 : cur) + step);
+      });
+    });
   }
 
   function openEditor() {
@@ -1017,6 +1169,7 @@
       const pt = rate[r - 1];
       entries.push({ name: state.players[i].name, rank: r, pt: pt });
     });
+    const ts = recordDateTs();
     const snapshot = {
       type: 'round',
       round: state.round, count: state.count,
@@ -1024,7 +1177,9 @@
       ranks: actives.map(i => state.currentRanks[i]),
       rate: rate.slice(),
       prevLasts: state.players.map(p => p.last),
-      entries: entries, ts: recordDateTs()
+      entries: entries, ts: ts,
+      remoteId: null,
+      pending: true
     };
     actives.forEach(i => {
       const r = state.currentRanks[i];
@@ -1036,7 +1191,30 @@
     state.history.push(snapshot);
     state.round++;
     state.currentRanks = [null, null, null, null, null];
-    renderPlayers(); renderHistory(); renderRoundLabel(); updateConfirmBtn(); scheduleSave();
+    renderPlayers(); renderHistory(); renderRoundLabel(); updateConfirmBtn();
+    persistCache();
+
+    // Push to Notion
+    setStatus('保存中…');
+    notionApi.add({
+      date: recordDate,
+      round: snapshot.round,
+      count: snapshot.count,
+      ts: snapshot.ts,
+      entries: snapshot.entries
+    }).then(res => {
+      if (res && res.ok && res.id) {
+        snapshot.remoteId = res.id;
+        snapshot.pending = false;
+        persistCache();
+        setStatus('保存しました', 1200);
+      } else {
+        throw new Error('add failed: ' + JSON.stringify(res));
+      }
+    }).catch(err => {
+      console.error('confirmRound: Notion add failed', err);
+      setStatusError('Notion保存失敗(後で再送)');
+    });
   }
 
   function undoLast() {
@@ -1048,15 +1226,46 @@
     if (idx === -1) return;
     const last = state.history[idx];
     state.history.splice(idx, 1);
-    last.activeIdx.forEach((playerIdx, k) => {
-      const r = last.ranks[k];
-      state.players[playerIdx].total -= last.rate[r - 1];
-    });
-    last.prevLasts.forEach((v, i) => {
-      if (state.players[i]) state.players[i].last = v;
-    });
+
+    // Restore local totals/last. For locally-confirmed rounds we have the snapshot.
+    // For remote-loaded rounds we don't, so just recompute from the (now-shortened) history.
+    if (last.activeIdx && last.activeIdx.length > 0 && last.rate && last.rate.length > 0) {
+      last.activeIdx.forEach((playerIdx, k) => {
+        const r = last.ranks[k];
+        if (state.players[playerIdx]) state.players[playerIdx].total -= last.rate[r - 1];
+      });
+      if (last.prevLasts && last.prevLasts.length) {
+        last.prevLasts.forEach((v, i) => {
+          if (state.players[i]) state.players[i].last = v;
+        });
+      }
+    } else {
+      // Remote-loaded entry — recompute totals from scratch
+      recomputeTotalsFromHistory();
+    }
     state.round = Math.max(1, state.round - 1);
-    renderPlayers(); renderHistory(); renderRoundLabel(); scheduleSave();
+    renderPlayers(); renderHistory(); renderRoundLabel();
+    persistCache();
+
+    // If this was a synced entry, delete it from Notion too
+    if (last.remoteId) {
+      setStatus('削除中…');
+      notionApi.remove(last.remoteId).then(res => {
+        if (res && res.ok) {
+          setStatus('削除しました', 1200);
+        } else {
+          throw new Error('delete failed: ' + JSON.stringify(res));
+        }
+      }).catch(err => {
+        console.error('undoLast: Notion delete failed', err);
+        setStatusError('Notion削除失敗');
+      });
+    } else if (last.pending) {
+      // Was queued but not yet confirmed by API — nothing to delete remotely
+      setStatus('取消しました', 1200);
+    } else {
+      setStatus('取消しました', 1200);
+    }
   }
 
   function resetAll() {
@@ -1297,11 +1506,37 @@
     });
     $('record-date').addEventListener('change', (e) => {
       setRecordDate(e.target.value || todayISO());
+      // After date change, recompute totals/last for the new date
+      recomputeTotalsFromHistory();
+      // Also recalc round number for that date
+      const dateTs = recordDateTs();
+      const maxRound = state.history
+        .filter(h => h.type !== 'daily' && sameLocalDay(h.ts, dateTs))
+        .reduce((mx, h) => Math.max(mx, h.round || 0), 0);
+      state.round = Math.max(1, maxRound + 1);
+      renderPlayers(); renderHistory(); renderRoundLabel(); updateConfirmBtn();
+      persistCache();
     });
-    $('date-today-btn').addEventListener('click', () => setRecordDate(todayISO()));
+    $('date-today-btn').addEventListener('click', () => {
+      setRecordDate(todayISO());
+      recomputeTotalsFromHistory();
+      const dateTs = recordDateTs();
+      const maxRound = state.history
+        .filter(h => h.type !== 'daily' && sameLocalDay(h.ts, dateTs))
+        .reduce((mx, h) => Math.max(mx, h.round || 0), 0);
+      state.round = Math.max(1, maxRound + 1);
+      renderPlayers(); renderHistory(); renderRoundLabel(); updateConfirmBtn();
+      persistCache();
+    });
     $('player-count').addEventListener('change', (e) => changeCount(e.target.value));
     $('confirm-btn').addEventListener('click', confirmRound);
     $('undo-btn').addEventListener('click', undoLast);
+    $('refresh-btn').addEventListener('click', () => {
+      syncFromNotion().then(() => {
+        renderPlayers(); renderHistory(); renderRoundLabel(); updateConfirmBtn();
+        if ($('tab-stats').classList.contains('active')) renderStats();
+      }).catch(() => {});
+    });
     $('reset-btn').addEventListener('click', () => {
       if (confirm('今の累計と直近表示をリセットしますか?(履歴と集計データは残ります)')) resetAll();
     });
@@ -1332,6 +1567,13 @@
         state.yenPerPoint = v;
         renderStats(); scheduleSave();
       }
+    });
+
+    // Initial sync from Notion (after rendering cached data)
+    syncFromNotion().then(() => {
+      renderPlayers(); renderHistory(); renderRoundLabel(); updateConfirmBtn();
+    }).catch(() => {
+      // already showed error status; cached data is on screen
     });
   }
   init();
