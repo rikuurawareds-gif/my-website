@@ -644,7 +644,8 @@
       editing: false,
       namePresets: DEFAULT_NAME_PRESETS.slice(),
       yenPerPoint: 500,
-      statsMonth: null
+      statsMonth: null,
+      lockedDates: []
     };
   }
 
@@ -670,7 +671,8 @@
         players: state.players, currentRanks: state.currentRanks,
         history: state.history, round: state.round,
         namePresets: state.namePresets,
-        yenPerPoint: state.yenPerPoint, statsMonth: state.statsMonth
+        yenPerPoint: state.yenPerPoint, statsMonth: state.statsMonth,
+        lockedDates: state.lockedDates
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
       flashSaved();
@@ -844,6 +846,7 @@
       if (Array.isArray(data.namePresets)) fresh.namePresets = data.namePresets.filter(s => typeof s === 'string');
       if (typeof data.yenPerPoint === 'number') fresh.yenPerPoint = data.yenPerPoint;
       if (typeof data.statsMonth === 'string') fresh.statsMonth = data.statsMonth;
+      if (Array.isArray(data.lockedDates)) fresh.lockedDates = data.lockedDates.filter(s => typeof s === 'string');
       state = fresh;
     } catch (e) {}
   }
@@ -958,7 +961,10 @@
   }
 
   function namesLocked() {
-    return todayHistory().some(h => h.type === 'round');
+    return Array.isArray(state.lockedDates) && state.lockedDates.includes(recordDate);
+  }
+  function lockNamesForToday() {
+    if (!state.lockedDates.includes(recordDate)) state.lockedDates.push(recordDate);
   }
 
   function renderPlayers() {
@@ -1214,6 +1220,7 @@
     state.history.push(snapshot);
     state.round++;
     state.currentRanks = [null, null, null, null, null];
+    lockNamesForToday();
     renderPlayers(); renderHistory(); renderRoundLabel(); updateConfirmBtn();
     persistCache();
 
@@ -1260,7 +1267,8 @@
     };
     state.history.push(snapshot);
     state.round++;
-    renderHistory(); renderRoundLabel(); updateConfirmBtn();
+    lockNamesForToday();
+    renderPlayers(); renderHistory(); renderRoundLabel(); updateConfirmBtn();
     persistCache();
 
     setStatus('累計を保存中…');
