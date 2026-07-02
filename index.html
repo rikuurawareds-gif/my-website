@@ -160,6 +160,7 @@
   .preset-btn.active {
     background: var(--bg-info); border-color: var(--border-info); color: var(--text-info);
   }
+  .preset-btn.twoplayer-only { display: none; }
   .rate-display {
     display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
     font-size: 12px; font-variant-numeric: tabular-nums;
@@ -237,13 +238,14 @@
     background: transparent;
   }
   .name-input:focus { outline: none; box-shadow: 0 0 0 2px var(--border-info); }
+  .name-input:disabled { opacity: 0.6; background: var(--bg-soft); }
   .totals {
     display: flex; flex-direction: column; align-items: flex-end;
-    min-width: 50px; gap: 0; flex-shrink: 0;
+    min-width: 72px; gap: 0; flex-shrink: 0;
   }
   .total-pts {
-    font-size: 17px; font-weight: 500;
-    font-variant-numeric: tabular-nums; line-height: 1.1;
+    font-size: 28px; font-weight: 800;
+    font-variant-numeric: tabular-nums; line-height: 1;
   }
   .last-pts {
     font-size: 10px; color: var(--text-tertiary);
@@ -261,6 +263,7 @@
     display: flex; gap: 3px; flex-wrap: wrap;
     flex-shrink: 0;
   }
+  .name-presets.locked { pointer-events: none; opacity: 0.5; }
   .name-chip {
     height: 22px; padding: 0 7px; font-size: 11px;
     border-radius: 999px;
@@ -486,6 +489,7 @@
       </div>
       <div class="top-right">
         <button id="refresh-btn" class="btn-sm" title="Notionから再読込">↻</button>
+        <button id="commit-btn" class="btn-sm" title="現在の累計を集計用の正式レコードとしてNotionに書き込み">累計登録</button>
         <button id="undo-btn" class="btn-sm">取消</button>
         <button id="reset-btn" class="btn-sm">リセット</button>
       </div>
@@ -496,6 +500,8 @@
         <span class="rate-header-label">レート</span>
         <div class="preset-row">
           <button class="preset-btn" data-preset="standard">標準</button>
+          <button class="preset-btn twoplayer-only" data-preset="six">+6/-6</button>
+          <button class="preset-btn twoplayer-only" data-preset="seven">+7/-7</button>
           <button class="preset-btn" data-preset="double">2倍</button>
           <button class="preset-btn" data-preset="half">半分</button>
           <button id="edit-btn" class="preset-btn">編集</button>
@@ -576,6 +582,12 @@
       3: [5, -1, -4],
       4: [5, 3, -3, -5],
       5: [10, 5, 0, -5, -10]
+    },
+    six: {
+      2: [6, -6]
+    },
+    seven: {
+      2: [7, -7]
     }
   };
 
@@ -850,8 +862,9 @@
     return state.players.map((p, i) => p.active ? i : -1).filter(i => i !== -1);
   }
   function detectPreset() {
-    for (const key of ['standard', 'double', 'half']) {
+    for (const key of ['standard', 'double', 'half', 'six', 'seven']) {
       const preset = PRESETS[key][state.count];
+      if (!preset) continue;
       const cur = state.rates[state.count];
       if (preset.length === cur.length && preset.every((v, i) => v === cur[i])) return key;
     }
@@ -904,6 +917,9 @@
     document.querySelectorAll('.preset-btn[data-preset]').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.preset === active);
     });
+    document.querySelectorAll('.twoplayer-only').forEach(btn => {
+      btn.style.display = state.count === 2 ? 'inline-block' : 'none';
+    });
   }
 
   function renderRateEditor() {
@@ -941,11 +957,16 @@
     $('edit-btn').style.opacity = '1';
   }
 
+  function namesLocked() {
+    return todayHistory().some(h => h.type === 'round');
+  }
+
   function renderPlayers() {
     const rate = currentRate();
     const usedNames = new Set(state.players.filter(p => p.active).map(p => p.name));
     const actives = activeIndices();
     const canAddMore = actives.length < 5;
+    const locked = namesLocked();
 
     // Render only active players as cards; an "add" button appears at the bottom if room
     const html = state.players.map((p, idx) => {
@@ -978,13 +999,13 @@
         <div class="player-row">
           <div class="player-top">
             ${removeBtn}
-            <input class="name-input" data-player="${idx}" value="${escapeHtml(p.name)}" placeholder="名前" />
+            <input class="name-input" data-player="${idx}" value="${escapeHtml(p.name)}" placeholder="名前" ${locked ? 'disabled' : ''} />
             <div class="totals">
               <span class="total-pts ${totalCls}">${totalDisplay}</span>
               ${lastHtml}
             </div>
           </div>
-          <div class="name-presets">${nameChips}</div>
+          <div class="name-presets${locked ? ' locked' : ''}">${nameChips}</div>
           <div class="rank-buttons cols-${rate.length}">${rankBtns}</div>
         </div>
       `;
@@ -1155,7 +1176,9 @@
   }
 
   function applyPreset(name) {
-    state.rates[state.count] = PRESETS[name][state.count].slice();
+    const preset = PRESETS[name][state.count];
+    if (!preset) return;
+    state.rates[state.count] = preset.slice();
     if (state.editing) closeEditor();
     renderRateDisplay(); scheduleSave();
   }
@@ -1214,6 +1237,51 @@
     }).catch(err => {
       console.error('confirmRound: Notion add failed', err);
       setStatusError('Notion保存失敗(後で再送)');
+    });
+  }
+
+  function commitTotals() {
+    const actives = activeIndices();
+    if (actives.length === 0) return;
+    const alreadyRecorded = namesLocked();
+    const warning = alreadyRecorded
+      ? `${recordDate} の現在の累計を、集計用の正式レコードとしてNotionに追加します。\nこの日は既に対戦記録があるため、集計が二重に計上される可能性があります。よろしいですか?`
+      : `${recordDate} の現在の累計を、集計用の正式レコードとしてNotionに追加します。よろしいですか?`;
+    if (!confirm(warning)) return;
+
+    const entries = actives.map(i => ({ name: state.players[i].name, rank: null, pt: state.players[i].total }));
+    const ts = recordDateTs();
+    const snapshot = {
+      type: 'round',
+      round: state.round, count: state.count,
+      activeIdx: [], ranks: [], rate: [], prevLasts: [],
+      entries: entries, ts: ts,
+      remoteId: null, pending: true
+    };
+    state.history.push(snapshot);
+    state.round++;
+    renderHistory(); renderRoundLabel(); updateConfirmBtn();
+    persistCache();
+
+    setStatus('累計を保存中…');
+    notionApi.add({
+      date: recordDate,
+      round: snapshot.round,
+      count: snapshot.count,
+      ts: snapshot.ts,
+      entries: snapshot.entries
+    }).then(res => {
+      if (res && res.ok && res.id) {
+        snapshot.remoteId = res.id;
+        snapshot.pending = false;
+        persistCache();
+        setStatus('累計を保存しました', 1200);
+      } else {
+        throw new Error('add failed: ' + JSON.stringify(res));
+      }
+    }).catch(err => {
+      console.error('commitTotals: Notion add failed', err);
+      setStatusError('累計保存失敗(後で再送)');
     });
   }
 
@@ -1530,6 +1598,7 @@
     });
     $('player-count').addEventListener('change', (e) => changeCount(e.target.value));
     $('confirm-btn').addEventListener('click', confirmRound);
+    $('commit-btn').addEventListener('click', commitTotals);
     $('undo-btn').addEventListener('click', undoLast);
     $('refresh-btn').addEventListener('click', () => {
       syncFromNotion().then(() => {
