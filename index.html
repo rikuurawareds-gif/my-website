@@ -401,6 +401,17 @@
     text-align: right;
     white-space: nowrap;
   }
+  .stats-cell-input {
+    width: 44px; border: none; background: transparent;
+    font: inherit; font-variant-numeric: tabular-nums;
+    text-align: right; color: inherit; padding: 2px;
+    border-radius: 4px;
+    -moz-appearance: textfield;
+  }
+  .stats-cell-input::-webkit-outer-spin-button,
+  .stats-cell-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .stats-cell-input:hover { background: var(--bg-soft); }
+  .stats-cell-input:focus { outline: none; background: var(--bg-info); box-shadow: 0 0 0 2px var(--border-info); }
   .stats-table th {
     font-weight: 500;
     color: var(--text-purple);
@@ -1509,9 +1520,10 @@
       const dow = date.getDay();
       const rowClass = dow === 0 ? 'row-sun' : (dow === 6 ? 'row-sat' : '');
       const cells = monthNames.map(n => {
-        if (dayPoints[d][n] === undefined) return `<td></td>`;
-        const v = dayPoints[d][n];
-        return `<td class="${ptClass(v)}">${v === 0 ? '0' : fmtPoint(v)}</td>`;
+        const hasVal = dayPoints[d][n] !== undefined;
+        const v = hasVal ? dayPoints[d][n] : '';
+        const cls = hasVal ? ptClass(dayPoints[d][n]) : '';
+        return `<td class="${cls}"><input type="number" inputmode="numeric" class="stats-cell-input" data-day="${d}" data-name="${escapeHtml(n)}" value="${v}" /></td>`;
       }).join('');
       dailyRows.push(`<tr class="${rowClass}"><td>${year}/${String(monthIdx + 1).padStart(2,'0')}/${String(d).padStart(2,'0')}</td>${cells}</tr>`);
     }
@@ -1542,6 +1554,74 @@
         </table>
       </div>
     `;
+
+    $('stats-content').querySelectorAll('.stats-cell-input').forEach(inp => {
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') e.target.blur();
+        if (e.key === 'Escape') { renderStats(); }
+      });
+      inp.addEventListener('change', (e) => {
+        const day = parseInt(e.target.dataset.day);
+        const name = e.target.dataset.name;
+        const raw = e.target.value.trim();
+        const newVal = raw === '' ? 0 : parseInt(raw);
+        if (isNaN(newVal)) { renderStats(); return; }
+        adjustDailyPoint(year, monthIdx, day, name, newVal);
+      });
+    });
+  }
+
+  // Point corrections are appended as extra "round" entries (pt = delta) rather than
+  // mutating existing history, since the Notion-side API only supports add/delete (no update).
+  function adjustDailyPoint(year, monthIdx, day, name, newVal) {
+    const ts = new Date(year, monthIdx, day, 12, 0, 0).getTime();
+    const dateStr = `${year}-${String(monthIdx + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    let oldVal = 0;
+    state.history.forEach(h => {
+      if (!h.ts) return;
+      const hd = new Date(h.ts);
+      if (hd.getFullYear() === year && hd.getMonth() === monthIdx && hd.getDate() === day) {
+        (h.entries || []).forEach(e => { if (e.name === name) oldVal += e.pt; });
+      }
+    });
+    const delta = newVal - oldVal;
+    if (delta === 0) { renderStats(); return; }
+    if (!confirm(`${dateStr} の ${name} のポイントを ${oldVal} → ${newVal} に補正します。\n差分 ${fmtPoint(delta)}pt の補正レコードをNotionに追加します。よろしいですか?`)) {
+      renderStats();
+      return;
+    }
+
+    const maxRound = state.history
+      .filter(h => h.type !== 'daily' && sameLocalDay(h.ts, ts))
+      .reduce((mx, h) => Math.max(mx, h.round || 0), 0);
+    const snapshot = {
+      type: 'round',
+      round: maxRound + 1, count: 1,
+      activeIdx: [], ranks: [], rate: [], prevLasts: [],
+      entries: [{ name: name, rank: null, pt: delta }],
+      ts: ts, remoteId: null, pending: true
+    };
+    state.history.push(snapshot);
+    persistCache();
+    renderStats();
+
+    setStatus('補正を保存中…');
+    notionApi.add({
+      date: dateStr, round: snapshot.round, count: snapshot.count,
+      ts: snapshot.ts, entries: snapshot.entries
+    }).then(res => {
+      if (res && res.ok && res.id) {
+        snapshot.remoteId = res.id;
+        snapshot.pending = false;
+        persistCache();
+        setStatus('補正を保存しました', 1200);
+      } else {
+        throw new Error('add failed: ' + JSON.stringify(res));
+      }
+    }).catch(err => {
+      console.error('adjustDailyPoint: Notion add failed', err);
+      setStatusError('補正保存失敗(後で再送)');
+    });
   }
 
   function updateDateWarning() {
