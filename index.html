@@ -67,11 +67,11 @@
     -webkit-tap-highlight-color: transparent;
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
-  .app { max-width: 600px; margin: 0 auto; padding: 8px; }
-  h1 { font-size: 14px; font-weight: 500; margin: 2px 0 8px; color: var(--text-secondary); text-align: center; }
+  .app { max-width: 600px; margin: 0 auto; padding: 6px 8px; }
+  h1 { display: none; } /* hidden to fit rate→confirm on one phone screen */
 
   .tabs {
-    display: flex; gap: 4px; margin-bottom: 8px;
+    display: flex; gap: 4px; margin-bottom: 6px;
     background: var(--bg-soft);
     padding: 3px;
     border-radius: var(--radius-md);
@@ -94,15 +94,12 @@
 
   .top-bar {
     display: flex; align-items: center; justify-content: space-between;
-    gap: 6px; margin-bottom: 8px; flex-wrap: wrap;
+    gap: 6px; margin-bottom: 6px; flex-wrap: wrap;
   }
   .date-bar {
     display: flex; align-items: center; gap: 6px;
-    margin-bottom: 6px; flex-wrap: wrap;
-    background: var(--bg-card);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 5px 8px;
+    margin-bottom: 4px; flex-wrap: wrap;
+    padding: 0 2px;
   }
   .date-input {
     height: 28px; padding: 0 6px;
@@ -148,7 +145,7 @@
   .rate-section {
     background: var(--bg-soft);
     border-radius: var(--radius-md);
-    padding: 6px 10px; margin-bottom: 8px;
+    padding: 5px 10px; margin-bottom: 6px;
   }
   .rate-header {
     display: flex; align-items: center; justify-content: space-between;
@@ -211,15 +208,15 @@
     color: var(--text-info); font-weight: 500;
   }
 
-  .players { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+  .players { display: flex; flex-direction: column; gap: 5px; margin-bottom: 6px; }
   .player-row {
     background: var(--bg-card);
     border: 0.5px solid var(--border);
     border-radius: var(--radius-md);
-    padding: 6px 8px;
+    padding: 5px 8px;
   }
   .player-row.inactive { opacity: 0.5; }
-  .player-top { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+  .player-top { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
   .toggle-btn {
     width: 26px; height: 26px;
     border-radius: var(--radius-sm); font-size: 14px;
@@ -238,7 +235,15 @@
     background: transparent;
   }
   .name-input:focus { outline: none; box-shadow: 0 0 0 2px var(--border-info); }
-  .name-input:disabled { opacity: 0.6; background: var(--bg-soft); }
+  .name-input:disabled {
+    /* Locked is the default state now — show as plain text, not greyed out */
+    opacity: 1;
+    background: transparent;
+    border-color: transparent;
+    color: var(--text);
+    -webkit-text-fill-color: var(--text);
+    font-weight: 600;
+  }
   .totals {
     display: flex; flex-direction: column; align-items: flex-end;
     min-width: 72px; gap: 0; flex-shrink: 0;
@@ -284,7 +289,7 @@
   .rank-buttons.cols-4 { grid-template-columns: repeat(4, 1fr); }
   .rank-buttons.cols-5 { grid-template-columns: repeat(5, 1fr); }
   .rank-btn {
-    height: 32px; padding: 0 4px;
+    height: 30px; padding: 0 4px;
     font-size: 13px; font-weight: 500;
     border-radius: var(--radius-sm);
     background: transparent;
@@ -300,11 +305,11 @@
   }
 
   .confirm-btn {
-    width: 100%; height: 40px;
+    width: 100%; height: 38px;
     font-size: 15px; font-weight: 500;
     border-radius: var(--radius-md);
     background: var(--bg-info); border-color: var(--border-info); color: var(--text-info);
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
   .confirm-btn:disabled { opacity: 0.4; }
   .save-status {
@@ -312,15 +317,30 @@
     text-align: center; min-height: 12px; margin-bottom: 10px;
   }
   .save-status.error { color: var(--text-danger); font-weight: 500; }
+  .player-actions {
+    display: flex; gap: 6px; margin-top: 2px;
+  }
   .add-player-btn {
-    width: 100%; height: 32px;
+    flex: 1; height: 28px;
     font-size: 12px; font-weight: 500;
     color: var(--text-info);
     border-style: dashed;
     background: transparent;
-    margin-top: 2px;
   }
   .add-player-btn:hover { background: var(--bg-info); }
+  .name-edit-btn {
+    height: 28px; padding: 0 12px;
+    font-size: 12px; font-weight: 500;
+    color: var(--text-secondary);
+    background: transparent;
+    flex-shrink: 0;
+  }
+  .name-edit-btn:hover { background: var(--bg-soft); }
+  .name-edit-btn.editing {
+    background: var(--bg-info);
+    border-color: var(--border-info);
+    color: var(--text-info);
+  }
 
   .history-section { margin-top: 8px; }
   .history-header {
@@ -573,23 +593,24 @@
   const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwNQzkj4x6G4VkeYIAcsQWUvGqcb43bnMV3MUgYdnilnNQ-xumPuO6bjrjHaA4kPXeHTA/exec';
 
   const STORAGE_KEY = 'smash_betting_counter_v6';
-  const DEFAULT_NAME_PRESETS = ['キルア', 'ごり', 'tom', 'さとう', '丸山', '尾關'];
+  const DEFAULT_NAME_PRESETS = ['キルア', 'ごり', 'tom', 'さとう'];
+  const REMOVED_NAME_PRESETS = ['丸山', '尾關']; // migrated out — filtered on load
 
   const PRESETS = {
     standard: {
-      2: [10, -10],
+      2: [5, -5],
       3: [10, -3, -7],
       4: [10, 5, -5, -10],
       5: [20, 10, 0, -10, -20]
     },
     double: {
-      2: [20, -20],
+      2: [10, -10],
       3: [20, -6, -14],
       4: [20, 10, -10, -20],
       5: [40, 20, 0, -20, -40]
     },
     half: {
-      2: [5, -5],
+      2: [3, -3],
       3: [5, -1, -4],
       4: [5, 3, -3, -5],
       5: [10, 5, 0, -5, -10]
@@ -660,9 +681,18 @@
     };
   }
 
+  // ===== Day boundary: 5 AM =====
+  // Matches played between midnight and 4:59 AM count as the PREVIOUS day
+  // (late-night sessions often run past midnight, sometimes to 4 AM).
+  const DAY_START_HOUR = 5;
+  function shiftedDate(tsOrDate) {
+    const t = (tsOrDate instanceof Date) ? tsOrDate.getTime() : (typeof tsOrDate === 'number' ? tsOrDate : Date.now());
+    return new Date(t - DAY_START_HOUR * 3600 * 1000);
+  }
+
   // Helpers for the record date (in-memory only — defaults to today on each load)
   function todayISO() {
-    const d = new Date();
+    const d = shiftedDate(Date.now());
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
   }
   let recordDate = todayISO();
@@ -790,7 +820,7 @@
   }
 
   function sameLocalDay(tsA, tsB) {
-    const a = new Date(tsA), b = new Date(tsB);
+    const a = shiftedDate(tsA), b = shiftedDate(tsB);
     return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
   }
 
@@ -832,6 +862,10 @@
             fresh.rates[k] = data.rates[k].map(n => Number(n) || 0);
           }
         }
+        // Migration: old 2-player standard was [10,-10]; new default is [5,-5]
+        if (fresh.rates[2][0] === 10 && fresh.rates[2][1] === -10) {
+          fresh.rates[2] = PRESETS.standard[2].slice();
+        }
       }
       if (Array.isArray(data.players)) {
         for (let i = 0; i < 5; i++) {
@@ -854,7 +888,7 @@
       }
       if (Array.isArray(data.history)) fresh.history = data.history;
       if (typeof data.round === 'number' && data.round >= 1) fresh.round = data.round;
-      if (Array.isArray(data.namePresets)) fresh.namePresets = data.namePresets.filter(s => typeof s === 'string');
+      if (Array.isArray(data.namePresets)) fresh.namePresets = data.namePresets.filter(s => typeof s === 'string' && !REMOVED_NAME_PRESETS.includes(s));
       if (typeof data.yenPerPoint === 'number') fresh.yenPerPoint = data.yenPerPoint;
       if (typeof data.statsMonth === 'string') fresh.statsMonth = data.statsMonth;
       if (Array.isArray(data.lockedDates)) fresh.lockedDates = data.lockedDates.filter(s => typeof s === 'string');
@@ -885,7 +919,7 @@
     return null;
   }
   function dayKey(ts) {
-    const d = ts ? new Date(ts) : new Date();
+    const d = shiftedDate(ts ? ts : Date.now());
     return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
   }
   function todayHistory() {
@@ -906,7 +940,7 @@
     return sign + '¥' + abs.toLocaleString('ja-JP');
   }
   function monthKey(ts) {
-    const d = new Date(ts);
+    const d = shiftedDate(ts);
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
   }
   function currentMonth() {
@@ -971,11 +1005,16 @@
     $('edit-btn').style.opacity = '1';
   }
 
+  // In-memory: when true, name inputs/chips are temporarily editable even if the day is locked
+  let nameEditMode = false;
+
   function namesLocked() {
+    if (nameEditMode) return false;
     return Array.isArray(state.lockedDates) && state.lockedDates.includes(recordDate);
   }
   function lockNamesForToday() {
     if (!state.lockedDates.includes(recordDate)) state.lockedDates.push(recordDate);
+    nameEditMode = false;
   }
 
   function renderPlayers() {
@@ -1007,33 +1046,38 @@
         ? `<button class="toggle-btn active" data-toggle="${idx}" title="外す">✓</button>`
         : `<button class="toggle-btn active" data-toggle="${idx}" disabled style="opacity:0.4">✓</button>`;
 
-      const nameChips = state.namePresets.map(name => {
-        const usedByOther = usedNames.has(name) && p.name !== name;
-        return `<button class="name-chip${usedByOther ? ' used' : ''}" data-name="${escapeHtml(name)}" data-player="${idx}">${escapeHtml(name)}</button>`;
-      }).join('') + `<button class="name-chip add-chip" data-add="${idx}">+</button>`;
+      // Name chips are shown only while editing names (keeps cards compact during play)
+      const chipsRow = nameEditMode
+        ? `<div class="name-presets">${state.namePresets.map(name => {
+            const usedByOther = usedNames.has(name) && p.name !== name;
+            return `<button class="name-chip${usedByOther ? ' used' : ''}" data-name="${escapeHtml(name)}" data-player="${idx}">${escapeHtml(name)}</button>`;
+          }).join('')}<button class="name-chip add-chip" data-add="${idx}">+</button></div>`
+        : '';
 
       return `
         <div class="player-row">
           <div class="player-top">
             ${removeBtn}
-            <input class="name-input" data-player="${idx}" value="${escapeHtml(p.name)}" placeholder="名前" ${locked ? 'disabled' : ''} />
+            <input class="name-input" data-player="${idx}" value="${escapeHtml(p.name)}" placeholder="名前" ${(locked || !nameEditMode) ? 'disabled' : ''} />
             <div class="totals">
               <span class="total-pts ${totalCls}">${totalDisplay}</span>
               ${lastHtml}
             </div>
           </div>
-          <div class="name-presets${locked ? ' locked' : ''}">${nameChips}</div>
+          ${chipsRow}
           <div class="rank-buttons cols-${rate.length}">${rankBtns}</div>
         </div>
       `;
     }).join('');
 
-    // Add-player button if we have room
+    // Bottom row: add-player button + name-edit toggle
     const addPlayerBtn = canAddMore
       ? `<button id="add-player-btn" class="add-player-btn">+ プレイヤー追加</button>`
       : '';
+    const nameEditBtn = `<button id="name-edit-btn" class="name-edit-btn${nameEditMode ? ' editing' : ''}">${nameEditMode ? '修正完了' : '名前修正'}</button>`;
+    const bottomRow = `<div class="player-actions">${addPlayerBtn}${nameEditBtn}</div>`;
 
-    $('players').innerHTML = html + addPlayerBtn;
+    $('players').innerHTML = html + bottomRow;
 
     $('players').querySelectorAll('.name-input').forEach(inp => {
       inp.addEventListener('input', (e) => {
@@ -1083,6 +1127,13 @@
             return;
           }
         }
+      });
+    }
+    const editNamesBtn = $('name-edit-btn');
+    if (editNamesBtn) {
+      editNamesBtn.addEventListener('click', () => {
+        nameEditMode = !nameEditMode;
+        renderPlayers();
       });
     }
   }
@@ -1437,7 +1488,7 @@
     const dayPoints = {};
     for (let d = 1; d <= daysInMonth; d++) dayPoints[d] = {};
     monthHistory.forEach(h => {
-      const d = new Date(h.ts).getDate();
+      const d = shiftedDate(h.ts).getDate();
       (h.entries || []).forEach(e => {
         if (dayPoints[d][e.name] === undefined) dayPoints[d][e.name] = 0;
         dayPoints[d][e.name] += e.pt;
@@ -1579,7 +1630,7 @@
     let oldVal = 0;
     state.history.forEach(h => {
       if (!h.ts) return;
-      const hd = new Date(h.ts);
+      const hd = shiftedDate(h.ts);
       if (hd.getFullYear() === year && hd.getMonth() === monthIdx && hd.getDate() === day) {
         (h.entries || []).forEach(e => { if (e.name === name) oldVal += e.pt; });
       }
@@ -1645,6 +1696,7 @@
   function setRecordDate(iso) {
     if (!iso) iso = todayISO();
     recordDate = iso;
+    nameEditMode = false;
     if ($('record-date')) $('record-date').value = iso;
     updateDateWarning();
     renderHistory();
