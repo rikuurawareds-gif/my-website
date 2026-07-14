@@ -1174,7 +1174,8 @@
   function updateConfirmBtn() {
     const actives = activeIndices();
     const allFilled = actives.length === state.count && actives.every(i => state.currentRanks[i] !== null);
-    $('confirm-btn').disabled = !allFilled;
+    $('confirm-btn').disabled = !allFilled || confirmInFlight;
+    $('confirm-btn').textContent = confirmInFlight ? '保存中…' : 'この順位で確定';
   }
 
   function renderRoundLabel() { $('round-label').textContent = `R ${state.round}`; }
@@ -1251,7 +1252,10 @@
     renderRateDisplay(); scheduleSave();
   }
 
+  let confirmInFlight = false;
+
   function confirmRound() {
+    if (confirmInFlight) return; // block double-tap while a save is in flight
     const rate = currentRate();
     const actives = activeIndices();
     const entries = [];
@@ -1270,7 +1274,8 @@
       prevLasts: state.players.map(p => p.last),
       entries: entries, ts: ts,
       remoteId: null,
-      pending: true
+      pending: true,
+      cancelled: false
     };
     actives.forEach(i => {
       const r = state.currentRanks[i];
@@ -1283,6 +1288,7 @@
     state.round++;
     state.currentRanks = [null, null, null, null, null];
     lockNamesForToday();
+    confirmInFlight = true;
     renderPlayers(); renderHistory(); renderRoundLabel(); updateConfirmBtn();
     persistCache();
 
@@ -1295,7 +1301,19 @@
       ts: snapshot.ts,
       entries: snapshot.entries
     }).then(res => {
+      confirmInFlight = false;
+      updateConfirmBtn();
       if (res && res.ok && res.id) {
+        if (snapshot.cancelled) {
+          // User pressed 取消 while this save was in flight — remove the orphan from Notion
+          notionApi.remove(res.id).then(() => {
+            setStatus('取消しました', 1200);
+          }).catch(err => {
+            console.error('orphan cleanup failed', err);
+            setStatusError('取消のNotion反映失敗 — Notion側の重複を確認してください');
+          });
+          return;
+        }
         snapshot.remoteId = res.id;
         snapshot.pending = false;
         persistCache();
@@ -1304,6 +1322,8 @@
         throw new Error('add failed: ' + JSON.stringify(res));
       }
     }).catch(err => {
+      confirmInFlight = false;
+      updateConfirmBtn();
       console.error('confirmRound: Notion add failed', err);
       setStatusError('Notion保存失敗(後で再送)');
     });
@@ -1396,11 +1416,13 @@
         }
       }).catch(err => {
         console.error('undoLast: Notion delete failed', err);
-        setStatusError('Notion削除失敗');
+        setStatusError('Notion削除失敗 — Notion側に残っている可能性があります');
       });
     } else if (last.pending) {
-      // Was queued but not yet confirmed by API — nothing to delete remotely
-      setStatus('取消しました', 1200);
+      // Add request still in flight — mark cancelled so its completion handler
+      // deletes the orphan record from Notion as soon as the ID comes back.
+      last.cancelled = true;
+      setStatus('取消中…(Notion反映待ち)');
     } else {
       setStatus('取消しました', 1200);
     }
