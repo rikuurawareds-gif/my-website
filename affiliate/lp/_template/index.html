@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>【ページタイトル】</title>
+<meta name="description" content="【120字以内の説明】">
+<link rel="stylesheet" href="../assets/base.css">
+<script src="../assets/config.js"></script>
+</head>
+<!-- data-page-id は ASP案件管理・KPIシートと同じIDにする -->
+<body data-page-id="lp-template">
+<div class="pr">当ページは広告（アフィリエイトプログラム）を含みます</div>
+<main class="wrap">
+  <h1 data-experiment="exp-template-fv" data-variant="A">【見出しA：読者の悩みに答える一文】</h1>
+  <h1 data-experiment="exp-template-fv" data-variant="B" hidden>【見出しB：別の切り口】</h1>
+  <p class="lead">【リード文：このページで何が分かるか】</p>
+
+  <!-- 3ステップのアンケート / 診断フォーム -->
+  <form class="card" data-form-id="survey-template" id="survey" novalidate>
+    <div class="progress"><span id="bar" style="width:33%"></span></div>
+    <div class="step" data-step="1" data-step-name="質問1">
+      <p><strong>Q1. 【質問】</strong></p>
+      <label><input type="radio" name="q1" value="a" required> 【選択肢A】</label>
+      <label><input type="radio" name="q1" value="b"> 【選択肢B】</label>
+    </div>
+    <div class="step" data-step="2" data-step-name="質問2" hidden>
+      <p><strong>Q2. 【質問】</strong></p>
+      <label><input type="radio" name="q2" value="a" required> 【選択肢A】</label>
+      <label><input type="radio" name="q2" value="b"> 【選択肢B】</label>
+    </div>
+    <div class="step" data-step="3" data-step-name="質問3" hidden>
+      <p><strong>Q3. 【質問】</strong></p>
+      <label><input type="radio" name="q3" value="a" required> 【選択肢A】</label>
+      <label><input type="radio" name="q3" value="b"> 【選択肢B】</label>
+    </div>
+    <button type="submit" class="cta" id="next">次へ</button>
+  </form>
+
+  <!-- 結果（回答内容でおすすめを出し分ける） -->
+  <section id="result" hidden>
+    <h2>あなたにおすすめは【サービス名】</h2>
+    <div class="card">
+      <p>【おすすめ理由。事実ベースで、断定・最上級表現は使わない】</p>
+      <a class="cta" href="#ASPのリンク" rel="sponsored noopener" target="_blank"
+         data-aff-id="asp-program-01" data-asp="a8" data-program-id="xxxx" data-position="result">【CTA文言】</a>
+    </div>
+  </section>
+</main>
+<footer class="wrap">
+  <a href="../privacy.html">プライバシーポリシー</a>
+  <a href="../privacy.html#ads">広告掲載について</a>
+  <p>運営: 【運営者名】</p>
+</footer>
+<script src="../assets/track.js"></script>
+<script src="../assets/ab.js"></script>
+<script>
+(function () {
+  var form = document.getElementById('survey');
+  var fid = form.getAttribute('data-form-id');
+  var steps = form.querySelectorAll('.step');
+  var i = 0;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var cur = steps[i];
+    if (!cur.querySelector('input:checked')) { cur.querySelector('input').reportValidity(); return; }
+    affFormStep(fid, i + 1, cur.getAttribute('data-step-name'));
+    if (i < steps.length - 1) {
+      cur.hidden = true; i++; steps[i].hidden = false;
+      document.getElementById('bar').style.width = Math.round((i + 1) / steps.length * 100) + '%';
+      if (i === steps.length - 1) document.getElementById('next').textContent = '結果を見る';
+      return;
+    }
+    affFormComplete(fid);
+    form.hidden = true;
+    var r = document.getElementById('result');
+    r.hidden = false;
+    r.scrollIntoView({ behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
