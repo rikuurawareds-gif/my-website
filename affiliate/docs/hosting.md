@@ -1,5 +1,10 @@
 # サイトの公開（無料で始めて、後で独自ドメインへ移す）
 
+## 現在の公開先（2026-11-26 設定済み）
+- 本番URL: https://afimakase.pages.dev/
+- Cloudflare Pages プロジェクト: afimakase ／ 本番ブランチ: `claude/friendly-hawking-5k5ymh` ／ 出力ディレクトリ: `affiliate/site`
+- このブランチに push すると自動で本番に反映される。PR #1 を main にマージしたら、本番ブランチを main に切り替える
+
 ## 決定
 - 当面は **Cloudflare Pages の無料のサブドメイン**（例: `afimakase.pages.dev`）で公開する（2026-11-25 オーナー決定）
 - 独自ドメインが必要になったら、Cloudflare Pages に独自ドメインを追加するだけで移せる（URLが変わるので、XのプロフィールなどのリンクはPMが張り替える）
