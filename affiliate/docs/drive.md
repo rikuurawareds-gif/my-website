@@ -13,6 +13,7 @@
 | 06_ASP・契約 | `1t5WDha4TuU0WKoUYQyDW_Ph0smhRDJrw` | ASP案件管理、規約PDF |
 | 07_法務・コンプライアンス | `1a89nDptuN9cyUnbdxE8b64iZznEh-gIu` | 法令メモ、レビュー記録 |
 | 08_顧客 | `1XESUcnk2cU6h6PN0AX-H2JZUSjtXBfyW` | 顧客ごとのフォルダと顧客管理シート |
+| 09_集客 | `1A-qNkwfsgXpchzldo6oy63Has1Dmw1O5` | リード管理、営業先リスト |
 | 99_アーカイブ | `16cMyE6nvX-F7An5Pm0-DIyCnqhGO9Lik` | 終了した案件・ページ |
 
 ## スプレッドシート
@@ -23,6 +24,12 @@
 | [ASP管理画面_日次取込](https://docs.google.com/spreadsheets/d/1-0RVdWvSOMapYX1GI95C4094d9gQdDU55nZs2gnFyxs/edit) | `1-0RVdWvSOMapYX1GI95C4094d9gQdDU55nZs2gnFyxs` | ASPのCSVを貼る（→ `asp.md`） |
 | [ASP案件管理（自社メディアを運営する場合用。今は使わない）](https://docs.google.com/spreadsheets/d/1gT57CpD6iyJ8RSFrVb4sZkXD9N_RvOWBax530lc_VfY/edit) | `1gT57CpD6iyJ8RSFrVb4sZkXD9N_RvOWBax530lc_VfY` | business-strategist / PM |
 | [意思決定ログ](https://docs.google.com/spreadsheets/d/1SRn6rCWL8J-nMbMl-Z4dotP4EhER40Opdnas1XxWMFA/edit) | `1SRn6rCWL8J-nMbMl-Z4dotP4EhER40Opdnas1XxWMFA` | PM |
+
+## 集客のシート
+| シート | ID |
+|---|---|
+| [リード管理](https://docs.google.com/spreadsheets/d/1bBkDmB2BL_lVZYOh1NkUsFBVvNNSO1VmXdvH0r3HJ1w/edit) | `1bBkDmB2BL_lVZYOh1NkUsFBVvNNSO1VmXdvH0r3HJ1w`（LPのフォームから自動追記: `automation/lead-capture.gs`） |
+| [営業先リスト](https://docs.google.com/spreadsheets/d/17w_vuocYF0R_rW-VN4n--5sRIjE2NVb1ZhlEKSpbtok/edit) | `17w_vuocYF0R_rW-VN4n--5sRIjE2NVb1ZhlEKSpbtok` |
 
 ## 顧客フォルダ
 新しい顧客が決まったら、`08_顧客/_顧客テンプレート（複製して使う）`（`1pmy5Vp5TryuUXqYxRQEnrCqq_wlDnRcD`）と同じ構成で `<顧客ID>_<社名>` フォルダを作り、顧客の担当者と共有する。

@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>アフィリエイト運用をまるごと手離れ | アフィまかせ</title>
+<meta name="description" content="ASP・メディアとのやり取り、成果承認、表記チェック、レポートまで、広告主のアフィリエイト運用をまるごと引き受けます。1分の無料診断で、いまの運用にかかっている工数が分かります。">
+<script src="assets/config.js"></script>
+<style>
+:root{--bg:#fff;--surface:#f5f7fa;--ink:#14181f;--muted:#5a6271;--line:#e2e6ec;--brand:#0f5bd8;--brand-ink:#fff;--accent:#e8590c;--ok:#1a7f4b;--warn:#b54708;--r:12px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:800;letter-spacing:.02em}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;background:var(--accent);color:#fff;font-weight:700;text-decoration:none;border:0;font-size:16px;cursor:pointer}
+.btn.sm{min-height:38px;padding:0 16px;font-size:14px}
+.btn.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+section{padding:72px 0}
+section.alt{background:var(--surface)}
+.eyebrow{color:var(--brand);font-weight:700;font-size:14px;letter-spacing:.08em}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.3;margin:12px 0 16px}
+h2{font-size:clamp(24px,3.4vw,32px);line-height:1.4;margin:8px 0 24px}
+h3{font-size:18px;margin:0 0 8px}
+.lead{color:var(--muted);font-size:18px;max-width:680px}
+.hero{padding:80px 0 64px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.note{font-size:13px;color:var(--muted)}
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.alt .card{background:#fff}
+.card p{margin:0;color:var(--muted)}
+.tasks{list-style:none;padding:0;margin:0}
+.tasks li{padding:6px 0;border-bottom:1px dashed var(--line)}
+.tasks li:last-child{border:0}
+.remain{border-left:4px solid var(--brand);background:#fff;padding:16px 20px;border-radius:0 var(--r) var(--r) 0}
+.flow{counter-reset:s;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.flow .card:before{counter-increment:s;content:counter(s);display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;align-items:center;justify-content:center;margin-bottom:8px}
+/* 診断 */
+#diagnosis .panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;max-width:760px;margin:0 auto}
+.q{margin:0 0 20px}
+.q legend{font-weight:700;margin-bottom:8px;padding:0}
+.q fieldset{border:0;padding:0;margin:0}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts label{position:relative}
+.opts input{position:absolute;opacity:0;inset:0}
+.opts span{display:inline-block;padding:8px 14px;border:1.5px solid var(--line);border-radius:999px;cursor:pointer;font-size:15px;background:#fff}
+.opts input:checked+span{border-color:var(--brand);background:#eaf1ff;color:var(--brand);font-weight:700}
+.opts input:focus-visible+span{outline:2px solid var(--brand);outline-offset:2px}
+.result{display:none;margin-top:24px;border-top:1px solid var(--line);padding-top:24px}
+.result.show{display:block}
+.big{font-size:clamp(36px,6vw,52px);font-weight:800;line-height:1.1}
+.big small{font-size:18px;font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:20px}
+.kpi{background:var(--surface);border-radius:var(--r);padding:16px}
+.kpi .label{font-size:13px;color:var(--muted)}
+.bars{margin:8px 0 16px}
+.bar{display:grid;grid-template-columns:170px 1fr 56px;align-items:center;gap:8px;font-size:14px;margin:6px 0}
+.bar .track{display:block;height:12px;background:var(--surface);border-radius:6px;overflow:hidden}
+.bar .fill{display:block;height:100%;background:var(--brand);border-radius:6px}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums}
+.alerts{list-style:none;padding:0;margin:0 0 16px}
+.alerts li{background:#fff4e5;color:var(--warn);border-radius:8px;padding:10px 14px;margin:6px 0;font-size:14px}
+/* フォーム */
+form.lead-form{max-width:640px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.field{margin:0 0 16px}
+.field label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:12px;border:1.5px solid var(--line);border-radius:8px;font:inherit}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brand)}
+.check{display:flex;gap:8px;align-items:flex-start;font-size:14px}
+.thanks{display:none;text-align:center;padding:24px}
+details{border-bottom:1px solid var(--line);padding:14px 0}
+summary{font-weight:700;cursor:pointer}
+details p{color:var(--muted);margin:8px 0 0}
+footer{padding:32px 0;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+footer a{color:inherit;margin-right:16px}
+@media (max-width:560px){.bar{grid-template-columns:110px 1fr 48px}section{padding:56px 0}}
+</style>
+</head>
+<body data-page-id="site-top">
+<header><div class="wrap"><span class="logo" data-name>アフィまかせ</span><a class="btn sm" href="#diagnosis">無料で診断</a></div></header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">広告主のためのアフィリエイト運用</div>
+    <h1>アフィリエイトの運用を、<br>まるごと手離れ。</h1>
+    <p class="lead">ASP・メディアとのやり取り、成果の承認、記事の表記チェック、レポート作成まで引き受けます。御社の作業は、週1回のまとめの確認と、大事な判断だけにします。</p>
+    <div class="cta">
+      <a class="btn" href="#diagnosis">1分で工数を無料診断する</a>
+      <a class="btn ghost" href="#contact">無料の表記チェックを頼む</a>
+    </div>
+    <p class="note">診断は登録なしで結果が見られます。</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">こんなことに時間を取られていませんか</div>
+    <h2>アフィリエイトは、見えない作業が多い</h2>
+    <div class="grid g3">
+      <div class="card"><h3>ASP・メディアとの連絡</h3><p>ASPごとの担当者、メディアからの問い合わせ、定例。窓口が増えるほど返信に追われる。</p></div>
+      <div class="card"><h3>成果の承認作業</h3><p>注文・登録データとの突き合わせ、重複やキャンセルの否認、各ASPの管理画面への反映。</p></div>
+      <div class="card"><h3>記事の表記チェック</h3><p>ステマ規制で責任を問われるのは広告主。外部の記事を見て回り、修正を依頼するのは大きな手間。</p></div>
+      <div class="card"><h3>新規メディアの開拓</h3><p>どこに載っていないのか調べ、条件を交渉し、提携の手続きをする。後回しになりがち。</p></div>
+      <div class="card"><h3>素材とキャンペーンの更新</h3><p>価格やキャンペーンが変わるたびに、素材の差し替えとメディアへの周知が発生する。</p></div>
+      <div class="card"><h3>レポートと社内報告</h3><p>ASPごとにバラバラの数字を集めて、分析して、上長向けの資料にまとめる。</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">引き受けること</div>
+    <h2>立ち上げから毎月の運用まで、まとめて任せられます</h2>
+    <div class="grid g3">
+      <div class="card"><h3>立ち上げ</h3><ul class="tasks">
+        <li>ASPの選定と比較</li><li>報酬・成果地点の設計</li><li>計測の設置確認</li><li>広告素材と訴求資料</li><li>プログラム規約・承認基準</li></ul></div>
+      <div class="card"><h3>日々・毎週</h3><ul class="tasks">
+        <li>ASP・メディアとのやり取り</li><li>提携審査</li><li>記事の表記チェックと修正依頼</li><li>新規メディアの開拓</li><li>特単・キャンペーンの管理</li><li>不正・違反の監視</li></ul></div>
+      <div class="card"><h3>毎月</h3><ul class="tasks">
+        <li>成果の承認（データとの突き合わせ）</li><li>複数ASPの統合レポート</li><li>媒体ごとの効果分析と打ち手</li><li>社内報告用の資料</li><li>予算・着地見込みの管理</li></ul></div>
+    </div>
+    <h3 style="margin-top:32px">御社に残る作業</h3>
+    <div class="remain">
+      <ul class="tasks">
+        <li>週1回のまとめを読む</li>
+        <li>単価や新規提携など、あらかじめ決めた範囲を超えるものの判断</li>
+        <li>御社にしか分からない成果の判定（データ連携で減らせます）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">進め方</div>
+    <h2>AIと担当者の組み合わせで、速く、正確に</h2>
+    <div class="flow">
+      <div class="card"><h3>無料診断・ヒアリング</h3><p>いまの作業と時間、目標を伺います。</p></div>
+      <div class="card"><h3>任せる範囲を決める</h3><p>単価の交渉や新規提携など、こちらで判断してよい範囲と上限を書面で決めます。</p></div>
+      <div class="card"><h3>窓口を引き継ぐ</h3><p>ASP・メディアへの連絡窓口をこちらに移します。Chatworkなど、いまのツールのままで大丈夫です。</p></div>
+      <div class="card"><h3>運用と改善</h3><p>AIが連絡の下書きやデータの判定を行い、担当者が確認してから送ります。毎月、成果と打ち手を報告します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="diagnosis">
+  <div class="wrap">
+    <div class="eyebrow">無料・1分・登録不要</div>
+    <h2>アフィリエイトの工数診断</h2>
+    <p class="lead" style="margin-bottom:24px">いまの運用を選ぶと、毎月どれくらいの時間がかかっているかの目安が分かります。</p>
+    <div class="panel">
+      <form id="diag" data-form-id="diagnosis" novalidate>
+        <div class="q"><fieldset><legend>1. 利用しているASPの数</legend><div class="opts" data-q="asp">
+          <label><input type="radio" name="asp" value="0"><span>1社</span></label>
+          <label><input type="radio" name="asp" value="1"><span>2〜3社</span></label>
+          <label><input type="radio" name="asp" value="2"><span>4〜6社</span></label>
+          <label><input type="radio" name="asp" value="3"><span>7社以上</span></label></div></fieldset></div>
+        <div class="q"><fieldset><legend>2. 提携しているメディアの数</legend><div class="opts">
+          <label><input type="radio" name="media" value="0"><span>〜20</span></label>
+          <label><input type="radio" name="media" value="1"><span>21〜100</span></label>
+          <label><input type="radio" name="media" value="2"><span>101〜300</span></label>
+          <label><input type="radio" name="media" value="3"><span>301以上</span></label></div></fieldset></div>
+        <div class="q"><fieldset><legend>3. 月の成果件数</legend><div class="opts">
+          <label><input type="radio" name="cv" value="0"><span>〜50件</span></label>
+          <label><input type="radio" name="cv" value="1"><span>51〜200件</span></label>
+          <label><input type="radio" name="cv" value="2"><span>201〜500件</span></label>
+          <label><input type="radio" name="cv" value="3"><span>501件以上</span></label></div></fieldset></div>
+        <div class="q"><fieldset><legend>4. 成果の承認はどうしていますか</legend><div class="opts">
+          <label><input type="radio" name="approve" value="auto"><span>ほぼ自動</span></label>
+          <label><input type="radio" name="approve" value="manual"><span>手作業でデータと突き合わせ</span></label>
+          <label><input type="radio" name="approve" value="none"><span>ほとんど見ていない</span></label></div></fieldset></div>
+        <div class="q"><fieldset><legend>5. 掲載記事の表記チェック</legend><div class="opts">
+          <label><input type="radio" name="check" value="regular"><span>定期的にしている</span></label>
+          <label><input type="radio" name="check" value="sometimes"><span>たまに</span></label>
+          <label><input type="radio" name="check" value="none"><span>していない</span></label></div></fieldset></div>
+        <div class="q"><fieldset><legend>6. 新規メディアの開拓</legend><div class="opts">
+          <label><input type="radio" name="dev" value="regular"><span>継続的にしている</span></label>
+          <label><input type="radio" name="dev" value="sometimes"><span>たまに</span></label>
+          <label><input type="radio" name="dev" value="none"><span>していない</span></label></div></fieldset></div>
+        <div class="q"><fieldset><legend>7. レポート・社内報告</legend><div class="opts">
+          <label><input type="radio" name="report" value="view"><span>管理画面を見るだけ</span></label>
+          <label><input type="radio" name="report" value="sum"><span>手作業で集計している</span></label>
+          <label><input type="radio" name="report" value="full"><span>社内報告の資料も作る</span></label></div></fieldset></div>
+        <div class="q"><fieldset><legend>8. 担当者の人件費の目安（1時間あたり）</legend><div class="opts">
+          <label><input type="radio" name="wage" value="3000"><span>3,000円</span></label>
+          <label><input type="radio" name="wage" value="4000" checked><span>4,000円</span></label>
+          <label><input type="radio" name="wage" value="5000"><span>5,000円</span></label></div></fieldset></div>
+        <p id="diag-error" class="note" style="color:var(--warn);display:none">未選択の質問があります。</p>
+        <button type="submit" class="btn">結果を見る</button>
+      </form>
+
+      <div class="result" id="diag-result" aria-live="polite">
+        <div class="kpis">
+          <div class="kpi"><div class="label">いまの運用工数（月）</div><div class="big"><span id="r-hours">0</span><small> 時間</small></div></div>
+          <div class="kpi"><div class="label">人件費に換算すると（月）</div><div class="big"><span id="r-yen">0</span><small> 万円</small></div></div>
+        </div>
+        <h3>作業ごとの内訳</h3>
+        <div class="bars" id="r-bars"></div>
+        <ul class="alerts" id="r-alerts"></ul>
+        <p>手離れした後に御社に残るのは、<strong>週1回のまとめの確認と、範囲を超える判断だけ</strong>です。</p>
+        <p class="note">この結果は、回答をもとにした目安の試算です。実際の工数は、商材や運用体制によって変わります。</p>
+        <a class="btn" href="#contact" id="to-contact">この結果をもとに相談する</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">表記チェック</div>
+    <h2>外部の記事のリスク、把握できていますか</h2>
+    <div class="grid g2">
+      <div class="card"><h3>ステマ規制の責任は広告主に</h3><p>2023年10月から、広告であることを隠した表示は景品表示法の規制対象になりました。対象となるのは広告主です。アフィリエイト記事も広告主の表示とみなされることがあります。</p></div>
+      <div class="card"><h3>まずは10記事、無料でチェック</h3><p>御社の商品が載っている記事を探し、PR表記の有無や、誤解を招くおそれのある表現を一次チェックしてお送りします。法的な最終判断ではなく、確認すべき箇所の洗い出しです。</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">よくある質問</div>
+    <h2>よくある質問</h2>
+    <details><summary>AIがASPやメディアに勝手に連絡しませんか</summary><p>はじめは、AIが作った下書きをすべて担当者が確認してから送ります。定型的な連絡から順に、御社と合意した範囲だけを自動にしていきます。金額や契約に関わる連絡は、必ず人が確認します。</p></details>
+    <details><summary>いまの代理店やASPとの関係はどうなりますか</summary><p>ASPとの契約はそのままで、運用の窓口だけを引き継ぐ形が基本です。状況に合わせてご提案します。</p></details>
+    <details><summary>料金はどのくらいですか</summary><p>媒体費（ASP・メディアへのお支払い）に応じた料率制で、最低月額があります。診断の結果と運用の状況を伺ってお見積もりします。</p></details>
+    <details><summary>契約期間は</summary><p>改善の効果を判定するのに数か月かかるため、6か月からをお願いしています。</p></details>
+    <details><summary>表記チェックで法的な判断もしてもらえますか</summary><p>いいえ。リスクのありそうな表現を拾って修正案を出す一次チェックです。最終的な判断は御社（必要に応じて弁護士）にお願いしています。</p></details>
+    <details><summary>データの扱いは大丈夫ですか</summary><p>秘密保持契約を結び、御社ごとにデータを分けて管理します。ASP管理画面のパスワードはお預かりしません。</p></details>
+  </div>
+</section>
+
+<section class="alt" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">無料相談・無料表記チェック</div>
+    <h2 style="text-align:center">まずはお気軽にご相談ください</h2>
+    <form class="lead-form" id="lead" data-form-id="lead" novalidate>
+      <div class="field"><label for="f-company">会社名</label><input id="f-company" name="company" required autocomplete="organization"></div>
+      <div class="field"><label for="f-name">お名前</label><input id="f-name" name="name" required autocomplete="name"></div>
+      <div class="field"><label for="f-email">メールアドレス</label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
+      <div class="field"><label for="f-spend">アフィリエイトの月の媒体費</label>
+        <select id="f-spend" name="spend"><option value="">選択してください</option><option>まだ始めていない</option><option>〜50万円</option><option>50〜200万円</option><option>200〜500万円</option><option>500万円以上</option></select></div>
+      <div class="field"><label for="f-msg">ご相談内容（任意）</label><textarea id="f-msg" name="message" rows="4"></textarea></div>
+      <div class="field"><label class="check"><input type="checkbox" name="freecheck" id="f-free"> 無料の表記チェック（10記事）を希望する</label></div>
+      <div class="field" id="f-product-wrap" hidden><label for="f-product">チェックしたい商品・サービス名</label><input id="f-product" name="product"></div>
+      <p class="note">送信いただいた情報は、ご相談への対応にのみ使います。<a href="privacy.html">プライバシーポリシー</a></p>
+      <p id="lead-error" class="note" style="color:var(--warn);display:none"></p>
+      <button type="submit" class="btn" style="width:100%">送信する</button>
+    </form>
+    <div class="thanks" id="thanks"><h3>送信しました</h3><p>2営業日以内にご連絡します。</p></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><a href="privacy.html">プライバシーポリシー</a><span>運営: 【運営者名】</span></div></footer>
+
+<script src="assets/track.js"></script>
+<script>
+(function () {
+  var cfg = window.AFF_CONFIG || {};
+  if (cfg.serviceName) {
+    document.querySelectorAll('[data-name]').forEach(function (el) { el.textContent = cfg.serviceName; });
+    document.title = document.title.replace('アフィまかせ', cfg.serviceName);
+  }
+
+  // ---- 工数診断 ----
+  // 係数は knowledge/workload-benchmarks.md の実データ（重い運用で月80時間）に合うように置いた目安
+  var ASP = [1, 2.5, 5, 8], MEDIA = [15, 60, 200, 400], CV = [30, 120, 350, 700];
+  var last = null;
+
+  function calc(a) {
+    var asp = ASP[a.asp], media = MEDIA[a.media], cv = CV[a.cv];
+    var t = {
+      'ASP担当とのやり取り': asp * 1.8,
+      'メディア対応・掲載確認': media * 0.02 + 0.5,
+      '成果の承認': a.approve === 'auto' ? cv * 0.002 + 0.5 : a.approve === 'manual' ? cv * 0.017 + 0.5 : 0,
+      '表記チェック': a.check === 'regular' ? media * 0.015 + 1 : a.check === 'sometimes' ? 2 : 0,
+      '新規開拓・提携手続き': a.dev === 'regular' ? Math.min(10, 3 + media * 0.02) : a.dev === 'sometimes' ? 3 : 0,
+      '素材・キャンペーン': asp * 0.8 + 1,
+      'レポート・社内報告': a.report === 'full' ? asp * 1.2 + 4 : a.report === 'sum' ? asp * 0.8 + 1 : 1,
+      '請求・予算管理': asp * 0.5
+    };
+    var total = 0;
+    Object.keys(t).forEach(function (k) { t[k] = Math.round(t[k] * 2) / 2; total += t[k]; });
+    var alerts = [];
+    if (a.approve === 'none') alerts.push('承認をほとんど見ていない場合、重複やキャンセルなど、本来は否認すべき成果にも支払っている可能性があります。');
+    if (a.check === 'none') alerts.push('表記チェックをしていない場合、PR表記のない記事や誤解を招く表現が残っている可能性があります。ステマ規制の責任は広告主にあります。');
+    if (a.dev === 'none') alerts.push('新規メディアの開拓をしていない場合、競合が載っていて御社が載っていない記事が残っている可能性があります。');
+    return { tasks: t, total: Math.round(total), alerts: alerts };
+  }
+
+  var diag = document.getElementById('diag');
+  diag.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var names = ['asp', 'media', 'cv', 'approve', 'check', 'dev', 'report', 'wage'], a = {}, missing = false;
+    names.forEach(function (n) {
+      var c = diag.querySelector('input[name=' + n + ']:checked');
+      if (!c) missing = true; else a[n] = isNaN(c.value) || n === 'approve' || n === 'check' || n === 'dev' || n === 'report' ? c.value : Number(c.value);
+    });
+    document.getElementById('diag-error').style.display = missing ? 'block' : 'none';
+    if (missing) return;
+    var r = calc(a);
+    var yen = Math.round(r.total * a.wage / 10000 * 10) / 10;
+    document.getElementById('r-hours').textContent = r.total;
+    document.getElementById('r-yen').textContent = yen;
+    var max = Math.max.apply(null, Object.keys(r.tasks).map(function (k) { return r.tasks[k]; })) || 1;
+    document.getElementById('r-bars').innerHTML = Object.keys(r.tasks)
+      .sort(function (x, y) { return r.tasks[y] - r.tasks[x]; })
+      .map(function (k) {
+        return '<div class="bar"><span>' + k + '</span><span class="track"><span class="fill" style="width:' +
+          (r.tasks[k] / max * 100) + '%"></span></span><span class="v">' + r.tasks[k] + 'h</span></div>';
+      }).join('');
+    document.getElementById('r-alerts').innerHTML = r.alerts.map(function (s) { return '<li>' + s + '</li>'; }).join('');
+    var box = document.getElementById('diag-result');
+    box.classList.add('show');
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    last = { answers: a, hours: r.total, yen: Math.round(r.total * a.wage) };
+    if (window.affTrack) affTrack('diagnosis_complete', { hours: r.total });
+  });
+
+  // ---- 相談フォーム ----
+  var lead = document.getElementById('lead');
+  document.getElementById('f-free').addEventListener('change', function (e) {
+    document.getElementById('f-product-wrap').hidden = !e.target.checked;
+  });
+  lead.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var err = document.getElementById('lead-error');
+    var f = lead.elements;
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value);
+    if (!f.company.value.trim() || !f.name.value.trim() || !emailOk) {
+      err.textContent = '会社名・お名前・メールアドレスを正しく入力してください。';
+      err.style.display = 'block';
+      return;
+    }
+    err.style.display = 'none';
+    var data = {
+      source: (location.search.match(/utm_source=([^&]+)/) || [])[1] || document.referrer || 'direct',
+      company: f.company.value, name: f.name.value, email: f.email.value,
+      spend: f.spend.value, message: f.message.value,
+      freecheck: f.freecheck.checked, product: f.product.value,
+      diagnosis: last
+    };
+    function done() {
+      lead.style.display = 'none';
+      document.getElementById('thanks').style.display = 'block';
+      if (window.affFormComplete) affFormComplete('lead');
+    }
+    if (!cfg.leadEndpoint) { console.log('[lead] endpoint未設定', data); done(); return; }
+    fetch(cfg.leadEndpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) })
+      .then(done)
+      .catch(function () {
+        err.textContent = '送信できませんでした。時間をおいてもう一度お試しください。';
+        err.style.display = 'block';
+      });
+  });
+})();
+</script>
+</body>
+</html>
