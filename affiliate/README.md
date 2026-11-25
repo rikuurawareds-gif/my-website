@@ -1,31 +1,35 @@
-# アフィリエイト事業
+# アフィリエイト運用支援サービス
 
-運営ルールは [CLAUDE.md](CLAUDE.md)、運用フローは [docs/operations.md](docs/operations.md)。
+事業計画は [docs/business-plan.md](docs/business-plan.md)、運営ルールは [CLAUDE.md](CLAUDE.md)、進め方は [docs/roadmap.md](docs/roadmap.md)。
 
-## オーナーにしかできないこと（最初の1回だけ）
+## オーナーにしかできないこと
 
-本人確認・ログイン・お金が絡むものだけが残っています。それ以外は PM と各担当が進めます。
+本人確認・契約・お金・外部アカウントに関わるものだけが残っています。
 
-| # | やること | 所要 | 終わったら PM に伝えること |
+| # | やること | いつ | 所要 |
 |---|---|---|---|
-| 1 | ジャンルを決める（または「候補を出して」と PM に頼む） | — | ジャンル or 依頼 |
-| 2 | GA4 でプロパティとウェブストリームを作る（[analytics.google.com](https://analytics.google.com)） | 5分 | 測定ID（G-…）とプロパティID（数字） |
-| 3 | KPI_週次 シートに Apps Script を入れる（手順は `automation/ga4-to-sheet.gs` の先頭） | 5分 | 「入れた」 |
-| 4 | ASP に登録する（まず A8.net。サイトURLは公開後のURL） | 15分/社 | 登録したASP名 |
-| 5 | 週1回、ASPの成果CSVを `ASP管理画面_日次取込` に貼る（後で自動化予定） | 5分/週 | — |
-| 6 | PM が出す PR を確認して承認する | 随時 | — |
+| 1 | 商品の順番と価格の方向性を決める（PMが調査結果つきで案を出す） | 今 | 判断のみ |
+| 2 | 事業の名前（屋号・サービス名）を決める | フェーズ1 | 判断のみ |
+| 3 | Claude API のキーを発行し、環境の認証情報に登録する（PMが登録画面を出す） | フェーズ1 | 5分 |
+| 4 | 利用規約・業務委託契約・NDA のたたき台を弁護士に見てもらう | 最初の顧客の前 | 外注 |
+| 5 | 運用担当用の Chatwork アカウントを作り、APIトークンを登録する | フェーズ3 | 10分 |
+| 6 | Google Cloud のプロジェクトと請求先を作る | フェーズ3 | 10分 |
+| 7 | 最初の顧客への営業（知り合いの広告主など） | フェーズ1〜 | — |
+| 8 | PM が出す PR・顧客向け文面の承認 | 随時 | — |
 
-2〜3 は GA4 の管理画面で PM が手順を案内しながら進めることもできます。
+自社サービスLPの集客計測（GA4）を始めるときは、`automation/ga4-to-sheet.gs` の手順を使います。
 
 ## 構成
 ```
 affiliate/
-  CLAUDE.md            運営ルール（全担当が読む）
-  docs/                設計書（計測・KPI・ASP・法務・デザイン・Drive）
-  lp/                  公開するページ
-    _template/         LPテンプレート（3ステップ診断 + 結果 + 広告リンク）
-    assets/            計測(track.js)・A/Bテスト(ab.js)・共通CSS・設定
-  automation/          GA4 → スプレッドシート自動取込
-  reports/             週次レポート
-.claude/agents/        各担当の定義
+  CLAUDE.md          運営ルール（全担当が読む）
+  docs/
+    business-plan.md 事業計画（顧客・商品・価格仮説・順番・前提）
+    services/        4つの商品の仕様
+    architecture.md  システム構成（Claude Code と Claude API の役割分担）
+    roadmap.md       フェーズごとのやること
+    …                計測・KPI・ASPナレッジ・Drive構成・運用フロー
+  lp/                自社サービスLP（テンプレート、計測、A/Bテスト）
+  automation/        GA4 → スプレッドシート取込
+.claude/agents/      担当の定義（11）
 ```

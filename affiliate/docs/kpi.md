@@ -1,20 +1,16 @@
-# KPI 定義と改善の発動条件
+# KPI
 
-## ファネル
-セッション → LP到達 → フォーム開始 → フォーム完了 → 広告クリック → ASP発生 → ASP承認
+事業全体のKPIは `business-plan.md` の「5. 事業KPI」。ここでは自社サービスLPの集客の目安を決める。
+
+## サービスLPのファネル
+セッション → LP到達 → 申込フォーム開始 → 申込完了（無料表記チェック・問い合わせ）
 
 | 指標 | 計算式 | 初期の目安（仮） | 下回ったら |
 |---|---|---|---|
-| フォーム開始率 | form_start ÷ page_view | 20% | `designer`（ファーストビュー）+ `content-writer`（見出し） |
-| フォーム完了率 | generate_lead ÷ form_start | 50% | `cro-specialist`（設問数・ステップ離脱） |
-| 広告CTR | affiliate_click ÷ page_view | 10% | `cro-specialist` + `content-writer`（CTA・比較表） |
-| ASP発生率 | ASP発生件数 ÷ affiliate_click | 案件ごと | `business-strategist`（案件の見直し） |
-| 承認率 | 承認件数 ÷ 発生件数 | 案件ごと | `business-strategist`（流入の質・案件変更） |
-| EPC | 承認報酬 ÷ affiliate_click | 案件ごと | ページ・案件の優先順位づけに使う |
+| フォーム開始率 | form_start ÷ page_view | 5% | `designer`（ファーストビュー）+ `content-writer`（見出し） |
+| フォーム完了率 | generate_lead ÷ form_start | 40% | `cro-specialist`（項目数・ステップ離脱） |
+| 商談化率 | 商談数 ÷ 申込数 | 30% | `business-strategist`（ターゲット・訴求の見直し） |
 
-- 目安はジャンル決定後に `business-strategist` が実データに合わせて更新する。
-- 週のセッションが100未満のページは判定しない（データ不足）。
-
-## 判定のしかた
+- 週のセッションが100未満のときは判定しない（データ不足）。
 - 2週連続で目安を下回ったら、PM が該当担当に改善を振る。
 - 前週比で50%以上落ちたら、まず計測の故障を疑い `analyst` に確認させる。
