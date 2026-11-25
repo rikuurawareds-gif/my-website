@@ -16,7 +16,7 @@
 - [x] サービス名「アフィまかせ」、公開は Cloudflare Pages の無料サブドメイン、X はサービスアカウント（2026-11-25 決定）
 - [ ] Cloudflare Pages の設定（オーナー・10分、`hosting.md`）→ LP公開
 - [ ] X アカウント作成（オーナー）→ 初期投稿の予約
-- [ ] ASPの広告主側CSV形式の収集（オーナーがログイン → Claude in Chrome、`automation/asp-formats/chrome-collect-prompt.md`）
+- [ ] ASPの広告主側CSV形式の収集（オーナーがログイン → Claude in Chrome、`ops/owner-tasks/05-asp-csv-formats.md`）
 - [ ] 営業先リスト30社とサンプルの表記チェック
 - [ ] M2 掲載監視の試作（記事URL → 指摘と修正案）と、無料表記チェック
 - [ ] M9 立ち上げキットの初版（ASP比較、報酬設計、規約・承認基準のひな形）

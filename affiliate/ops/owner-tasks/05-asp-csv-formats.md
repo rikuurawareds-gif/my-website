@@ -1,4 +1,8 @@
-# Claude in Chrome 用の指示文: ASP（広告主側）のCSV形式の収集
+# 05 ASP（広告主側）のCSV形式の収集
+
+- 実行者: **Claude in Chrome**
+- あなたがやること: 対象ASPの広告主側管理画面へのログイン（ASPごとに数十秒）
+- 依存: なし
 
 使い方: オーナーが対象ASPの **広告主側の管理画面** にログインした状態で、Chrome の Claude に下の「指示文」をそのまま貼る。ASPごとに1回ずつ実行する（`【ASP名】` と `【ログイン後のURL】` だけ書き換える）。
 
@@ -73,7 +77,13 @@ https://docs.google.com/document/d/1lIVypXPTXC1Y8UkGM6-Twu7tQKfY1OwJ-rhA8XpWY9U/
 4. まとめができたら、次のGoogleドキュメントを開き、一番下に追記する。
    https://docs.google.com/document/d/1lIVypXPTXC1Y8UkGM6-Twu7tQKfY1OwJ-rhA8XpWY9U/edit
    追記する前に、実データ（具体的な名前・金額・件数・URL）が混ざっていないか、もう一度確認する。
-5. 最後に、確認できなかった画面や、押す必要があって止めた操作を私に一覧で報告する。
+5. 次の Google ドキュメントの一番下にも、完了の記録を追記する:
+   https://docs.google.com/document/d/1h3CYlzcAakR8DB2nmBx2qvGakh9Z7z5Zahi3_SNWSzM/edit
+   ## 05 ASP CSV形式の収集【ASP名】（YYYY-MM-DD HH:MM）
+   - 状態: 完了 / 途中で停止（理由）
+   - 結果: 確認したCSVの数=、成果承認のアップロード=可/不可、API=有/無
+   - オーナーの対応が必要なこと: （なければ「なし」）
+6. 最後に、確認できなかった画面や、押す必要があって止めた操作を私に一覧で報告する。
 ```
 
 ---
