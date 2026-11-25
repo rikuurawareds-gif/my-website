@@ -30,6 +30,9 @@
 |---|---|
 | [リード管理](https://docs.google.com/spreadsheets/d/1bBkDmB2BL_lVZYOh1NkUsFBVvNNSO1VmXdvH0r3HJ1w/edit) | `1bBkDmB2BL_lVZYOh1NkUsFBVvNNSO1VmXdvH0r3HJ1w`（LPのフォームから自動追記: `automation/lead-capture.gs`） |
 | [営業先リスト](https://docs.google.com/spreadsheets/d/17w_vuocYF0R_rW-VN4n--5sRIjE2NVb1ZhlEKSpbtok/edit) | `17w_vuocYF0R_rW-VN4n--5sRIjE2NVb1ZhlEKSpbtok` |
+| X投稿キュー.csv（PM が投稿文を追記） | `1LllAyV014Nakc-vICYkV_T3jYNdMDotE` |
+| [X投稿ログ](https://docs.google.com/spreadsheets/d/1lQUPoyUg1vfRzL703pkYMAC1MSh1LD0KQ7YWj6mGNd0/edit)（自動投稿の状態。止めるときは状態を「停止」） | `1lQUPoyUg1vfRzL703pkYMAC1MSh1LD0KQ7YWj6mGNd0` |
+| 作業結果の受け渡し（Chrome・コワーク → PM） | `1h3CYlzcAakR8DB2nmBx2qvGakh9Z7z5Zahi3_SNWSzM` |
 
 ## 顧客フォルダ
 新しい顧客が決まったら、`08_顧客/_顧客テンプレート（複製して使う）`（`1pmy5Vp5TryuUXqYxRQEnrCqq_wlDnRcD`）と同じ構成で `<顧客ID>_<社名>` フォルダを作り、顧客の担当者と共有する。
