@@ -33,6 +33,12 @@
 | X投稿キュー.csv（PM が投稿文を追記） | `1LllAyV014Nakc-vICYkV_T3jYNdMDotE` |
 | [X投稿ログ](https://docs.google.com/spreadsheets/d/1lQUPoyUg1vfRzL703pkYMAC1MSh1LD0KQ7YWj6mGNd0/edit)（自動投稿の状態。止めるときは状態を「停止」） | `1lQUPoyUg1vfRzL703pkYMAC1MSh1LD0KQ7YWj6mGNd0` |
 | 作業結果の受け渡し（Chrome・コワーク → PM） | `1h3CYlzcAakR8DB2nmBx2qvGakh9Z7z5Zahi3_SNWSzM` |
+| [オーナー作業の指示文（Chrome・コワークに貼る）](https://docs.google.com/spreadsheets/d/1KmFecmJjsDteyuRKTAGAPsMtb5vDSu4dHhda6LBmzF4/edit)（`00_PM・経営`） | `1KmFecmJjsDteyuRKTAGAPsMtb5vDSu4dHhda6LBmzF4` |
+| 作業ログ（`00_PM・経営`） | `1yEYZKWuQsy6xxcUfcynsBZ6DZWEIXwpbSr68_Fvf4A8` |
+| ASP振り分け設定（`08_顧客`。PM は「ASP振り分け_C001.csv」などを同じフォルダに追加する） | `18SuZA-lVYTPnatkTRLMRYoCisLgY0pkrC6FZ1_VoN-8` |
+| ASPレポート_未振り分け（フォルダ・`08_顧客`） | `1Ta0AZWO52XMS8AugJ63dsSkdWd-SVidm` |
+| ヒアリングシート（テンプレート・`08_顧客`） | `1wCCIN0rbNfMSQuA1ekDvA3Ch6OkK-ZX_fV2_QzcggYs` |
+| 連絡先台帳（`_顧客テンプレート`） | `1SwpcT7DZiRvvmueBAgC6O6MXBJA1lpd4W9sNfkOoPqs` |
 
 ## 顧客フォルダ
 新しい顧客が決まったら、`08_顧客/_顧客テンプレート（複製して使う）`（`1pmy5Vp5TryuUXqYxRQEnrCqq_wlDnRcD`）と同じ構成で `<顧客ID>_<社名>` フォルダを作り、顧客の担当者と共有する。

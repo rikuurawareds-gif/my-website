@@ -19,7 +19,7 @@
 
 ## 自動投稿の仕組み（2026-11-25 決定）
 - **公式APIでだけ自動投稿する。** Xの自動化ルールで、ブラウザ操作など API 以外の自動化は禁止（凍結のおそれ）。Claude in Chrome に投稿させない
-- 流れ: PM が投稿文を Drive `09_集客/X投稿キュー.csv`（`1LllAyV014Nakc-vICYkV_T3jYNdMDotE`）に追記 → オーナーの Google 上の Apps Script（`automation/x-autopost.gs`、シート「X投稿ログ」`1lQUPoyUg1vfRzL703pkYMAC1MSh1LD0KQ7YWj6mGNd0`）が毎時確認し、予定時刻の投稿を1本ずつ投稿
+- 流れ: PM が投稿文を Drive `09_集客` に「X投稿キュー_YYYYMM.csv」として新しく置く（既存ファイルは書き換えない。最初の分は `X投稿キュー.csv`） → オーナーの Google 上の Apps Script（`automation/x-autopost.gs`、シート「X投稿ログ」`1lQUPoyUg1vfRzL703pkYMAC1MSh1LD0KQ7YWj6mGNd0`）が毎時確認し、予定時刻の投稿を1本ずつ投稿
 - 止め方: 1本だけ止める → ログシートの状態を「停止」。全部止める → スクリプトのプロパティ PAUSED を true
 - 予定から24時間以上遅れた投稿は投稿しない（止めていた後にまとめて連投しないため）
 - 費用: X API は従量課金。リンク付きの投稿は高いので、リンクは固定ポストとプロフィールに寄せ、通常の投稿には入れない

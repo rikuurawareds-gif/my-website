@@ -2,13 +2,13 @@
  * X（旧Twitter）の自動投稿（公式API経由）。Drive の「X投稿キュー.csv」を読み、
  * 「X投稿ログ」シートで状態を管理しながら、予定時刻になった投稿を1本ずつ投稿する。
  *
- * - 投稿文は PM（Claude Code）が X投稿キュー.csv に追記する。オーナーは何もしなくてよい
+ * - 投稿文は PM（Claude Code）が、フォルダに「X投稿キュー_YYYYMM.csv」のような新しいファイルを置いて追加する（既存のファイルは書き換えない）。オーナーは何もしなくてよい
  * - 止めたい投稿は、ログシートの「状態」を「停止」に変える（その投稿だけ止まる）
  * - 全部止めたいときは、スクリプトのプロパティ PAUSED を true にする
  *
  * スクリプトのプロパティ（「プロジェクトの設定」→「スクリプト プロパティ」）:
  *   X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET … X Developer のキー（ここ以外に書かない）
- *   QUEUE_FILE_ID … X投稿キュー.csv のファイルID
+ *   QUEUE_FOLDER_ID … 「X投稿キュー」で始まる CSV を置くフォルダのID（フォルダ内のすべてを読む）
  *   LP_URL        … 本文中の {LP_URL} を置き換えるURL
  *   DRY_RUN       … true の間は投稿せず、ログに「テスト」と書くだけ
  *   PAUSED        … true の間は何もしない
@@ -56,11 +56,17 @@ function run() {
   }
 }
 
-/** キューCSVから、まだログにないIDを「予約」として追加する */
+/** キューCSV（フォルダ内の「X投稿キュー」で始まるすべてのファイル）から、まだログにないIDを「予約」として追加する */
 function importQueue() {
-  const id = props_().getProperty('QUEUE_FILE_ID');
-  if (!id) return;
-  const csv = Utilities.parseCsv(DriveApp.getFileById(id).getBlob().getDataAsString('UTF-8'));
+  const folderId = props_().getProperty('QUEUE_FOLDER_ID');
+  if (!folderId) return;
+  let csv = [['header']];
+  const files = DriveApp.getFolderById(folderId).getFiles();
+  while (files.hasNext()) {
+    const f = files.next();
+    if (f.getName().indexOf('X投稿キュー') !== 0) continue;
+    csv = csv.concat(Utilities.parseCsv(f.getBlob().getDataAsString('UTF-8')).slice(1));
+  }
   const sh = sheet_();
   const last = sh.getLastRow();
   const known = new Set(last > 1 ? sh.getRange(2, 1, last - 1, 1).getValues().flat().map(String) : []);

@@ -5,7 +5,7 @@
 - 依存: 01（公開URL）、04（アフィまかせのアカウント）
 - 費用の目安: 投稿1本あたり約2円（リンク付きは約30円）。平日1本でも月数十〜100円程度（第三者の情報。チャージ画面の金額で確認する）
 
-仕組み: PM が投稿文を Drive の「X投稿キュー.csv」に入れる → オーナーの Google 上で動くスクリプトが毎時確認し、予定時刻になった投稿を公式 API で1本ずつ投稿する。止めたい投稿は「X投稿ログ」シートの状態を「停止」に変えるだけ。
+仕組み: PM が投稿文を Drive の 09_集客 フォルダに「X投稿キュー_YYYYMM.csv」として置く → オーナーの Google 上で動くスクリプトが毎時確認し、予定時刻になった投稿を公式 API で1本ずつ投稿する。止めたい投稿は「X投稿ログ」シートの状態を「停止」に変えるだけ。
 
 ```
 あなたは X（旧Twitter）の自動投稿の設定担当です。オーナーのブラウザで作業します。
@@ -18,7 +18,7 @@
 - 公開URL（01）と X のユーザー名（04）は、次のドキュメントにある: https://docs.google.com/document/d/1h3CYlzcAakR8DB2nmBx2qvGakh9Z7z5Zahi3_SNWSzM/edit
 - 投稿ログのシート: https://docs.google.com/spreadsheets/d/1lQUPoyUg1vfRzL703pkYMAC1MSh1LD0KQ7YWj6mGNd0/edit
 - 貼るコード: https://raw.githubusercontent.com/rikuurawareds-gif/my-website/claude/friendly-hawking-5k5ymh/affiliate/automation/x-autopost.gs
-- 投稿キューのファイルID: 1LllAyV014Nakc-vICYkV_T3jYNdMDotE
+- 投稿キューのフォルダID: 1A-qNkwfsgXpchzldo6oy63Has1Dmw1O5
 
 # 守ること
 - X の開発者ポータルには、必ず「アフィまかせ」のアカウントでログインする。オーナーの個人アカウントで作業しない（違うアカウントのキーになってしまう）。
@@ -53,7 +53,7 @@
     - X_API_SECRET: 手順7の API Key Secret
     - X_ACCESS_TOKEN: 手順7の Access Token
     - X_ACCESS_SECRET: 手順7の Access Token Secret
-    - QUEUE_FILE_ID: 1LllAyV014Nakc-vICYkV_T3jYNdMDotE
+    - QUEUE_FOLDER_ID: 1A-qNkwfsgXpchzldo6oy63Has1Dmw1O5
     - LP_URL: 01 の公開URL の末尾に ?utm_source=x&utm_medium=social&utm_campaign=post を付けたもの
     - DRY_RUN: true
     - PAUSED: false
