@@ -23,7 +23,7 @@ function doPost(e) {
     label.asp[a.asp] || '', label.media[a.media] || '', label.cv[a.cv] || '',
     a.approve || '', a.check || '', a.dev || '', a.report || '',
     d.diagnosis ? d.diagnosis.hours : '', d.diagnosis ? d.diagnosis.yen : '',
-    (d.freecheck ? '【無料表記チェック希望: ' + (d.product || '商品名未記入') + '】' : '') + (d.message || ''),
+    '［' + (d.type || '') + '］' + (d.freecheck ? '【無料表記チェック希望: ' + (d.product || '商品名未記入') + '】' : '') + (d.message || ''),
     '新規', '', ''
   ].map(clean);
   row[0] = new Date(); // 日時は日付型のまま入れる

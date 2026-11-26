@@ -82,7 +82,7 @@ footer a{color:inherit;margin-right:16px}
 </style>
 </head>
 <body data-page-id="site-top">
-<header><div class="wrap"><span class="logo" data-name>アフィまかせ</span><a class="btn sm" href="#diagnosis">無料で診断</a></div></header>
+<header><div class="wrap"><span class="logo" data-name>アフィまかせ</span><span><a href="#price" style="margin-right:16px;color:var(--ink);text-decoration:none;font-size:14px">料金</a><a class="btn sm" href="#diagnosis">無料で診断</a></span></div></header>
 
 <main>
 <section class="hero">
@@ -222,13 +222,26 @@ footer a{color:inherit;margin-right:16px}
   </div>
 </section>
 
-<section>
+<section id="price">
+  <div class="wrap">
+    <div class="eyebrow">料金の目安</div>
+    <h2>料金は、はじめから公開しています</h2>
+    <div class="grid g3">
+      <div class="card"><h3>完全手離れプラン</h3><p class="big" style="font-size:28px;color:var(--ink)">媒体費の10%</p><p>最低月額 150,000円（税別）・初期費用 0円<br>立ち上げから毎月の運用・表記チェック・レポートまで</p></div>
+      <div class="card"><h3>表記チェック ライト</h3><p class="big" style="font-size:28px;color:var(--ink)">月 30,000円</p><p>（税別）提携メディア 20件まで・月1回のチェックと修正依頼文の作成</p></div>
+      <div class="card"><h3>表記チェック スタンダード</h3><p class="big" style="font-size:28px;color:var(--ink)">月 50,000円</p><p>（税別）提携メディア 100件まで・隔週のチェックと修正依頼文の作成</p></div>
+    </div>
+    <p class="note" style="margin-top:12px">媒体費は、ASP・メディアへの月々のお支払い額です。最低契約期間は6か月（以後1か月ごとの自動更新）。内容に応じてお見積もりします。</p>
+  </div>
+</section>
+
+<section class="alt">
   <div class="wrap">
     <div class="eyebrow">よくある質問</div>
     <h2>よくある質問</h2>
     <details><summary>AIがASPやメディアに勝手に連絡しませんか</summary><p>はじめは、AIが作った下書きをすべて担当者が確認してから送ります。定型的な連絡から順に、御社と合意した範囲だけを自動にしていきます。金額や契約に関わる連絡は、必ず人が確認します。</p></details>
     <details><summary>いまの代理店やASPとの関係はどうなりますか</summary><p>ASPとの契約はそのままで、運用の窓口だけを引き継ぐ形が基本です。状況に合わせてご提案します。</p></details>
-    <details><summary>料金はどのくらいですか</summary><p>媒体費（ASP・メディアへのお支払い）に応じた料率制で、最低月額があります。診断の結果と運用の状況を伺ってお見積もりします。</p></details>
+    <details><summary>料金はどのくらいですか</summary><p>完全手離れプランは媒体費の10%（最低月額15万円・税別）、表記チェック単体は月3万円からです。上の「料金の目安」をご覧ください。</p></details>
     <details><summary>契約期間は</summary><p>改善の効果を判定するのに数か月かかるため、6か月からをお願いしています。</p></details>
     <details><summary>表記チェックで法的な判断もしてもらえますか</summary><p>いいえ。リスクのありそうな表現を拾って修正案を出す一次チェックです。最終的な判断は御社（必要に応じて弁護士）にお願いしています。</p></details>
     <details><summary>データの扱いは大丈夫ですか</summary><p>秘密保持契約を結び、御社ごとにデータを分けて管理します。ASP管理画面のパスワードはお預かりしません。</p></details>
@@ -240,6 +253,8 @@ footer a{color:inherit;margin-right:16px}
     <div class="eyebrow">無料相談・無料表記チェック</div>
     <h2 style="text-align:center">まずはお気軽にご相談ください</h2>
     <form class="lead-form" id="lead" data-form-id="lead" novalidate>
+      <div class="field"><label for="f-type">お問い合わせの種類</label>
+        <select id="f-type" name="type"><option>導入のご相談</option><option>無料の表記チェック</option><option>個人情報の取り扱いについて</option><option>その他</option></select></div>
       <div class="field"><label for="f-company">会社名</label><input id="f-company" name="company" required autocomplete="organization"></div>
       <div class="field"><label for="f-name">お名前</label><input id="f-name" name="name" required autocomplete="name"></div>
       <div class="field"><label for="f-email">メールアドレス</label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
@@ -257,7 +272,7 @@ footer a{color:inherit;margin-right:16px}
 </section>
 </main>
 
-<footer><div class="wrap"><a href="privacy.html">プライバシーポリシー</a><span>運営: 【運営者名】</span></div></footer>
+<footer><div class="wrap"><a href="privacy.html">プライバシーポリシー</a><span>運営: アフィまかせ</span></div></footer>
 
 <script src="assets/track.js"></script>
 <script>
@@ -328,6 +343,10 @@ footer a{color:inherit;margin-right:16px}
   document.getElementById('f-free').addEventListener('change', function (e) {
     document.getElementById('f-product-wrap').hidden = !e.target.checked;
   });
+  document.getElementById('f-type').addEventListener('change', function (e) {
+    if (e.target.value === '無料の表記チェック') { var c = document.getElementById('f-free'); c.checked = true; c.dispatchEvent(new Event('change')); }
+  });
+  if (location.hash === '#privacy-request') document.getElementById('f-type').value = '個人情報の取り扱いについて';
   lead.addEventListener('submit', function (e) {
     e.preventDefault();
     var err = document.getElementById('lead-error');
@@ -342,7 +361,7 @@ footer a{color:inherit;margin-right:16px}
     var data = {
       source: (location.search.match(/utm_source=([^&]+)/) || [])[1] || document.referrer || 'direct',
       company: f.company.value, name: f.name.value, email: f.email.value,
-      spend: f.spend.value, message: f.message.value,
+      type: f.type.value, spend: f.spend.value, message: f.message.value,
       freecheck: f.freecheck.checked, product: f.product.value,
       diagnosis: last
     };
