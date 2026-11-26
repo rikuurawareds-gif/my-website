@@ -5,6 +5,7 @@
 - 引き受ける作業の一覧と、それぞれの自動化の方法: `docs/workload-inventory.md`（作業番号 A1〜D4、モジュール M1〜M9）
 - 事業計画: `docs/business-plan.md`、モジュール仕様: `docs/services/`
 - 作業はすべて作業番号と時間を記録し、時間がかかっている順に自動化する
+- **顧客・ASP・メディアの力学については `knowledge/owner-insights.md`（オーナーの見立て）を最優先する。** 料金・プラン・決めたことは `docs/decisions.md`
 - **運用・提案・設計の判断の前に `knowledge/` を読む。** 実際の提案資料や事例から学んだ運用知識が入っている。新しい資料の取り込み手順は `knowledge/README.md`
 
 ## 体制
