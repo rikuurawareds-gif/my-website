@@ -41,6 +41,7 @@
 - `03_表記チェックレポート`
 - `04_契約・レギュレーション`
 - `提携メディア台帳`（スプレッドシート）
+- `連絡先台帳`（スプレッドシート）: 顧客の担当者・上長・決裁者、ASP・メディアの担当者の氏名・役割・Chatwork アカウント・報告の宛先。自動の連絡・報告はここを見て宛先を決める
 
 顧客管理シート: [顧客管理](https://docs.google.com/spreadsheets/d/1w4G0OlehBrubnMqX3sb6XtJF-hJcR0b9dGm_PwnOtJk/edit)（`1w4G0OlehBrubnMqX3sb6XtJF-hJcR0b9dGm_PwnOtJk`）
 
