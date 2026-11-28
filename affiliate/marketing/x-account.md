@@ -38,7 +38,7 @@
 ## 毎月の投稿づくり（2026-11-28 決定。オーナーの作業ゼロ）
 毎月20日ごろ、PM が次の順で翌月分を作る。オーナーの承認は不要（上の「投稿文の追加」のとおり。炎上・誤りの恐れがあるものだけ確認）。
 1. **リサーチ担当 `x-researcher`** が `marketing/x-research/YYYYMM.md`（ネタ帳）を作る: 法令・行政の動き、業界の動き、季節の需要、よく出る質問、前月の投稿の反応
-2. **投稿担当 `x-post-writer`** がネタ帳から平日分を書き、`marketing/x-queue/X投稿キュー_YYYYMM.csv` を作る（リンク付きは月4本まで）
+2. **投稿担当 `x-post-writer`** がネタ帳から平日分を書き、`marketing/x-queue/X投稿キュー_YYYYMM.csv` を作る（リンク付きは月6本まで）`n   - 新しいコラムが公開されたら（workstreams.md の受け渡し）、PM が紹介投稿を平日 18:13 に足す（`X投稿キュー_YYYYMMb.csv` などの新しいファイルで）
 3. PM が `checker/check.py` と `compliance-reviewer` を通して直す
 4. PM が CSV を Drive `09_集客`（フォルダID は 07 の QUEUE_FOLDER_ID）に新しいファイルとして置く → スクリプトが自動で予約に取り込む
 5. コミット・push（リポジトリにも同じ CSV を残す）
