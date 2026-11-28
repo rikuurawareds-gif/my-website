@@ -113,6 +113,7 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 .list a strong{display:block;font-size:18px;line-height:1.5;margin-bottom:6px}.list a span{font-size:14px;color:var(--text-sub)}
 """
 
+# site.css を変えたら ?v= の版番号を上げる（ブラウザが4時間キャッシュするため）。index.html・privacy.html も同じ番号に
 HEAD = """<!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title><meta name="description" content="{desc}"><link rel="canonical" href="{url}">
@@ -120,7 +121,7 @@ HEAD = """<!doctype html>
 <meta name="theme-color" content="#070b18">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v=20261128b">
 <style>{css}</style>
 {jsonld}
 <script src="/assets/config.js"></script>
