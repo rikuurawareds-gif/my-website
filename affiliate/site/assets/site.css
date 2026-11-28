@@ -258,9 +258,23 @@ fieldset.plan-pick{border:0;padding:0;margin:0;flex:1 1 100%;min-width:0}
 .sheet-eq b{display:block;font-size:clamp(18px,3vw,23px);font-weight:900;font-variant-numeric:tabular-nums;line-height:1.3}
 .sheet-eq i{font-style:normal;font-weight:900;font-size:20px;color:var(--text-sub)}
 .sheet-eq .res{background:var(--navy);border-color:var(--navy);color:#fff}.sheet-eq .res span{color:var(--text-inv-sub)}
-@media (max-width:560px){.sheet-eq{grid-template-columns:1fr}.sheet-eq i{line-height:1}}
-.sheet-hours{display:flex;flex-wrap:wrap;gap:4px 20px;margin:0;padding:12px 0 18px;border-bottom:1px solid var(--line);font-size:14px;color:var(--text-sub)}
-.sheet-hours b{color:var(--text);font-variant-numeric:tabular-nums}
+/* スマホ: 引き算をレシートのように1行ずつ（項目は左、金額は右） */
+@media (max-width:560px){
+  .sheet-eq{grid-template-columns:1fr;gap:0;text-align:left;padding:16px 0 0}
+  .sheet-eq i{display:none}
+  .sheet-eq div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-radius:0;border-width:0 0 1px;background:none;padding:10px 2px}
+  .sheet-eq b{font-size:18px}
+  .sheet-eq div:nth-of-type(2) span:before{content:"− "}
+  .sheet-eq .res{border-radius:10px;padding:12px 14px;margin-top:8px}
+  .sheet-eq .res span:before{content:"＝ "}
+  #diagnosis .panel:has(.result.show){padding:12px}
+  .sheet-desk{padding:10px}
+  .sheet{padding:20px 16px}
+  .sheet-eq b{white-space:nowrap}
+  .sheet-hours{display:grid;grid-template-columns:1fr auto;gap:2px 12px}.sheet-hours b{margin-right:0;text-align:right}
+}
+.sheet-hours{display:flex;flex-wrap:wrap;gap:4px 8px;margin:0;padding:12px 0 18px;border-bottom:1px solid var(--line);font-size:14px;color:var(--text-sub)}
+.sheet-hours b{color:var(--text);font-variant-numeric:tabular-nums;margin-right:16px}
 .sheet h4{font-size:15px;font-weight:900;margin:24px 0 8px}
 .sheet .bar{grid-template-columns:150px 1fr 104px}
 .sheet .bar .v{font-size:13px;white-space:nowrap}
@@ -305,3 +319,8 @@ fieldset.plan-pick{border:0;padding:0;margin:0;flex:1 1 100%;min-width:0}
 @media (max-width:640px){.facts dl>div{grid-template-columns:1fr;gap:2px}}
 .sheet-net .caveat{grid-column:1/-1;margin:4px 0 0;font-size:13px;color:var(--text-sub)}
 .pack-sum .sep{color:var(--text-inv-sub);font-size:14px}
+/* スマホの内訳: 作業名と時間を1行目、棒を2行目に（先にある .sheet .bar の列指定より後ろに置く） */
+@media (max-width:560px){
+  .sheet .bar{grid-template-columns:1fr auto;grid-template-areas:"n v" "t t";gap:4px 8px;margin:10px 0}
+  .sheet .bar>span:first-child{grid-area:n}.sheet .bar .track{grid-area:t}.sheet .bar .v{grid-area:v}
+}
