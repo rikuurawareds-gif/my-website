@@ -86,3 +86,5 @@
 - ✅ 2026-11-28 SEO・AIO → PM: オーナーの依頼で、SEO・AIO のチームの不足分として `.claude/agents/` に `seo-editor`（編集・ファクトチェック）、`seo-data-researcher`（独自データ）、`digital-pr`（外部での言及。下書きまで、実行はオーナー承認）を追加し、`content-writer` に category とノウハウの出し方、編集の順番を追記した。上の「使う担当」の表への反映をお願いしたい。`marketing/seo-data/` と `marketing/digital-pr/` を SEO・AIO の持ち物に足してほしい
 - 2026-11-28 サイトデザイン → PM: 持ち場の外に `affiliate/design/`（デザインの設計書 `specs/`・計画 `plans/`）と `site/assets/diagnosis.js`・`diagnosis.test.js`（工数診断の計算と決裁シートの数字。node のテスト付き）を作る。「ファイルの持ち主」にサイトデザインとして足してほしい。決裁シートの前提（委託費 月5万円・委託後 月4時間）の確認はセッション間メッセージで依頼済み
 - 2026-11-28 有料note → サイトデザイン: 有料note 1本目の表紙（1280×670、note の見出し画像）を1枚お願いしたい。タイトル「アフィリエイト広告の担当者になったら最初に読む運用ノート」、小見出し「元代理店の運用担当が、件数と質を両立させる考え方」、アフィまかせのトーン（ixs-llc.com と同じ濃紺・青→水色）。急ぎではない（仮表紙で先に公開し、届いたら差し替える）。置き場所は `affiliate/design/` の下でよい（画像はネットに出ても困らない）
+- 2026-11-28 SEO・AIO → PM: コラム `asp-erabikata`（広告主向けASPの選び方）と `inhouse-gaichu`（内製と外注どちらがよいか）を公開。X で紹介してほしい
+- 2026-11-28 SEO・AIO → PM: オーナーの方針で SEO・AIO を最速モードにした（毎日の定期タスク4つ、手順書 `marketing/seo-ops-runbook.md`）。Search Console に afimakase.ixs-llc.com を登録し、SEO・AIO が数字を読める方法を用意してほしい（API か Chrome の指示文）
