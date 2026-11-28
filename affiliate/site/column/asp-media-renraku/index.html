@@ -9,12 +9,15 @@
 <style>
 .col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
 .col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
-.col-hero .w{position:relative}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
 .w{max-width:800px;margin:0 auto;padding:0 20px}
 .crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
 .col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
 .meta{font-size:13px;color:var(--text-inv-sub);margin:0}
-article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
 article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
 article h3{font-size:19px;margin:30px 0 8px}
 .lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
@@ -37,9 +40,9 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <script src="/assets/config.js"></script>
 </head><body data-page-id="col-asp-media-renraku">
 <header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
-<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
 <h1>ASP・メディアとのやり取りの工数を減らす方法：連絡が多くなる理由と、減らすための準備</h1>
-<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div></div>
+<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div><img class="art" src="/assets/img/cat-kosu.svg" alt="" width="150" height="60"></div></div>
 <main><article class="w"><div class="lead"><strong>結論</strong>ASP・メディアとのやり取りの工数を減らすには、<strong>連絡を受ける窓口を一本にまとめ、よく聞かれることへの答えと資料を先に用意し、定例の議題を固定する</strong> ことが効果的です。やり取りは、アフィリエイト運用の作業の中でも特に時間がかかりやすく、取引先が多いほど大きく膨らみます。連絡の数そのものを減らす準備と、1回のやり取りで話が進む伝え方の両方が必要です。</div>
 <nav class="toc"><strong>目次</strong><ol><li><a href="#s1">ASP・メディアとのやり取りに時間がかかる理由</a></li><li><a href="#s2">工数を減らす方法</a></li><li><a href="#s3">よくある質問</a></li><li><a href="#s4">まとめ</a></li></ol></nav>
 <h2 id="s1">ASP・メディアとのやり取りに時間がかかる理由</h2>
@@ -68,8 +71,8 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <p>規模の小さいメディアなどでは、連絡しても返事がもらえないこともあります。返事を待ち続けると、確認と催促の工数が積み上がります。</p>
 <ul><li>何日返事がなければ、ASP担当者からも連絡してもらうか</li><li>それでも返事がなく、表記の修正などが必要な場合は、提携の停止を検討するか</li></ul>
 <p>この基準を事前に決めておくと、迷う時間を減らせます。表記の修正に応じてもらえない場合の考え方は<a href="/column/stema-affiliate/">ステマ規制とアフィリエイト</a>も参考にしてください。</p>
-<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">よくある質問</h2>
+<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">よくある質問</h2>
 <h3>ASP担当者とのやり取りは、月にどれくらいの時間がかかりますか</h3>
 <p>取引するASPやメディアの数、定例の頻度、メディアからの問い合わせの多さによって大きく変わります。取引先が多いほど長くなり、運用全体の中でいちばん大きい作業になることもあります。作業ごとの時間の目安は<a href="/column/kosu-sakugen/">アフィリエイト運用の工数を減らす方法</a>にまとめています。</p>
 <h3>メディアからの問い合わせを減らすには、どうすればよいですか</h3>
@@ -77,10 +80,10 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <h3>ASPとの連絡を自動化してもよいですか</h3>
 <p>お礼や日程の調整など、内容が決まっている連絡は自動化に向いています。一方、条件の交渉や施策の相談は、ASP側の事情もふまえた判断が必要です。下書きまでを自動で作り、人が確認してから送る形が安全です。</p>
 <h2 id="s4">まとめ</h2>
-<p>ASP・メディアとのやり取りは、アフィリエイト運用の中でも時間がかかりやすい作業です。窓口の一本化、よく聞かれることへの資料の準備、定例の議題の固定で連絡の数を減らし、相手が動きやすい材料をそろえて1回のやり取りで話を進めることが、工数を減らす近道です。</p><div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<p>ASP・メディアとのやり取りは、アフィリエイト運用の中でも時間がかかりやすい作業です。窓口の一本化、よく聞かれることへの資料の準備、定例の議題の固定で連絡の数を減らし、相手が動きやすい材料をそろえて1回のやり取りで話を進めることが、工数を減らす近道です。</p><div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
 <div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
-<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
 <p class="copy">© IXS LLC.</p>
 </div></footer>
 <script src="/assets/track.js"></script>

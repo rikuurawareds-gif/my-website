@@ -9,12 +9,15 @@
 <style>
 .col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
 .col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
-.col-hero .w{position:relative}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
 .w{max-width:800px;margin:0 auto;padding:0 20px}
 .crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
 .col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
 .meta{font-size:13px;color:var(--text-inv-sub);margin:0}
-article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
 article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
 article h3{font-size:19px;margin:30px 0 8px}
 .lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
@@ -37,9 +40,9 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <script src="/assets/config.js"></script>
 </head><body data-page-id="col-affiliate-hajimekata">
 <header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
-<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
 <h1>広告主のアフィリエイトの始め方：ASP選び・報酬設計・計測・規約づくりの手順</h1>
-<p class="meta">公開: 2026-11-27　更新: 2026-11-27　運営: アフィまかせ（合同会社IXS）</p></div></div>
+<p class="meta">公開: 2026-11-27　更新: 2026-11-27　運営: アフィまかせ（合同会社IXS）</p></div><img class="art" src="/assets/img/cat-hajime.svg" alt="" width="150" height="60"></div></div>
 <main><article class="w"><div class="lead"><strong>結論</strong>広告主がアフィリエイトを始めるときは、<strong>①目標とCPAの上限を決める → ②ASPを選ぶ → ③成果地点と報酬を決める → ④計測を確認する → ⑤規約と承認基準を作る → ⑥メディアを集める</strong> の順に進めると、始めてからの手戻りが少なくなります。最初に「1件の成果にいくらまで払えるか」を決めておくことが、すべての判断の基準になります。</div>
 <nav class="toc"><strong>目次</strong><ol><li><a href="#s1">① 目標と、1件あたりに払える上限を決める</a></li><li><a href="#s2">② ASPを選ぶ</a></li><li><a href="#s3">③ 成果地点と報酬を決める</a></li><li><a href="#s4">④ 計測を確認する</a></li><li><a href="#s5">⑤ プログラム規約と承認基準を作る</a></li><li><a href="#s6">⑥ メディアを集める</a></li><li><a href="#s7">よくある質問</a></li><li><a href="#s8">まとめ</a></li></ol></nav>
 <h2 id="s1">① 目標と、1件あたりに払える上限を決める</h2>
@@ -50,8 +53,8 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <p>ASP（アフィリエイト・サービス・プロバイダ）は、広告主とメディアをつなぐプラットフォームです。選ぶときは次の点を比べます。</p>
 <ul><li><strong>ジャンルの強さ</strong>: 自社の分野で実績のあるメディアが多く登録しているか</li><li><strong>費用</strong>: 初期費用・月額費用・成果報酬に対する手数料</li><li><strong>担当者の支援</strong>: メディアの紹介や、特集・メルマガ枠の相談に乗ってくれるか</li><li><strong>計測の方法</strong>: 自社サイトの仕組みと相性がよいか</li></ul>
 <p>最初から多くのASPに出稿すると、管理の手間が増えます。まずは自社の分野に強いASPを1〜2社選び、成果を見ながら広げるのが一般的です。</p>
-<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">③ 成果地点と報酬を決める</h2>
+<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">③ 成果地点と報酬を決める</h2>
 <p>報酬には、1件あたり決まった金額を払う「定額」と、売上の一定割合を払う「定率」があります。メディアは、<strong>報酬単価 × 成約率（CVR）× 承認率</strong>、つまり1クリックあたりの報酬（EPC）で、どの案件を掲載するかを判断します。</p>
 <ul><li>単価が競合より低くても、CVRが高ければEPCで勝てることがある</li><li>承認率が低い（否認が多い）案件は、メディアから敬遠されやすい</li><li>特定のメディアにだけ高い単価を出す「特別単価（特単）」は、成果を見てから使う</li></ul>
 <h2 id="s4">④ 計測を確認する</h2>
@@ -72,10 +75,10 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <h3>始めてから成果が出るまで、どれくらいかかりますか</h3>
 <p>メディアに掲載されるまでに時間がかかるため、数か月単位で見るのが一般的です。メディアへの掲載依頼を自社から積極的に行うと、立ち上がりが早くなります。</p>
 <h2 id="s8">まとめ</h2>
-<p>アフィリエイトは「ASPに出稿すれば成果が来る」ものではなく、報酬設計、計測、規約、メディア集めを順番に整える必要があります。最初に1件あたりに払える上限を決め、それを基準に判断していくのがポイントです。</p><div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<p>アフィリエイトは「ASPに出稿すれば成果が来る」ものではなく、報酬設計、計測、規約、メディア集めを順番に整える必要があります。最初に1件あたりに払える上限を決め、それを基準に判断していくのがポイントです。</p><div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
 <div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
-<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
 <p class="copy">© IXS LLC.</p>
 </div></footer>
 <script src="/assets/track.js"></script>

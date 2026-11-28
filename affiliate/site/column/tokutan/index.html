@@ -9,12 +9,15 @@
 <style>
 .col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
 .col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
-.col-hero .w{position:relative}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
 .w{max-width:800px;margin:0 auto;padding:0 20px}
 .crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
 .col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
 .meta{font-size:13px;color:var(--text-inv-sub);margin:0}
-article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
 article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
 article h3{font-size:19px;margin:30px 0 8px}
 .lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
@@ -37,9 +40,9 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <script src="/assets/config.js"></script>
 </head><body data-page-id="col-tokutan">
 <header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
-<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
 <h1>特単（特別単価）とは？出し方・期限の管理・やめどきと、単価管理の工数を減らすコツ</h1>
-<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div></div>
+<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div><img class="art" src="/assets/img/cat-jitsumu.svg" alt="" width="150" height="60"></div></div>
 <main><article class="w"><div class="lead"><strong>結論</strong>特単（特別単価）とは、アフィリエイトで <strong>特定のメディアにだけ、通常より高い報酬単価を設定すること</strong> です。成果の多いメディアに掲載順位や露出を上げてもらう目的で使います。特単を出すときは、先に <strong>自社が払える1件あたりの上限単価</strong> を決め、期限と見直しの条件をつけて段階的に試すのが基本です。期限や条件の管理を一覧にしておくと、単価管理の工数も減らせます。</div>
 <nav class="toc"><strong>目次</strong><ol><li><a href="#s1">特単とは</a></li><li><a href="#s2">特単を出すべき場面</a></li><li><a href="#s3">上限単価の決め方</a></li><li><a href="#s4">出し方のコツ</a></li><li><a href="#s5">期限と条件の管理</a></li><li><a href="#s6">やめどきの判断</a></li><li><a href="#s7">よくある質問</a></li><li><a href="#s8">まとめ</a></li></ol></nav>
 <h2 id="s1">特単とは</h2>
@@ -48,8 +51,8 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <h2 id="s2">特単を出すべき場面</h2>
 <ul><li><strong>成果の多いメディアで、もう一段上の順位を取りたい</strong>: 比較・ランキングのページでは、順位が上がるほどクリックが増えやすくなります</li><li><strong>新しいメディアに掲載を始めてもらいたい</strong>: 掲載のきっかけとして、期間を区切った特単を出します</li><li><strong>競合が単価を上げて、順位を落とした</strong>: 順位を戻すかどうかを判断します</li></ul>
 <p>一方で、成果の少ないメディアや、成約の質が低いメディアに特単を出しても、費用が増えるだけになりがちです。</p>
-<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">上限単価の決め方</h2>
+<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">上限単価の決め方</h2>
 <p>特単の交渉で迷わないために、先に <strong>これ以上は払えない1件あたりの単価</strong> を決めておきます。</p>
 <blockquote>上限単価 ＝ 許容できる1件あたりの獲得費用（CPA）× 成果の質の補正</blockquote>
 <p>計算例（架空の数字）:</p>
@@ -75,10 +78,10 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <h3>特単を出しても、順位が上がらないことはありますか</h3>
 <p>あります。比較・ランキングのページのメディアの掲載方針などにより、最上位の枠が単価だけでは決まらないこともあります。事前にASP担当者に、どの順位が狙えるかを確認しておきましょう。</p>
 <h2 id="s8">まとめ</h2>
-<p>特単は、成果の多いメディアに順位や露出を上げてもらうための仕組みです。先に上限単価を決め、期限と見直しの条件をつけて段階的に試すこと、条件と期限を一覧で管理することで、費用の膨らみと管理の工数の両方を抑えられます。</p><div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<p>特単は、成果の多いメディアに順位や露出を上げてもらうための仕組みです。先に上限単価を決め、期限と見直しの条件をつけて段階的に試すこと、条件と期限を一覧で管理することで、費用の膨らみと管理の工数の両方を抑えられます。</p><div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
 <div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
-<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
 <p class="copy">© IXS LLC.</p>
 </div></footer>
 <script src="/assets/track.js"></script>

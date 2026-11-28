@@ -16,13 +16,13 @@ test('calc: 承認・表記・開拓をしていないと注意が出る', () =>
   assert.strictEqual(r.alerts.length, 3);
 });
 
-test('roi: 月48時間・時給4,000円', () => {
-  const r = D.roi(48, 4000);
+test('roi: 月48時間・時給4,000円・委託費5万円・残り4時間', () => {
+  const r = D.roi(48, 4000, { fee: 50000, remainHours: 4 });
   assert.deepStrictEqual(r, { hoursNow: 48, hoursAfter: 4, hoursSaved: 44, laborSaved: 176000, fee: 50000, netMonth: 126000, netYear: 1512000 });
 });
 
 test('roi: 工数が残る工数より小さいとき、差し引きはマイナスのまま', () => {
-  const r = D.roi(3, 4000);
+  const r = D.roi(3, 4000, { fee: 50000, remainHours: 4 });
   assert.strictEqual(r.hoursAfter, 3);
   assert.strictEqual(r.hoursSaved, 0);
   assert.strictEqual(r.netMonth, -50000);
@@ -49,17 +49,30 @@ test('decode: 壊れた文字列は null', () => {
     assert.strictEqual(D.decode(s), null, String(s));
 });
 
-test('plan: まるごと（全部任せる）は roi と同じ', () => {
-  const c = D.calc(MID);
-  const r = D.plan(c, 4000, D.PLANS[0]);
-  assert.strictEqual(r.hoursAfter, 4);
-  assert.strictEqual(r.netMonth, D.roi(26, 4000).netMonth);
+test('fee: まるごとパックと窓口代行の委託費（ASP 4社目からの加算）', () => {
+  const pack = D.PLANS.find(p => p.id === 'pack'), contact = D.PLANS.find(p => p.id === 'contact');
+  assert.strictEqual(D.fee(pack, 0), 90000);           // 1社
+  assert.strictEqual(D.fee(pack, 1), 90000);           // 2〜3社 → 3社
+  assert.strictEqual(D.fee(pack, 2), 90000 + 2 * 10000 + 3000 + 2000); // 4〜6社 → 5社
+  assert.strictEqual(D.fee(pack, 3), 90000 + 5 * 10000 + 3000 + 4 * 2000); // 7社以上 → 8社
+  assert.strictEqual(D.fee(contact, 1), 30000);
+  assert.strictEqual(D.fee(contact, 3), 30000 + 5 * 10000);
 });
 
-test('plan: 一部だけ任せると、任せない作業の時間が残る', () => {
-  const c = D.calc(MID);
-  const onlyContact = { id: 'x', name: '窓口代行', fee: 30000, remainHours: 2, covers: ['ASP担当とのやり取り', 'メディア対応・掲載確認'] };
-  const r = D.plan(c, 4000, onlyContact);
+test('plan: まるごとパックは確認の月4時間＋料金表に含まれない請求・予算管理が残る', () => {
+  const r = D.plan(D.calc(MID), MID, D.PLANS.find(p => p.id === 'pack'));
+  assert.strictEqual(r.hoursAfter, 4 + 1.5);
+  assert.strictEqual(r.fee, 90000);
+  assert.strictEqual(r.netMonth, (26 - 5.5) * 4000 - 90000);
+});
+
+test('plan: 窓口代行だけは、窓口の作業以外の時間と確認の2時間が残る', () => {
+  const r = D.plan(D.calc(MID), MID, D.PLANS.find(p => p.id === 'contact'));
   assert.strictEqual(r.hoursAfter, 26 - 4.5 - 1.5 + 2);
   assert.strictEqual(r.netMonth, (26 - r.hoursAfter) * 4000 - 30000);
+});
+
+test('plan: 既定はまるごとパック、時給の既定は5,000円', () => {
+  assert.strictEqual(D.PLANS[0].id, 'pack');
+  assert.strictEqual(D.DEFAULT_WAGE, 5000);
 });

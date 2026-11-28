@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img"><title>表記・法令</title><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="240" y2="120"><stop offset="0" stop-color="#3366ff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<g fill="none" stroke="#0f1424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="40" y="8" width="58" height="66" rx="4"/></g>
+<g stroke="#c5ccdd" stroke-width="2" stroke-linecap="round"><path d="M50 36h38M50 46h38M50 56h26"/></g>
+<rect x="50" y="16" width="22" height="13" rx="3" fill="url(#g)"/><text x="61" y="26" font-family="Noto Sans JP,sans-serif" font-size="9" font-weight="900" fill="#fff" text-anchor="middle">PR</text>
+<g fill="none" stroke="#0f1424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M120 30l12 12 26-26"/></g><path d="M120 58h50" stroke="#9aa4bf" stroke-width="2" stroke-linecap="round"/></svg>

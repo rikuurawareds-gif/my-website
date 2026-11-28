@@ -9,12 +9,15 @@
 <style>
 .col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
 .col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
-.col-hero .w{position:relative}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
 .w{max-width:800px;margin:0 auto;padding:0 20px}
 .crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
 .col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
 .meta{font-size:13px;color:var(--text-inv-sub);margin:0}
-article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
 article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
 article h3{font-size:19px;margin:30px 0 8px}
 .lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
@@ -37,9 +40,9 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <script src="/assets/config.js"></script>
 </head><body data-page-id="col-report">
 <header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
-<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
 <h1>アフィリエイトの月次レポートの作り方：数字が動いた理由の書き方と、作る手間の減らし方</h1>
-<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div></div>
+<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div><img class="art" src="/assets/img/cat-jitsumu.svg" alt="" width="150" height="60"></div></div>
 <main><article class="w"><div class="lead"><strong>結論</strong>アフィリエイトの月次レポートは、<strong>結果の数字、数字が動いた理由、次の月の打ち手と判断してほしいこと</strong> の3つを、毎月同じ順番でまとめるのが基本です。特に大切なのは、数字が動いた理由を「成約率」「市況」「競合」「個別のメディア」のように分けて書くことです。理由が分かれていると、次に何をすればよいかが読み手にも伝わります。構成を固定し、集計を自動化すると、作る手間も減らせます。</div>
 <nav class="toc"><strong>目次</strong><ol><li><a href="#s1">月次レポートに入れる項目</a></li><li><a href="#s2">数字が動いた理由の書き方</a></li><li><a href="#s3">外部環境の書き方</a></li><li><a href="#s4">着地見込みとのずれの見せ方</a></li><li><a href="#s5">レポートの品質を保つためのルール</a></li><li><a href="#s6">作る手間を減らすコツ</a></li><li><a href="#s7">よくある質問</a></li><li><a href="#s8">まとめ</a></li></ol></nav>
 <h2 id="s1">月次レポートに入れる項目</h2>
@@ -51,8 +54,8 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <ul><li><strong>成約率の変化</strong>: サイトやフォームの変更、訴求の変更など、自社側の要因</li><li><strong>市況・季節</strong>: 検索の量や、見込み客の動きの変化</li><li><strong>競合の動き</strong>: 競合の単価の引き上げや、広告の強化</li><li><strong>個別のメディア</strong>: 特定のメディアの掲載停止、順位の変化、新規の掲載</li><li><strong>自社の施策</strong>: 特単や新しいメディアの追加などの効果</li></ul>
 <p>それぞれが目標に対してどれくらい影響したかを並べると、「どこに手を打てば戻せるか」が見えます。書くときは、次の点に気をつけます。</p>
 <ul><li><strong>主語をはっきりさせる</strong>: 「競合の広告」「競合のアフィリエイトメディア」「競合の自社サイト」のように、誰の動きかを分ける</li><li><strong>何の数字が変わったかを書く</strong>: 表示の回数、クリック、成約率のどれが変わったのか</li><li><strong>「好調」「苦戦」には基準を添える</strong>: 何に対して何%か</li><li><strong>件数が少ないときは「参考値」と書く</strong>: 少ない件数から言い切らない</li></ul>
-<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">外部環境の書き方</h2>
+<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">外部環境の書き方</h2>
 <p>外部環境は、日付をつけて、時系列で書くと伝わりやすくなります。</p>
 <ul><li>競合の動き: 「○日から、競合の比較ページでの露出が強まった」</li><li>メディアの動き: 「○日から、主要な比較ページの掲載順位が入れ替わった」</li><li>見込み客の動き: 「月初は活発 → 中旬から鈍化 → 連休で低下」</li></ul>
 <p>競合の動きは、公開されている情報や、ASP担当者・メディアから聞ける範囲の情報をもとに整理します。確かめられなかったことは「推定」と書き、事実と分けます。</p>
@@ -71,10 +74,10 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <h3>レポート作りの手間を減らすには、どうすればよいですか</h3>
 <p>構成を固定し、複数のASPの数字の集計を自動化するのが効果的です。報告先の資料の形で最初から作ると、作り直しの手間も減らせます。</p>
 <h2 id="s8">まとめ</h2>
-<p>アフィリエイトの月次レポートは、結果・理由・次の打ち手を毎月同じ順番でまとめ、数字が動いた理由を分けて書くことで、読み手が判断しやすいものになります。構成の固定と集計の自動化で、作る手間も減らしましょう。</p><div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<p>アフィリエイトの月次レポートは、結果・理由・次の打ち手を毎月同じ順番でまとめ、数字が動いた理由を分けて書くことで、読み手が判断しやすいものになります。構成の固定と集計の自動化で、作る手間も減らしましょう。</p><div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
 <div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
-<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
 <p class="copy">© IXS LLC.</p>
 </div></footer>
 <script src="/assets/track.js"></script>

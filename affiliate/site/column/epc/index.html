@@ -9,12 +9,15 @@
 <style>
 .col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
 .col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
-.col-hero .w{position:relative}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
 .w{max-width:800px;margin:0 auto;padding:0 20px}
 .crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
 .col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
 .meta{font-size:13px;color:var(--text-inv-sub);margin:0}
-article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
 article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
 article h3{font-size:19px;margin:30px 0 8px}
 .lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
@@ -37,9 +40,9 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <script src="/assets/config.js"></script>
 </head><body data-page-id="col-epc">
 <header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
-<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
 <h1>EPCとは？アフィリエイトの単価交渉で使う計算方法と考え方</h1>
-<p class="meta">公開: 2026-11-27　更新: 2026-11-27　運営: アフィまかせ（合同会社IXS）</p></div></div>
+<p class="meta">公開: 2026-11-27　更新: 2026-11-27　運営: アフィまかせ（合同会社IXS）</p></div><img class="art" src="/assets/img/cat-jitsumu.svg" alt="" width="150" height="60"></div></div>
 <main><article class="w"><div class="lead"><strong>結論</strong>EPC（Earnings Per Click）とは、アフィリエイトで <strong>1クリックあたりにメディアが得られる報酬</strong> のことで、「報酬単価 × 成約率（CVR）× 承認率」で計算します。メディアは同じ掲載枠に載せる案件をEPCで比べるため、広告主は単価だけでなく、CVRや承認率を高めることでも、メディアに選ばれやすくなります。</div>
 <nav class="toc"><strong>目次</strong><ol><li><a href="#s1">EPCの計算方法</a></li><li><a href="#s2">メディアがEPCで案件を選ぶ理由</a></li><li><a href="#s3">広告主がEPCを上げる方法</a></li><li><a href="#s4">単価交渉での使い方</a></li><li><a href="#s5">よくある質問</a></li><li><a href="#s6">まとめ</a></li></ol></nav>
 <h2 id="s1">EPCの計算方法</h2>
@@ -48,8 +51,8 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <p>案件Aは単価が低いものの、CVRと承認率が高いため、メディアにとっては案件Aのほうが1クリックあたりの収益が大きくなります。</p>
 <h2 id="s2">メディアがEPCで案件を選ぶ理由</h2>
 <p>比較サイトやランキング記事の掲載枠は限られています。メディアは、限られた枠と読者のクリックから最大の収益を得たいので、EPCの高い案件を上位に載せる傾向があります。比較サイトの上位の掲載枠が、実質的に「単価の入札」のようになるのはこのためです。</p>
-<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">広告主がEPCを上げる方法</h2>
+<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">広告主がEPCを上げる方法</h2>
 <div class="tbl"><table><thead><tr><th>方法</th><th>例</th></tr></thead><tbody><tr><td>CVRを上げる</td><td>申込フォームの入力項目を減らす、LPの訴求を検索意図に合わせる</td></tr><tr><td>承認率を上げる</td><td>承認基準を明確にしてメディアに伝える、条件に合わない読者が来にくい訴求にしてもらう</td></tr><tr><td>単価を上げる</td><td>成果の質が高いメディアにだけ特別単価（特単）を出す</td></tr></tbody></table></div>
 <p>単価を上げるのは分かりやすい手段ですが、費用が増えます。CVRと承認率の改善は、費用を増やさずにEPCを上げられるため、先に検討する価値があります。</p>
 <h2 id="s4">単価交渉での使い方</h2>
@@ -63,10 +66,10 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <h3>EPCが低いと、どうなりますか</h3>
 <p>メディアがほかの案件を優先し、掲載順位が下がったり、掲載をやめられたりすることがあります。EPCが競合より低い場合は、CVRと承認率の改善、成果の良いメディアへの特別単価などを検討します。</p>
 <h2 id="s6">まとめ</h2>
-<p>EPCは「報酬単価 × CVR × 承認率」で決まり、メディアが案件を選ぶ基準になります。広告主は単価だけで勝負せず、CVRと承認率を高め、数字でEPCの見込みを示すことで、費用を抑えながらメディアに選ばれやすくなります。</p><div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<p>EPCは「報酬単価 × CVR × 承認率」で決まり、メディアが案件を選ぶ基準になります。広告主は単価だけで勝負せず、CVRと承認率を高め、数字でEPCの見込みを示すことで、費用を抑えながらメディアに選ばれやすくなります。</p><div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
 <div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
-<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
 <p class="copy">© IXS LLC.</p>
 </div></footer>
 <script src="/assets/track.js"></script>

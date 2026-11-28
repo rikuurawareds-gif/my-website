@@ -9,12 +9,15 @@
 <style>
 .col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
 .col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
-.col-hero .w{position:relative}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
 .w{max-width:800px;margin:0 auto;padding:0 20px}
 .crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
 .col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
 .meta{font-size:13px;color:var(--text-inv-sub);margin:0}
-article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
 article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
 article h3{font-size:19px;margin:30px 0 8px}
 .lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
@@ -37,9 +40,9 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <script src="/assets/config.js"></script>
 </head><body data-page-id="col-seikyu-yosan">
 <header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
-<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
 <h1>アフィリエイトの請求・予算・着地見込みの管理方法：ずれを早く見つける確認の仕方</h1>
-<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div></div>
+<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div><img class="art" src="/assets/img/cat-jitsumu.svg" alt="" width="150" height="60"></div></div>
 <main><article class="w"><div class="lead"><strong>結論</strong>アフィリエイトの請求・予算の管理は、<strong>「承認した件数と請求の件数が合っているか」「予算の消化ペースと獲得単価が計画どおりか」「月末にどこまで届きそうか」の3つを、決まった項目で定期的に確かめる</strong> ことが基本です。アフィリエイトは、成果が発生してから承認・請求されるまでに時間差があるため、発生ベースの数字だけを見ていると、予算の超過や請求のずれに気づくのが遅れます。</div>
 <nav class="toc"><strong>目次</strong><ol><li><a href="#s1">アフィリエイトの請求・予算管理が分かりにくい理由</a></li><li><a href="#s2">請求の確認</a></li><li><a href="#s3">予算と獲得単価の監視</a></li><li><a href="#s4">月末の着地見込みの出し方</a></li><li><a href="#s5">管理の工数を減らすコツ</a></li><li><a href="#s6">よくある質問</a></li><li><a href="#s7">まとめ</a></li></ol></nav>
 <h2 id="s1">アフィリエイトの請求・予算管理が分かりにくい理由</h2>
@@ -50,8 +53,8 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <p>請求書が届いたら、次の点を確かめます。</p>
 <div class="tbl"><table><thead><tr><th>確認すること</th><th>見るポイント</th></tr></thead><tbody><tr><td>件数</td><td>ASPの承認件数と、請求書の件数が合っているか</td></tr><tr><td>単価</td><td>メディアごと・期間ごとの単価（特単を含む）が正しく反映されているか</td></tr><tr><td>手数料</td><td>ASPの手数料の計算が契約どおりか</td></tr><tr><td>対象期間</td><td>締め日と対象期間が、社内の集計とそろっているか</td></tr></tbody></table></div>
 <p>ずれがあった場合の主な原因は、締め日の違い、承認の反映漏れ、特単の設定ミス、計測の違いなどです。件数は「ASPの成果」「請求」「自社の計測」の3つでそろえ、ずれる場合はその理由をメモしておくと、翌月以降の確認が速くなります。承認の作業そのものは<a href="/column/seika-shonin/">成果承認のやり方</a>で解説しています。</p>
-<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">予算と獲得単価の監視</h2>
+<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">予算と獲得単価の監視</h2>
 <p>月の途中で、次の数字を定期的に確認します。</p>
 <ul><li><strong>予算の消化ペース</strong>: 月の経過日数に対して、予算をどれくらい使っているか</li><li><strong>獲得単価（CPA）</strong>: 1件あたりの費用が、決めた上限を超えていないか</li><li><strong>メディアごとの偏り</strong>: 特定のメディアで費用が急に増えていないか</li></ul>
 <p>予算の上限や獲得単価の上限に近づいたら、早めに気づける仕組み（集計表の色分けや通知など）を用意しておくと、月末に慌てずに済みます。</p>
@@ -72,10 +75,10 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <h3>着地見込みはどうやって出せばよいですか</h3>
 <p>月末までの見込み発生件数に、過去の実績から見た承認率を掛けて出します。承認の結果が戻ったら、確定の数字に置き換えていきます。</p>
 <h2 id="s7">まとめ</h2>
-<p>アフィリエイトの請求・予算の管理は、発生と承認の時間差を前提に、請求の件数、予算の消化ペースと獲得単価、月末の着地見込みを決まった項目で確かめるのが基本です。確認の形を固定し、ASPごとのデータをそろえて集計を自動化すると、管理の工数も減らせます。</p><div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<p>アフィリエイトの請求・予算の管理は、発生と承認の時間差を前提に、請求の件数、予算の消化ペースと獲得単価、月末の着地見込みを決まった項目で確かめるのが基本です。確認の形を固定し、ASPごとのデータをそろえて集計を自動化すると、管理の工数も減らせます。</p><div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
 <div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
-<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
 <p class="copy">© IXS LLC.</p>
 </div></footer>
 <script src="/assets/track.js"></script>

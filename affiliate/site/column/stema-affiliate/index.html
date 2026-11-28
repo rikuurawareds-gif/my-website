@@ -9,12 +9,15 @@
 <style>
 .col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
 .col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
-.col-hero .w{position:relative}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
 .w{max-width:800px;margin:0 auto;padding:0 20px}
 .crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
 .col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
 .meta{font-size:13px;color:var(--text-inv-sub);margin:0}
-article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
 article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
 article h3{font-size:19px;margin:30px 0 8px}
 .lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
@@ -37,9 +40,9 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <script src="/assets/config.js"></script>
 </head><body data-page-id="col-stema-affiliate">
 <header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
-<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
 <h1>ステマ規制とアフィリエイト：広告主が確認すべきポイントと対応の進め方</h1>
-<p class="meta">公開: 2026-11-27　更新: 2026-11-27　運営: アフィまかせ（合同会社IXS）</p></div></div>
+<p class="meta">公開: 2026-11-27　更新: 2026-11-27　運営: アフィまかせ（合同会社IXS）</p></div><img class="art" src="/assets/img/cat-hourei.svg" alt="" width="150" height="60"></div></div>
 <main><article class="w"><div class="lead"><strong>結論</strong>2023年10月1日から、広告であることが分かりにくい表示（いわゆるステルスマーケティング）は、景品表示法の不当表示として規制されています。アフィリエイト記事でも、<strong>広告主が表示内容の決定に関与していれば、その記事は広告主の表示とみなされ</strong>、責任を問われるのは広告主です。広告主は、提携メディアの記事に「広告」「PR」などの表記が分かりやすくあるかを確認し、必要に応じて修正を依頼する体制を整えておく必要があります。</div>
 <nav class="toc"><strong>目次</strong><ol><li><a href="#s1">ステマ規制とは</a></li><li><a href="#s2">アフィリエイト記事が「広告主の表示」になるケース</a></li><li><a href="#s3">広告主が確認すべきポイント</a></li><li><a href="#s4">景品表示法の指針で求められる「管理措置」</a></li><li><a href="#s5">対応の進め方</a></li><li><a href="#s6">よくある質問</a></li><li><a href="#s7">まとめ</a></li></ol></nav>
 <h2 id="s1">ステマ規制とは</h2>
@@ -48,8 +51,8 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <p>消費者庁の考え方では、広告主が表示内容の決定に関与しているかどうかがポイントです。</p>
 <div class="tbl"><table><thead><tr><th>ケース</th><th>広告主の表示になるか</th></tr></thead><tbody><tr><td>広告主がアフィリエイターに、商品の内容を書いてもらう</td><td>なる（関与あり）</td></tr><tr><td>報酬や無償提供などで、広告主の目的に沿った内容を書いてもらう</td><td>なりうる（関与あり）</td></tr><tr><td>アフィリエイターが、広告主の関与なく独自に書いた</td><td>ならない（関与なし）</td></tr></tbody></table></div>
 <p>アフィリエイトは成果報酬を支払う仕組みなので、多くの場合「関与あり」と考えて対応しておくのが安全です。</p>
-<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">広告主が確認すべきポイント</h2>
+<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">広告主が確認すべきポイント</h2>
 <ol><li><strong>PR表記があるか</strong>: 「広告」「PR」「プロモーション」など、広告であることが分かる表記があるか</li><li><strong>PR表記の位置と見え方</strong>: 記事の冒頭など、読者がすぐに分かる位置にあるか。末尾だけ、極端に小さい文字だけ、という表記は「分かりにくい」と判断されるおそれがある</li><li><strong>表現の内容</strong>: 「No.1」「最安」などの根拠のない最上級表現、効果を断定する表現がないか（これらは景品表示法の優良誤認・有利誤認の問題にもなる）</li><li><strong>情報の鮮度</strong>: 価格やキャンペーンが古いままになっていないか</li></ol>
 <h2 id="s4">景品表示法の指針で求められる「管理措置」</h2>
 <p>2022年6月、消費者庁は景品表示法第26条に基づく指針を改正し、アフィリエイト広告も事業者が講ずべき表示の管理措置の対象であることを明確にしました（<a href="https://www.caa.go.jp/notice/entry/028668/" rel="noopener" target="_blank">消費者庁の公表</a>）。解説では、次のような対応が例として挙げられています。</p>
@@ -67,10 +70,10 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <p>広告主が表示内容の決定に関与していない場合は、広告主の表示とはみなされないとされています。ただしアフィリエイトでは、成果報酬を支払い、素材や訴求ポイントを提供していることが多いため、関与があると判断される場面は少なくありません。</p>
 <h2 id="s7">まとめ</h2>
 <p>ステマ規制では、アフィリエイト記事も広告主の表示とみなされる場合があり、責任は広告主にあります。PR表記の有無と位置、表現の内容、情報の鮮度を定期的に確認し、問題があれば修正を依頼する仕組みを作っておきましょう。</p>
-<blockquote>本記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な判断ではありません。判断に迷う場合は、弁護士などの専門家にご相談ください。</blockquote><div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<blockquote>本記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な判断ではありません。判断に迷う場合は、弁護士などの専門家にご相談ください。</blockquote><div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
 <div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
-<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
 <p class="copy">© IXS LLC.</p>
 </div></footer>
 <script src="/assets/track.js"></script>

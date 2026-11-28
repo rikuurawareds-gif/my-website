@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img"><title>その他</title><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="240" y2="120"><stop offset="0" stop-color="#3366ff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<g fill="none" stroke="#0f1424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="60" y="14" width="80" height="54" rx="6"/></g>
+<g fill="#9aa4bf"><circle cx="84" cy="41" r="4"/><circle cx="100" cy="41" r="4"/></g><circle cx="116" cy="41" r="4" fill="url(#g)"/></svg>

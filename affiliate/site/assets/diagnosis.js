@@ -1,5 +1,5 @@
 /* 工数診断の計算（決裁シートの数字）。DOM には触らない。ブラウザでは window.AffDiag、node では require で使う。
- * 料金・残る工数の前提は PLANS だけで決まる（PM が決める数字。2026-11-28 時点は仮に現行の月5万円）。
+ * 料金・残る工数の前提は PLANS と fee だけで決まる（docs/pricing.md）。
  * 係数は knowledge/workload-benchmarks.md の実データ（重い運用で月80時間）に合うように置いた目安。 */
 (function (root, factory) {
   var api = factory();
@@ -8,12 +8,26 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   var ASP = [1, 2.5, 5, 8], MEDIA = [15, 60, 200, 400], CV = [30, 120, 350, 700];
 
-  // プラン。covers が 'all' なら全作業を任せ、残るのは remainHours（週1回の確認など）だけ。
-  // 一部だけ任せるプランは covers に作業名を並べる（任せない作業の時間は、そのまま残る）。
+  // プランと前提は docs/pricing.md（2026-11-28 オーナー決定）のとおり。変えるときは pricing.md が先。
+  // covers が 'all' なら全作業を任せ、残るのは remainHours だけ。一部だけのプランは任せる作業名を並べる。
+  // ASP の数は診断の選択肢（1社／2〜3社／4〜6社／7社以上）を 1・3・5・8 社として数える。
+  var ASP_COUNT = [1, 3, 5, 8];
+  var DEFAULT_WAGE = 5000;
   var PLANS = [
-    { id: 'full', name: 'まるごと', fee: 50000, remainHours: 4, covers: 'all', remainNote: '週1回のまとめの確認と、範囲を超える判断' }
+    { id: 'pack', name: 'まるごとパック', base: 90000, perAsp: 10000, approval: true, remainHours: 4,
+      covers: ['ASP担当とのやり取り', 'メディア対応・掲載確認', '成果の承認', '表記チェック', '新規開拓・提携手続き', '素材・キャンペーン', 'レポート・社内報告'],
+      remainNote: '週1回のまとめ報告の確認と、任せた範囲を超える判断、請求・予算管理（料金表に含まれないため）' },
+    { id: 'contact', name: '窓口代行だけ', base: 30000, perAsp: 10000, approval: false, remainHours: 2,
+      covers: ['ASP担当とのやり取り', 'メディア対応・掲載確認'],
+      remainNote: '週1回のまとめ報告の確認と判断、窓口以外の作業（成果承認・表記チェック・レポートなど）' }
   ];
-  var ASSUMPTIONS = { fee: PLANS[0].fee, remainHours: PLANS[0].remainHours };
+
+  // 委託費（月・税別）。ASP 3社までが基本料金。4社目から窓口 +1万円/社、パックは成果承認も 4社目3,000円・5社目から2,000円/社
+  function fee(p, aspIdx) {
+    var n = ASP_COUNT[aspIdx], f = p.base;
+    for (var i = 4; i <= n; i++) f += p.perAsp + (p.approval ? (i === 4 ? 3000 : 2000) : 0);
+    return f;
+  }
 
   function calc(a) {
     var asp = ASP[a.asp], media = MEDIA[a.media], cv = CV[a.cv];
@@ -43,16 +57,18 @@
       netMonth: labor - fee, netYear: (labor - fee) * 12 };
   }
 
+  // a = { fee, remainHours }
   function roi(total, wage, a) {
-    a = a || ASSUMPTIONS;
     return money(total, Math.min(a.remainHours, total), wage, a.fee);
   }
 
-  function plan(c, wage, p) {
-    if (p.covers === 'all') return roi(c.total, wage, p);
+  // c = calc の結果、ans = 診断の回答（asp・wage を使う）、p = PLANS の1つ
+  function plan(c, ans, p) {
+    var f = fee(p, ans.asp);
+    if (p.covers === 'all') return roi(c.total, ans.wage, { fee: f, remainHours: p.remainHours });
     var left = 0;
     Object.keys(c.tasks).forEach(function (k) { if (p.covers.indexOf(k) < 0) left += c.tasks[k]; });
-    return money(c.total, Math.min(c.total, left + p.remainHours), wage, p.fee);
+    return money(c.total, Math.min(c.total, left + p.remainHours), ans.wage, f);
   }
 
   // 共有リンク用の短い文字列（8文字）。回答の値だけを入れ、個人情報は入れない。
@@ -74,5 +90,5 @@
     return a;
   }
 
-  return { calc: calc, roi: roi, plan: plan, encode: encode, decode: decode, PLANS: PLANS, ASSUMPTIONS: ASSUMPTIONS };
+  return { calc: calc, roi: roi, plan: plan, fee: fee, encode: encode, decode: decode, PLANS: PLANS, DEFAULT_WAGE: DEFAULT_WAGE, ASP_COUNT: ASP_COUNT };
 });

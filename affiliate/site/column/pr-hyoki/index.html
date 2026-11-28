@@ -9,12 +9,15 @@
 <style>
 .col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
 .col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
-.col-hero .w{position:relative}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
 .w{max-width:800px;margin:0 auto;padding:0 20px}
 .crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
 .col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
 .meta{font-size:13px;color:var(--text-inv-sub);margin:0}
-article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
 article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
 article h3{font-size:19px;margin:30px 0 8px}
 .lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
@@ -37,9 +40,9 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <script src="/assets/config.js"></script>
 </head><body data-page-id="col-pr-hyoki">
 <header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
-<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
 <h1>アフィリエイト記事のPR表記：位置・文言と、よくある指摘</h1>
-<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div></div>
+<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div><img class="art" src="/assets/img/cat-hourei.svg" alt="" width="150" height="60"></div></div>
 <main><article class="w"><div class="lead"><strong>結論</strong>アフィリエイト記事のPR表記は、<strong>「広告」「PR」「プロモーション」など広告だと分かる文言を、読者が記事を読み始める前に目に入る位置に、周りの文字と同じ程度に読める大きさと色で入れる</strong> ことが大切です。消費者庁の運用基準では、末尾の分かりにくい位置への表示、周りより小さい文字や薄い色での表示、大量のハッシュタグなど他の情報に紛れ込ませる表示などが「広告だと分かりにくい」例として挙げられています。実務では、記事の冒頭（タイトルの付近）への表記を基準にしておくと確認しやすくなります。広告主は、この基準をレギュレーションに書いてメディアに伝え、記事を定期的に確認する必要があります。</div>
 <nav class="toc"><strong>目次</strong><ol><li><a href="#s1">PR表記が必要な理由</a></li><li><a href="#s2">使ってよい文言の例</a></li><li><a href="#s3">分かりにくいとされる表示の例</a></li><li><a href="#s4">実務での位置の決め方</a></li><li><a href="#s5">アフィリエイト記事で、よくある指摘</a></li><li><a href="#s6">メディアへの修正依頼の伝え方</a></li><li><a href="#s7">レギュレーションに書いておくこと</a></li><li><a href="#s8">よくある質問</a></li><li><a href="#s9">まとめ</a></li></ol></nav>
 <h2 id="s1">PR表記が必要な理由</h2>
@@ -48,8 +51,8 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <p>消費者庁の運用基準では、広告であることが明瞭になる表示として、次のような例が示されています（<a href="https://www.caa.go.jp/notice/assets/representation_cms216_230328_03.pdf" rel="noopener" target="_blank">消費者庁「『一般消費者が事業者の表示であることを判別することが困難である表示』の運用基準」</a>、<a href="https://www.caa.go.jp/policies/policy/representation/fair_labeling/faq/stealth_marketing/" rel="noopener" target="_blank">ステルスマーケティングに関するQ&amp;A</a>）。</p>
 <div class="tbl"><table><thead><tr><th>表示の例</th><th>ポイント</th></tr></thead><tbody><tr><td>「広告」「宣伝」「プロモーション」「PR」</td><td>いずれも例として挙げられている文言。ただし、小さな文字や目立たない位置では意味がない</td></tr><tr><td>「A社から商品の提供を受けて投稿している」</td><td>広告主との関係を文章で説明する方法</td></tr></tbody></table></div>
 <p>大切なのは文言そのものより、<strong>読者が広告だと分かるかどうか</strong> です。文字の大きさや色、位置も含めて判断されます。</p>
-<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">分かりにくいとされる表示の例</h2>
+<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">分かりにくいとされる表示の例</h2>
 <p>運用基準では、次のような表示が、広告であることが分かりにくい例として挙げられています。</p>
 <div class="tbl"><table><thead><tr><th>運用基準の例（要約）</th><th>アフィリエイト記事での例</th></tr></thead><tbody><tr><td>部分的にしか表示していない</td><td>記事の一部の商品にだけ表記があり、他の紹介部分には何もない</td></tr><tr><td>冒頭に「広告」と書きつつ、文中で「第三者としての感想」と書く</td><td>「PR」と書いたうえで、本文に「広告主とは関係のない立場で書いています」と書く</td></tr><tr><td>動画で、認識できないほど短い時間だけ表示する。長い動画の途中や末尾にだけ表示する</td><td>記事内の動画の最後に一瞬だけ「PR」と出す</td></tr><tr><td>広告だと認識できない文言を使う</td><td>広告と伝わらない独自の言い回しだけを使う</td></tr><tr><td>分かりにくい末尾の位置に表示する</td><td>長い記事の最後に小さく書く</td></tr><tr><td>周りの文字と比べて小さく表示する</td><td>注意書きのような小さな文字だけで書く</td></tr><tr><td>長い文章の中に表示する。他の文字より薄い色で表示する</td><td>長い注意書きの中に埋もれている、薄い灰色で書く</td></tr><tr><td>他の情報（大量のハッシュタグなど）に紛れ込ませる</td><td>免責事項の一覧の中に1行だけある</td></tr></tbody></table></div>
 <h2 id="s4">実務での位置の決め方</h2>
@@ -77,10 +80,10 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <p>法令で決まった頻度はありません。私たちは、新しく提携したメディアは掲載の開始時に、成果の多いメディアは月1回程度を目安に確認することをおすすめしています。記事は後から書き換えられることがあるため、一度の確認で終わりにしないことが大切です。</p>
 <h2 id="s9">まとめ</h2>
 <p>PR表記は、「広告」「PR」などの文言を、読者が読み始める前に気づける位置に、読める大きさと色で入れることが大切です。広告主は、記事の冒頭への表記などの基準をレギュレーションに書いて提携時に伝え、成果の多い記事から定期的に確認し、直らない場合の対応まで決めておきましょう。</p>
-<blockquote>本記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な判断ではありません。判断に迷う場合は、弁護士などの専門家にご相談ください。</blockquote><div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<blockquote>本記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な判断ではありません。判断に迷う場合は、弁護士などの専門家にご相談ください。</blockquote><div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
 <div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
-<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
 <p class="copy">© IXS LLC.</p>
 </div></footer>
 <script src="/assets/track.js"></script>

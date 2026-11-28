@@ -9,12 +9,15 @@
 <style>
 .col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
 .col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
-.col-hero .w{position:relative}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
 .w{max-width:800px;margin:0 auto;padding:0 20px}
 .crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
 .col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
 .meta{font-size:13px;color:var(--text-inv-sub);margin:0}
-article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
 article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
 article h3{font-size:19px;margin:30px 0 8px}
 .lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
@@ -37,9 +40,9 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <script src="/assets/config.js"></script>
 </head><body data-page-id="col-kosu-sakugen">
 <header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
-<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
 <h1>アフィリエイト運用の工数を減らす方法：作業別の時間と「なくす・自動化・任せる」の判断</h1>
-<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div></div>
+<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div><img class="art" src="/assets/img/cat-kosu.svg" alt="" width="150" height="60"></div></div>
 <main><article class="w"><div class="lead"><strong>結論</strong>アフィリエイト運用の工数を減らすには、まず作業ごとに月の時間を書き出し、時間の大きい作業から <strong>「なくす → 自動化する → 任せる」の順</strong> で手を打ちます。私たちの見立てでは、広告主の運用工数は月20時間前後が多い一方、ASPやメディアが多いと月数十時間を超えることもあります。時間の大半は、ASP担当者とのやり取り、成果の承認、広告素材の準備、分析と社内報告といった、一部の作業に集中しています。</div>
 <nav class="toc"><strong>目次</strong><ol><li><a href="#s1">アフィリエイト運用で、工数がかかる作業</a></li><li><a href="#s2">作業ごとの時間の目安</a></li><li><a href="#s3">工数を減らす3つの考え方</a></li><li><a href="#s4">作業ごとの減らし方</a></li><li><a href="#s5">よくある質問</a></li><li><a href="#s6">まとめ</a></li></ol></nav>
 <h2 id="s1">アフィリエイト運用で、工数がかかる作業</h2>
@@ -50,8 +53,8 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <div class="tbl"><table><thead><tr><th>作業</th><th>月の時間（一例）</th><th>全体に占める割合</th></tr></thead><tbody><tr><td>ASP担当者とのやり取り</td><td>15時間</td><td>約19%</td></tr><tr><td>成果の承認・否認の判定</td><td>10時間</td><td>約13%</td></tr><tr><td>広告素材・LPの準備</td><td>10時間</td><td>約13%</td></tr><tr><td>媒体ごとの効果分析</td><td>6時間</td><td>約8%</td></tr><tr><td>社内報告</td><td>6時間</td><td>約8%</td></tr><tr><td>新規メディア・ASPの開拓</td><td>5時間</td><td>約6%</td></tr><tr><td>新規提携の手続き</td><td>5時間</td><td>約6%</td></tr><tr><td>掲載記事の表記・レギュレーションの確認</td><td>4時間</td><td>約5%</td></tr><tr><td>単価・特単の交渉</td><td>3時間</td><td>約4%</td></tr><tr><td>請求の確認、予算・着地見込みの管理</td><td>4時間</td><td>約5%</td></tr><tr><td>その他（計測、キャンペーン設定、成果データの取得、不正の調査など）</td><td>12時間</td><td>約15%</td></tr></tbody></table></div>
 <p>上位7つの作業で、全体の約7割を占めています。</p>
 <p>これは取引先が多い重めの例です。私たちの見立てでは、<strong>多くの広告主はもっと少なく、月20時間ほど</strong> です。それでも、担当者の時給を5,000円とすると、月20時間で約10万円分の人件費になります。</p>
-<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">工数を減らす3つの考え方</h2>
+<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">工数を減らす3つの考え方</h2>
 <h3>1. なくす：作業そのものが必要か見直す</h3>
 <p>自動化より先に、作業そのものをなくせないかを考えます。</p>
 <ul><li><strong>承認方式を変える</strong>: 全件を承認する代わりに単価を下げる契約にすると、承認・否認の判定作業そのものがなくなります（詳しくは<a href="/column/seika-shonin/">成果承認のやり方</a>）</li><li><strong>成果の出ていないASP・メディアを整理する</strong>: やり取りの相手が減るほど、連絡の工数は減ります</li><li><strong>社内報告の形を固定する</strong>: 毎月ゼロから資料を作らず、同じ項目・同じ順番で報告します</li></ul>
@@ -74,10 +77,10 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <h3>運用代行に任せれば、社内の作業はゼロになりますか</h3>
 <p>ゼロになるとは限りません。定例への参加や社内報告、自社にしか分からない成果の判定などは、広告主に残ることが多いです。依頼する前に、どの作業が自社に残るのかを確認しておきましょう。</p>
 <h2 id="s6">まとめ</h2>
-<p>アフィリエイト運用の工数は、一部の作業に集中しています。作業ごとに時間を書き出し、時間の大きい作業から「なくす → 自動化する → 任せる」の順で手を打つのが、効率のよい減らし方です。まずは、自社の運用に毎月何時間かかっているかを把握するところから始めましょう。</p><div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<p>アフィリエイト運用の工数は、一部の作業に集中しています。作業ごとに時間を書き出し、時間の大きい作業から「なくす → 自動化する → 任せる」の順で手を打つのが、効率のよい減らし方です。まずは、自社の運用に毎月何時間かかっているかを把握するところから始めましょう。</p><div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
 <div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
-<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
 <p class="copy">© IXS LLC.</p>
 </div></footer>
 <script src="/assets/track.js"></script>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img"><title>価格やキャンペーンが変わるたびに素材を差し替えて周知する</title><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="240" y2="120"><stop offset="0" stop-color="#3366ff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<g fill="#fff" stroke="#9aa4bf" stroke-width="2" stroke-linejoin="round"><rect x="16" y="76" width="112" height="62" rx="6"/><rect x="28" y="60" width="112" height="62" rx="6"/></g>
+<rect x="40" y="44" width="112" height="62" rx="6" fill="#fff" stroke="#0f1424" stroke-width="2"/>
+<g stroke="#c5ccdd" stroke-width="2" stroke-linecap="round"><path d="M52 58h52M52 68h34"/></g>
+<text x="54" y="94" font-family="Noto Sans JP,sans-serif" font-size="13" font-weight="700" fill="#9aa4bf">¥3,980</text><path d="M52 90h48" stroke="#b54708" stroke-width="2"/>
+<text x="106" y="94" font-family="Noto Sans JP,sans-serif" font-size="13" font-weight="900" fill="#0f1424">¥2,980</text>
+<g fill="none" stroke="#0f1424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M184 46a28 28 0 1 1-24 36"/></g><path d="M192 44l-12-8v15z" fill="#0f1424"/>
+<g stroke="#9aa4bf" stroke-width="2" stroke-linecap="round"><path d="M176 116l-14 10M196 116v12M216 116l14 10"/></g>
+<g fill="#fff" stroke="#9aa4bf" stroke-width="2"><circle cx="158" cy="134" r="6"/><circle cx="196" cy="140" r="6"/><circle cx="234" cy="134" r="5"/></g></svg>

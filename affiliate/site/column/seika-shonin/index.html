@@ -9,12 +9,15 @@
 <style>
 .col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
 .col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
-.col-hero .w{position:relative}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
 .w{max-width:800px;margin:0 auto;padding:0 20px}
 .crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
 .col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
 .meta{font-size:13px;color:var(--text-inv-sub);margin:0}
-article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
 article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
 article h3{font-size:19px;margin:30px 0 8px}
 .lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
@@ -37,9 +40,9 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <script src="/assets/config.js"></script>
 </head><body data-page-id="col-seika-shonin">
 <header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
-<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
 <h1>アフィリエイトの成果承認のやり方：否認の基準と、工数を減らす方法</h1>
-<p class="meta">公開: 2026-11-27　更新: 2026-11-27　運営: アフィまかせ（合同会社IXS）</p></div></div>
+<p class="meta">公開: 2026-11-27　更新: 2026-11-27　運営: アフィまかせ（合同会社IXS）</p></div><img class="art" src="/assets/img/cat-jitsumu.svg" alt="" width="150" height="60"></div></div>
 <main><article class="w"><div class="lead"><strong>結論</strong>アフィリエイトの成果承認とは、ASPで発生した成果を、自社の注文・申込データと突き合わせて「報酬を払う成果（承認）」と「払わない成果（否認）」に分ける作業です。否認は、<strong>事前に決めた承認基準に当てはまる場合だけ</strong> に限り、理由を説明できるようにしておくことが大切です。工数を減らすには、照合を自動化するか、承認作業そのものをなくす契約（全件承認型）を検討します。</div>
 <nav class="toc"><strong>目次</strong><ol><li><a href="#s1">成果承認の流れ</a></li><li><a href="#s2">否認してよいケースと、注意点</a></li><li><a href="#s3">工数を減らす方法</a></li><li><a href="#s4">よくある質問</a></li><li><a href="#s5">まとめ</a></li></ol></nav>
 <h2 id="s1">成果承認の流れ</h2>
@@ -49,8 +52,8 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <div class="tbl"><table><thead><tr><th>否認の理由の例</th><th>確認の方法</th></tr></thead><tbody><tr><td>重複（同じ人が何度も申し込んだ）</td><td>注文番号・申込IDの重複、同一人物の判定ルール</td></tr><tr><td>キャンセル・返品</td><td>注文データの状態</td></tr><tr><td>テスト・いたずら</td><td>明らかに不正な入力内容</td></tr><tr><td>成果条件を満たしていない</td><td>承認基準に書いた条件（対象地域、年齢など）</td></tr><tr><td>不正な手段による成果</td><td>禁止しているリスティング出稿、自己アフィリエイトなど</td></tr></tbody></table></div>
 <p>注意点:</p>
 <ul><li><strong>承認基準にない理由で否認しない</strong>。メディアの信頼を失い、掲載を外されることがある</li><li><strong>否認率が高い案件は、メディアから敬遠される</strong>。メディアは「単価 × 成約率 × 承認率」で案件を選ぶため</li><li><strong>判定の理由を記録しておく</strong>。問い合わせへの回答や、基準の見直しに使う</li></ul>
-<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">工数を減らす方法</h2>
+<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">工数を減らす方法</h2>
 <h3>照合を自動化する</h3>
 <p>ASPのCSVと自社データの突き合わせは、注文番号などのキーがあれば機械的にできます。重複・キャンセル・テストのように、データで判定できるものは自動で振り分け、判断が必要なものだけを人が見るようにすると、作業時間を大きく減らせます。</p>
 <h3>全件承認型の契約にする</h3>
@@ -66,10 +69,10 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <h3>成果承認を外部に任せることはできますか</h3>
 <p>できます。運用代行に任せる場合は、どの判定を代行会社が行い、どの判定を自社が行うかを決めておきます。データで判定できるものを代行会社、社内の情報が必要なものを自社、と分けるのが一般的です。</p>
 <h2 id="s5">まとめ</h2>
-<p>成果承認は、承認基準を明確にし、データで判定できるものを自動化することで、工数を大きく減らせます。否認は基準に沿って説明できるものに限り、メディアとの信頼関係を保つことが、結果的に成果を伸ばします。</p><div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<p>成果承認は、承認基準を明確にし、データで判定できるものを自動化することで、工数を大きく減らせます。否認は基準に沿って説明できるものに限り、メディアとの信頼関係を保つことが、結果的に成果を伸ばします。</p><div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
 <div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
-<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
 <p class="copy">© IXS LLC.</p>
 </div></footer>
 <script src="/assets/track.js"></script>

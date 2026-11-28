@@ -87,12 +87,15 @@ def parse(path):
 CSS = """
 .col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
 .col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
-.col-hero .w{position:relative}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
 .w{max-width:800px;margin:0 auto;padding:0 20px}
 .crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
 .col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
 .meta{font-size:13px;color:var(--text-inv-sub);margin:0}
-article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
 article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
 article h3{font-size:19px;margin:30px 0 8px}
 .lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
@@ -126,13 +129,13 @@ HEAD = """<!doctype html>
 """
 FOOT = """<footer class="site-footer"><div class="wrap">
 <div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
-<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
 <p class="copy">© IXS LLC.</p>
 </div></footer>
 <script src="/assets/track.js"></script>
 </body></html>"""
-CTA = """<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div>"""
+CTA = """<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div>"""
 
 ORG = {"@type": "Organization", "name": "合同会社IXS", "alternateName": "IXS LLC", "url": "https://ixs-llc.com/", "description": "Webマーケティングのコンサルティング、アフィリエイト・広告の運用支援"}
 
@@ -162,8 +165,10 @@ def article_page(a):
         body_html = "<h2".join(parts[:3]) + CTA + "<h2" + parts[3]
     page = HEAD.format(title=html.escape(a["title"]) + "｜アフィまかせ", desc=html.escape(a["description"]), url=url, ogtype="article",
                        css=CSS, jsonld=jsonld, pageid="col-" + a["slug"])
-    page += f'<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>\n<h1>{html.escape(a["title"])}</h1>\n'
-    page += f'<p class="meta">公開: {a["date"]}　更新: {a.get("updated", a["date"])}　運営: アフィまかせ（合同会社IXS）</p></div></div>\n'
+    cat = a.get("category") if a.get("category") in dict(CATS) else "etc"
+    page += f'<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>\n<h1>{html.escape(a["title"])}</h1>\n'
+    page += f'<p class="meta">公開: {a["date"]}　更新: {a.get("updated", a["date"])}　運営: アフィまかせ（合同会社IXS）</p></div>'
+    page += f'<img class="art" src="/assets/img/cat-{cat}.svg" alt="" width="150" height="60"></div></div>\n'
     page += '<main><article class="w">' + body_html + CTA + '</article></main>' + FOOT
     return page
 
@@ -205,6 +210,8 @@ IDX_CSS = """
 .tag{align-self:flex-start;display:inline-block;font-size:12px;font-weight:700;line-height:1.6;padding:2px 10px;border-radius:999px;background:#eef2ff;color:#2952cc}
 .t-jitsumu{background:#e6f7fb;color:#0e6f86}.t-hourei{background:#fff4e5;color:var(--warn)}.t-hajime{background:#e7f6ef;color:var(--ok)}.t-etc{background:var(--bg-sub);color:var(--text-sub)}
 .col-sec[hidden]{display:none}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.card-top img{width:70px;height:auto}
+.col-card:focus-visible,.col-feat:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 """
 
 IDX_JS = """<script>
@@ -234,11 +241,11 @@ def index_body(arts):
     def card(a):
         m, s = split_title(a["title"])
         d = a.get("updated", a["date"])
-        return (f'<a class="col-card" href="/column/{a["slug"]}/"><span class="tag t-{a["category"]}">{labels[a["category"]]}</span>'
+        return (f'<a class="col-card" href="/column/{a["slug"]}/"><span class="card-top"><span class="tag t-{a["category"]}">{labels[a["category"]]}</span><img src="/assets/img/cat-{a["category"]}.svg" alt="" width="70" height="28" loading="lazy"></span>'
                 f'<strong>{html.escape(m)}</strong>' + (f'<span class="sub">{html.escape(s)}</span>' if s else "") +
                 f'<span class="desc">{html.escape(a["description"])}</span><time datetime="{d}">{fmt_date(d)} 更新</time></a>')
 
-    out = ('<div class="col-hero"><div class="wrap"><span class="en">Column</span><h1>アフィリエイト運用コラム</h1>'
+    out = ('<div class="col-hero"><div class="wrap"><h1>アフィリエイト運用コラム</h1>'
            '<p class="meta">広告主・代理店のための、アフィリエイト運用の実務と表記の注意点。</p>'
            f'<span class="count">全{len(arts)}本</span></div></div><main class="wrap col-main">')
     feat = next((a for a in arts if str(a.get("featured", "")).lower() == "true"), None)
@@ -246,7 +253,7 @@ def index_body(arts):
         m, s = split_title(feat["title"])
         out += (f'<a class="col-feat" href="/column/{feat["slug"]}/"><span class="tag">まずはここから</span><strong>{html.escape(m)}</strong>'
                 + (f'<span class="sub">{html.escape(s)}</span>' if s else "") +
-                f'<span class="desc">{html.escape(feat["description"])}</span><span class="more">記事を読む →</span></a>')
+                f'<span class="desc">{html.escape(feat["description"])}</span><span class="more">記事を読む</span></a>')
     used = [(k, v, [a for a in arts if a["category"] == k]) for k, v in CATS]
     used = [u for u in used if u[2]]
     out += '<nav class="col-filter" aria-label="テーマで絞り込む"><button type="button" data-f="all" aria-pressed="true">すべて<span>' + str(len(arts)) + "</span></button>"
