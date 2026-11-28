@@ -1,5 +1,6 @@
 """有料note の表紙（1280×670）を、サイトと同じ線のモチーフで作る。
-使い方: python make_note_cover.py <出力ファイル.png>
+使い方: python make_note_cover.py <出力ファイル.png> [タイトル（行は | で区切る） 小見出し [幅x高さ]]
+例（サイトの OGP 画像）: python make_note_cover.py ../site/assets/img/og.png "アフィリエイトの|連絡窓口を、|まるごと代行。" "ASP・メディアとのやり取りを代行。窓口代行は月3万円から（税別）" 1200x630
 フォントは Windows の Noto Sans JP（可変フォント C:\\Windows\\Fonts\\NotoSansJP-VF.ttf）。2倍で描いて縮小し、線をなめらかにする。"""
 import sys
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
@@ -13,6 +14,11 @@ INV, INV_SUB, KNOT = (232, 236, 247), (154, 164, 191), (58, 69, 102)
 
 TITLE = ["アフィリエイト広告の", "担当者になったら", "最初に読む運用ノート"]
 SUB = "元代理店の運用担当が、件数と質を両立させる考え方"
+FINAL = (W, H)
+if len(sys.argv) >= 4:
+    TITLE, SUB = sys.argv[2].split("|"), sys.argv[3]
+if len(sys.argv) >= 5:
+    FINAL = tuple(int(v) for v in sys.argv[4].split("x"))
 
 
 def font(size, weight):
@@ -86,5 +92,5 @@ img.paste(mark, (bx, by), m)
 d.text((bx + s(42), by + s(1)), "アフィまかせ", font=fb, fill=(255, 255, 255))
 d.text((bx + s(42) + d.textlength("アフィまかせ", font=fb) + s(10), by + s(8)), "by IXS", font=fsm, fill=INV_SUB)
 
-img.resize((W, H), Image.LANCZOS).save(OUT, optimize=True)
+img.resize(FINAL, Image.LANCZOS).save(OUT, optimize=True)
 print("saved", OUT)
