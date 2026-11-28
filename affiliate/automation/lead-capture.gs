@@ -6,9 +6,15 @@
  *  2. デプロイ → 新しいデプロイ → 種類「ウェブアプリ」
  *     実行ユーザー: 自分 ／ アクセスできるユーザー: 全員 → デプロイ → 権限を許可
  *  3. 表示されたURLを PM に伝える（site/assets/config.js の leadEndpoint に入れる）
- *  任意: NOTIFY_EMAIL に自分のアドレスを入れると、申込のたびにメールが届く。
+ *  通知: 申込のたびに、このスクリプトの持ち主（デプロイした Google アカウント）にメールが届く。
+ *  宛先を変えたいときはスクリプト プロパティ NOTIFY_EMAIL に入れる。止めたいときは NOTIFY_EMAIL を off にする。
+ *  （公開リポジトリなので、アドレスはコードに書かない）
  */
-const NOTIFY_EMAIL = '';
+function notifyTo_() {
+  const p = PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL');
+  if (p === 'off') return '';
+  return p || Session.getEffectiveUser().getEmail();
+}
 
 function doPost(e) {
   const d = JSON.parse(e.postData.contents || '{}');
@@ -28,8 +34,11 @@ function doPost(e) {
   ].map(clean);
   row[0] = new Date(); // 日時は日付型のまま入れる
   SpreadsheetApp.getActiveSpreadsheet().getSheets()[0].appendRow(row);
-  if (NOTIFY_EMAIL) {
-    MailApp.sendEmail(NOTIFY_EMAIL, '【新規リード】' + clean(d.company), row.join('\n'));
+  const to = notifyTo_();
+  if (to) {
+    const body = ['日時', '流入元', '会社名', 'お名前', 'メール', '', '媒体費', 'ASP数', 'メディア数', '成果件数', '承認', '表記チェック', '開拓', 'レポート', '診断の工数(h)', '診断の金額', '内容']
+      .map((k, i) => k ? k + ': ' + row[i] : '').filter(Boolean).join('\n');
+    MailApp.sendEmail(to, '【アフィまかせ 新規の相談】' + clean(d.company), body + '\n\nリード管理シートにも記録しました。');
   }
   return ContentService.createTextOutput('ok');
 }
