@@ -102,6 +102,9 @@ article h3{font-size:19px;margin:30px 0 8px}
 .lead strong:first-child{display:inline-block;font-size:12px;letter-spacing:.14em;color:#fff;background:var(--grad);border-radius:999px;padding:2px 12px;margin-bottom:8px}
 .toc{border:1px solid var(--line);border-radius:16px;padding:16px 24px;margin:24px 0;font-size:15px;background:#fff}.toc ol{margin:6px 0;padding-left:20px}.toc a{color:var(--text);text-decoration:none}.toc a:hover{color:var(--blue)}
 .tbl{overflow-x:auto;margin:18px 0}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}th{background:var(--bg-sub)}
+figure.dia{margin:28px 0;padding:clamp(14px,3vw,24px);background:#fff;border:1px solid var(--line);border-radius:16px}
+figure.dia img{display:block;width:100%;max-width:560px;height:auto;margin:0 auto}
+figure.dia figcaption{margin-top:12px;font-size:13px;line-height:1.7;color:var(--text-sub);text-align:center}
 blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px solid var(--blue);border-radius:0 12px 12px 0;font-size:15px}
 .cta-box{margin:48px 0;padding:32px 24px;border-radius:20px;background:var(--navy);color:var(--text-inv);text-align:center;position:relative;overflow:hidden}
 .cta-box:before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 100% 0%,rgba(51,102,255,.35),transparent 70%)}
@@ -141,8 +144,19 @@ CTA = """<div class="cta-box"><p><strong>任せた場合の費用対効果を、
 ORG = {"@type": "Organization", "name": "合同会社IXS", "alternateName": "IXS LLC", "url": "https://ixs-llc.com/", "description": "Webマーケティングのコンサルティング、アフィリエイト・広告の運用支援"}
 
 
+def figures(body_html):
+    """原稿で単独の行に書いた ![説明](/assets/img/….svg) を図にする（見た目の組み立て。Markdown の変換は変えない）。
+    md_to_html は「!」を文字のまま、[説明](パス) をリンクにするので、その形を図に置き換える。"""
+    def fig(m):
+        src, alt = m.group(1), m.group(2)
+        return (f'<figure class="dia"><img src="{src}" alt="{alt}" loading="lazy">'
+                f'<figcaption aria-hidden="true">{alt}</figcaption></figure>')
+    return re.sub(r'<p>!<a href="(/assets/img/[^"]+\.(?:svg|png|jpg|webp))">([^<]+)</a></p>', fig, body_html)
+
+
 def article_page(a):
     body_html, toc = md_to_html(a["body"])
+    body_html = figures(body_html)
     # 冒頭の段落を「結論」ボックスに
     body_html = re.sub(r"^<p>(.*?)</p>", r'<div class="lead"><strong>結論</strong>\1</div>', body_html, count=1, flags=re.S)
     url = f"{BASE}/column/{a['slug']}/"
