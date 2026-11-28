@@ -30,7 +30,7 @@
 1. `seo-planner` の考え方で、狙う言葉と検索意図、上位の記事との差（自社だけが出せる数字・知見）を決める。差が作れない題材は書かずに後ろへ回す
 2. `content-writer` の定義に従って `affiliate/site/content/<slug>.md` を書く（category を必ず入れる）
 3. `seo-editor` の定義に従って自分で点検・修正する（正確さ、言い切り、事例と自社の区別、AIO の形、ノウハウの出し方、内部リンク）
-4. `PY affiliate/site/build.py` → リンク検査（下）→ `PY affiliate/checker/check.py --html affiliate/site/column/<slug>/index.html --out <scratch>/r.md` で指摘0件
+4. **build の直前に必ず `git pull --rebase`**（CSS の版番号 ?v= が変わっていると古い版でページが作られるため）→ `PY affiliate/site/build.py` → リンク検査（下）→ `PY affiliate/checker/check.py --html affiliate/site/column/<slug>/index.html --out <scratch>/r.md` で指摘0件（フッターの「金額や契約に関わる連絡は、必ず人が確認します」の1件は誤検知として記録済みなので無視してよい）
 5. `compliance-reviewer` をサブエージェントで呼んで「要修正」を直す
 6. 関連する既存の記事・まとめ記事から、新しい記事へのリンクを足す
 7. `git add <自分のファイルだけ>` → commit → pull --rebase → push（自動で公開）
@@ -43,6 +43,7 @@ PY -c "import re,pathlib as p;c=p.Path('affiliate/site/content');s={f.stem for f
 
 ## 4. リライトと FAQ の改善
 - 対象は朝の作業リストのとおり。`seo-rewriter` の定義に従う
+- 図があると分かりやすい箇所（手順・流れ・比較・内訳）は、記事名と箇所を AFFデザインに受け渡しで依頼する。届いた図は `![説明](/assets/img/diagrams/<名前>.svg)` を単独の行で差し込む
 - **FAQ の質**: 各記事の「よくある質問」を、実際に AI に聞かれる質問の形にそろえ、回答の1文目で答えを言い切る。回答は1段落で完結させる。重複する質問は記事ごとに角度を変える
 - 直したら `updated` を今日にする。同じ点検（build、リンク検査、check.py、法令に触れる変更は compliance-reviewer）を通して公開
 - LP（`site/index.html`）の FAQ やサービス説明の改善案は、PM の持ち物なので `workstreams.md` の受け渡しに案として書く
