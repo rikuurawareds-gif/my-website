@@ -18,6 +18,9 @@
 | `seo-analyst`（SEO 分析） | SEO・AIO | 記事が検索に載り始める 2027年1月ごろから月1回 |
 | `seo-rewriter`（リライト・改善） | SEO・AIO | 分析と同時。全記事の見直しは半年ごと |
 | `aio-monitor`（AI 回答の監視） | SEO・AIO（AI の画面での質問は PM が Chrome で行う） | 2026年12月末から月1回 |
+| `seo-editor`（編集・ファクトチェック） | SEO・AIO | 公開前に毎回（seo-editor → check.py → compliance-reviewer の順） |
+| `seo-data-researcher`（独自データ） | SEO・AIO（元資料の数字を新しく使うときは PM に回す） | 必要なとき |
+| `digital-pr`（外部での言及） | 計画と下書きは SEO・AIO、外部への連絡・投稿・費用の実行は PM 経由でオーナーが承認 | コラムが増えてから |
 | `seo-tech`（技術面の SEO） | **PM**（build.py・共通ファイルが PM の持ち物のため） | 問題が出たとき＋四半期に1回 |
 | `compliance-reviewer` と `checker/check.py` | 全員 | 公開前に毎回 |
 | `x-researcher` / `x-post-writer` | PM | 毎月20日ごろ |
@@ -29,7 +32,7 @@
 ## ファイルの持ち主
 | 範囲 | 持ち主 | 他の担当がしてよいこと |
 |---|---|---|
-| `site/content/*.md`（コラムの原稿）、`marketing/content-plan.md`、`marketing/specs/`、`marketing/seo-reports/`、`marketing/aio-queries.md`、`marketing/aio-reports/` | SEO・AIO | 読むだけ |
+| `site/content/*.md`（コラムの原稿）、`marketing/content-plan.md`、`marketing/specs/`、`marketing/seo-reports/`、`marketing/aio-queries.md`、`marketing/aio-reports/`、`marketing/seo-data/`、`marketing/digital-pr/` | SEO・AIO | 読むだけ |
 | `site/column/`、`sitemap.xml`、`llms.txt`（`build.py` の出力） | SEO・AIO が `build.py` を実行して更新 | PM も実行してよい（出力は誰が作っても同じ） |
 | `site/build.py`、`site/assets/*`（共通 CSS・計測・設定）、`site/index.html`（LP）、`site/privacy.html`、`robots.txt` | **PM** | 変更の提案だけ |
 | `marketing/x-*`、`marketing/x-research/`、`marketing/x-queue/`、`automation/x-autopost.gs`、`.claude/agents/x-*` | PM（X 運用） | 読むだけ |
@@ -72,4 +75,4 @@
 - ✅ 2026-11-28 SEO・AIO → PM: コラム `asp-media-renraku`（ASP・メディアとのやり取りの工数を減らす方法）と `tokutan`（特単とは）を公開。X で紹介してほしい
 - ✅ 2026-11-28 SEO・AIO → PM: コラム `shinki-media`（新規メディアの開拓）、`seikyu-yosan`（請求・予算・着地見込み）、`report`（月次レポートの作り方）を公開。工数削減の記事群6本がそろった。X で紹介してほしい
 - 2026-11-28 SEO・AIO → PM: コラム一覧（/column/）を作り直して公開。build.py は一覧の部分（CATS・IDX_CSS・IDX_JS・index_body と main() の idx の1行）だけ変更。記事ページ・HEAD/FOOT/CTA は変更なし。原稿の category がない記事は「その他」、featured がなければ大きいカードは出さない
-- 2026-11-28 SEO・AIO → PM: オーナーの依頼で、SEO・AIO のチームの不足分として `.claude/agents/` に `seo-editor`（編集・ファクトチェック）、`seo-data-researcher`（独自データ）、`digital-pr`（外部での言及。下書きまで、実行はオーナー承認）を追加し、`content-writer` に category とノウハウの出し方、編集の順番を追記した。上の「使う担当」の表への反映をお願いしたい。`marketing/seo-data/` と `marketing/digital-pr/` を SEO・AIO の持ち物に足してほしい
+- ✅ 2026-11-28 SEO・AIO → PM: オーナーの依頼で、SEO・AIO のチームの不足分として `.claude/agents/` に `seo-editor`（編集・ファクトチェック）、`seo-data-researcher`（独自データ）、`digital-pr`（外部での言及。下書きまで、実行はオーナー承認）を追加し、`content-writer` に category とノウハウの出し方、編集の順番を追記した。上の「使う担当」の表への反映をお願いしたい。`marketing/seo-data/` と `marketing/digital-pr/` を SEO・AIO の持ち物に足してほしい
