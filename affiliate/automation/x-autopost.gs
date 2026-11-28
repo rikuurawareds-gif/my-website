@@ -125,6 +125,13 @@ function preview() {
   Logger.log(rows.length ? rows[0].slice(0, 3).join(' | ') : '予約なし');
 }
 
+/** 動作確認用: キーが正しいかを、投稿せずに確かめる（自分のアカウント情報を読むだけ。読み取り1回分の料金がかかる） */
+function checkAuth() {
+  const url = 'https://api.x.com/2/users/me';
+  const res = UrlFetchApp.fetch(url, { method: 'get', headers: { Authorization: oauthHeader_('GET', url) }, muteHttpExceptions: true });
+  Logger.log('HTTP ' + res.getResponseCode() + ': ' + res.getContentText().slice(0, 200));
+}
+
 // ---- 共通 ----
 
 function parseJst_(s) {
