@@ -18,10 +18,24 @@
 1. `site/content/<英語のslug>.md` を書く（形式は `site/build.py` の先頭）
 2. `python3 site/build.py` → `site/column/` と sitemap・llms.txt が更新される
 3. `python3 checker/check.py --html site/column/<slug>/index.html` で自社の表現を確認（法令の解説で例として挙げた表現は誤検知なので問題なし）
-4. `compliance-reviewer`（社内法務チェック）で原稿を確認し、「要修正」を直す
+4. `seo-editor`（編集・ファクトチェック）で正確さ・言い切り・AIO の形・内部リンクを直し、`compliance-reviewer`（社内法務チェック）で「要修正」を直す
 5. 自分の原稿と build の出力だけを `git add <パス>` で記録 → `git pull --rebase` → push で自動公開。`docs/workstreams.md` の「受け渡し」に1行書く（X での紹介は PM が行う。投稿キューは触らない）
 
 工数削減の記事群の設計と実行計画: `specs/2026-11-28-kosu-cluster-design.md`、`specs/2026-11-28-kosu-cluster-plan.md`
+
+## チーム（エージェント。`.claude/agents/`）
+| 段階 | 担当 | いつ |
+|---|---|---|
+| 企画・キーワード調査 | `seo-planner` | 記事群を作る前 |
+| 独自データ | `seo-data-researcher`（自社だけが出せる数字を集める。AI に引用されやすい） | 月1回、記事群を作る前 |
+| 執筆 | `content-writer` | 毎回 |
+| 編集・ファクトチェック | `seo-editor` | 公開前に毎回 |
+| 法務 | `compliance-reviewer`、`checker/check.py` | 公開前に毎回 |
+| 分析 | `seo-analyst` | 2027年1月ごろから月1回 |
+| AI 回答の監視 | `aio-monitor` | 2026年12月末から月1回 |
+| リライト・改善 | `seo-rewriter` | 分析と同時。全記事は半年ごと |
+| 外部での言及 | `digital-pr`（下書きまで。実行は PM 経由でオーナー承認） | 独自データがそろってから |
+| 技術面 | `seo-tech`（PM 側） | 問題が出たとき＋四半期 |
 
 ## 記事の一覧（優先順。✅ は公開済み）
 | # | 狙う検索 | タイトル案 | 柱 |

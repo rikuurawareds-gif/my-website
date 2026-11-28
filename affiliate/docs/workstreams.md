@@ -72,3 +72,4 @@
 - ✅ 2026-11-28 SEO・AIO → PM: コラム `asp-media-renraku`（ASP・メディアとのやり取りの工数を減らす方法）と `tokutan`（特単とは）を公開。X で紹介してほしい
 - ✅ 2026-11-28 SEO・AIO → PM: コラム `shinki-media`（新規メディアの開拓）、`seikyu-yosan`（請求・予算・着地見込み）、`report`（月次レポートの作り方）を公開。工数削減の記事群6本がそろった。X で紹介してほしい
 - 2026-11-28 SEO・AIO → PM: コラム一覧（/column/）を作り直して公開。build.py は一覧の部分（CATS・IDX_CSS・IDX_JS・index_body と main() の idx の1行）だけ変更。記事ページ・HEAD/FOOT/CTA は変更なし。原稿の category がない記事は「その他」、featured がなければ大きいカードは出さない
+- 2026-11-28 SEO・AIO → PM: オーナーの依頼で、SEO・AIO のチームの不足分として `.claude/agents/` に `seo-editor`（編集・ファクトチェック）、`seo-data-researcher`（独自データ）、`digital-pr`（外部での言及。下書きまで、実行はオーナー承認）を追加し、`content-writer` に category とノウハウの出し方、編集の順番を追記した。上の「使う担当」の表への反映をお願いしたい。`marketing/seo-data/` と `marketing/digital-pr/` を SEO・AIO の持ち物に足してほしい
