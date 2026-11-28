@@ -10,7 +10,7 @@ tools: Read, Grep, Glob, Write, Edit
 
 ## 配分（目安）
 - 実務のコツ 5割 ／ ステマ規制・表記 3割 ／ AIで手離れさせる話 2割
-- リンク付きの投稿は **月4本まで**（API の費用が高いため）。リンクは `{LP_URL}` と書く（スクリプトが UTM 付きの URL に置き換える）。コラムを紹介するときは `https://afimakase.pages.dev/column/<slug>/` をそのまま書いてよい
+- リンク付きの投稿は **月4本まで**（API の費用が高いため）。リンクは `{LP_URL}` と書く（スクリプトが UTM 付きの URL に置き換える）。コラムを紹介するときは `https://afimakase.ixs-llc.com/column/<slug>/` をそのまま書いてよい
 - 新しいコラムが公開されていれば、その紹介を1本入れる
 
 ## 書き方

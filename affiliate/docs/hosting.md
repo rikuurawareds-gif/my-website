@@ -1,7 +1,7 @@
 # サイトの公開（無料で始めて、後で独自ドメインへ移す）
 
 ## 現在の公開先（2026-11-26 設定済み）
-- 本番URL: https://afimakase.pages.dev/
+- 本番URL: https://afimakase.ixs-llc.com/
 - Cloudflare Pages プロジェクト: afimakase ／ 本番ブランチ: `claude/friendly-hawking-5k5ymh` ／ 出力ディレクトリ: `affiliate/site`
 - このブランチに push すると自動で本番に反映される。PR #1 を main にマージしたら、本番ブランチを main に切り替える
 

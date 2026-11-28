@@ -1,36 +1,46 @@
 <!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>広告主のアフィリエイトの始め方：ASP選び・報酬設計・計測・規約づくりの手順｜アフィまかせ</title><meta name="description" content="これからアフィリエイト広告を始める広告主向けに、目標の決め方、ASPの選び方、成果地点と報酬単価の決め方、計測の確認、プログラム規約と承認基準の作り方を順番に解説します。"><link rel="canonical" href="https://afimakase.pages.dev/column/affiliate-hajimekata/">
-<meta property="og:type" content="article"><meta property="og:title" content="広告主のアフィリエイトの始め方：ASP選び・報酬設計・計測・規約づくりの手順｜アフィまかせ"><meta property="og:description" content="これからアフィリエイト広告を始める広告主向けに、目標の決め方、ASPの選び方、成果地点と報酬単価の決め方、計測の確認、プログラム規約と承認基準の作り方を順番に解説します。"><meta property="og:url" content="https://afimakase.pages.dev/column/affiliate-hajimekata/"><meta property="og:site_name" content="アフィまかせ"><meta name="twitter:card" content="summary">
+<title>広告主のアフィリエイトの始め方：ASP選び・報酬設計・計測・規約づくりの手順｜アフィまかせ</title><meta name="description" content="これからアフィリエイト広告を始める広告主向けに、目標の決め方、ASPの選び方、成果地点と報酬単価の決め方、計測の確認、プログラム規約と承認基準の作り方を順番に解説します。"><link rel="canonical" href="https://afimakase.ixs-llc.com/column/affiliate-hajimekata/">
+<meta property="og:type" content="article"><meta property="og:title" content="広告主のアフィリエイトの始め方：ASP選び・報酬設計・計測・規約づくりの手順｜アフィまかせ"><meta property="og:description" content="これからアフィリエイト広告を始める広告主向けに、目標の決め方、ASPの選び方、成果地点と報酬単価の決め方、計測の確認、プログラム規約と承認基準の作り方を順番に解説します。"><meta property="og:url" content="https://afimakase.ixs-llc.com/column/affiliate-hajimekata/"><meta property="og:site_name" content="アフィまかせ"><meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#070b18">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
 <style>
-:root{--bg:#fff;--surface:#f5f7fa;--ink:#14181f;--muted:#5a6271;--line:#e2e6ec;--brand:#0f5bd8;--accent:#e8590c}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.9 system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
-header,footer{border-bottom:1px solid var(--line)}footer{border-top:1px solid var(--line);border-bottom:0;margin-top:64px;font-size:13px;color:var(--muted)}
-.w{max-width:760px;margin:0 auto;padding:0 16px}header .w{display:flex;justify-content:space-between;align-items:center;height:56px}
-header a{color:var(--ink);text-decoration:none;font-weight:800}header nav a{font-weight:600;font-size:14px;margin-left:16px}
-.crumb{font-size:13px;color:var(--muted);margin:16px 0}.crumb a{color:var(--muted)}
-h1{font-size:clamp(26px,4.5vw,34px);line-height:1.4;margin:8px 0 12px}h2{font-size:23px;line-height:1.5;margin:48px 0 12px;padding-top:8px;border-top:2px solid var(--ink)}h3{font-size:19px;margin:28px 0 8px}
-.meta{font-size:13px;color:var(--muted)}.lead{background:var(--surface);border-left:4px solid var(--brand);padding:16px 20px;border-radius:0 10px 10px 0;margin:20px 0}
-.lead strong:first-child{display:block;font-size:14px;color:var(--brand);margin-bottom:4px}
-.toc{border:1px solid var(--line);border-radius:10px;padding:12px 20px;margin:24px 0;font-size:15px}.toc ol{margin:6px 0;padding-left:20px}.toc a{color:var(--ink)}
-a{color:var(--brand)}.tbl{overflow-x:auto;margin:16px 0}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}th{background:var(--surface)}
-blockquote{margin:16px 0;padding:12px 16px;background:#fff8f0;border-radius:8px;font-size:15px}
-.cta{margin:48px 0;padding:24px;border-radius:14px;background:var(--surface);text-align:center}.cta a.btn{display:inline-block;margin:8px 6px;padding:12px 22px;border-radius:999px;background:var(--accent);color:#fff;font-weight:700;text-decoration:none}
-.cta a.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
-.list a{display:block;padding:16px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}.list a strong{display:block;font-size:18px}.list a span{font-size:14px;color:var(--muted)}
-.note{font-size:13px;color:var(--muted)}
+.col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
+.col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
+.col-hero .w{position:relative}
+.w{max-width:800px;margin:0 auto;padding:0 20px}
+.crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
+.col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
+.meta{font-size:13px;color:var(--text-inv-sub);margin:0}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
+article h3{font-size:19px;margin:30px 0 8px}
+.lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
+.lead strong:first-child{display:inline-block;font-size:12px;letter-spacing:.14em;color:#fff;background:var(--grad);border-radius:999px;padding:2px 12px;margin-bottom:8px}
+.toc{border:1px solid var(--line);border-radius:16px;padding:16px 24px;margin:24px 0;font-size:15px;background:#fff}.toc ol{margin:6px 0;padding-left:20px}.toc a{color:var(--text);text-decoration:none}.toc a:hover{color:var(--blue)}
+.tbl{overflow-x:auto;margin:18px 0}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}th{background:var(--bg-sub)}
+blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px solid var(--blue);border-radius:0 12px 12px 0;font-size:15px}
+.cta-box{margin:48px 0;padding:32px 24px;border-radius:20px;background:var(--navy);color:var(--text-inv);text-align:center;position:relative;overflow:hidden}
+.cta-box:before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 100% 0%,rgba(51,102,255,.35),transparent 70%)}
+.cta-box>*{position:relative}.cta-box p{margin:0 0 16px}.cta-box strong{color:#fff;font-size:18px}
+.cta-box .btn{margin:6px}
+.list{display:grid;gap:14px;padding:32px 0}
+.list a{display:block;padding:22px 24px;border:1px solid var(--line);border-radius:16px;color:var(--text);text-decoration:none;background:#fff;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.list a:hover{transform:translateY(-2px);box-shadow:0 18px 36px -24px rgba(15,20,36,.3)}
+.list a strong{display:block;font-size:18px;line-height:1.5;margin-bottom:6px}.list a span{font-size:14px;color:var(--text-sub)}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "広告主のアフィリエイトの始め方：ASP選び・報酬設計・計測・規約づくりの手順", "description": "これからアフィリエイト広告を始める広告主向けに、目標の決め方、ASPの選び方、成果地点と報酬単価の決め方、計測の確認、プログラム規約と承認基準の作り方を順番に解説します。", "datePublished": "2026-11-27", "dateModified": "2026-11-27", "inLanguage": "ja", "author": {"@type": "Organization", "name": "アフィまかせ", "url": "https://afimakase.pages.dev/", "description": "広告主・広告代理店向けのアフィリエイト運用支援サービス"}, "publisher": {"@type": "Organization", "name": "アフィまかせ", "url": "https://afimakase.pages.dev/", "description": "広告主・広告代理店向けのアフィリエイト運用支援サービス"}, "mainEntityOfPage": "https://afimakase.pages.dev/column/affiliate-hajimekata/"}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://afimakase.pages.dev/"}, {"@type": "ListItem", "position": 2, "name": "コラム", "item": "https://afimakase.pages.dev/column/"}, {"@type": "ListItem", "position": 3, "name": "広告主のアフィリエイトの始め方：ASP選び・報酬設計・計測・規約づくりの手順", "item": "https://afimakase.pages.dev/column/affiliate-hajimekata/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "広告主のアフィリエイトの始め方：ASP選び・報酬設計・計測・規約づくりの手順", "description": "これからアフィリエイト広告を始める広告主向けに、目標の決め方、ASPの選び方、成果地点と報酬単価の決め方、計測の確認、プログラム規約と承認基準の作り方を順番に解説します。", "datePublished": "2026-11-27", "dateModified": "2026-11-27", "inLanguage": "ja", "author": {"@type": "Organization", "name": "合同会社IXS", "alternateName": "IXS LLC", "url": "https://ixs-llc.com/", "description": "Webマーケティングのコンサルティング、アフィリエイト・広告の運用支援"}, "publisher": {"@type": "Organization", "name": "合同会社IXS", "alternateName": "IXS LLC", "url": "https://ixs-llc.com/", "description": "Webマーケティングのコンサルティング、アフィリエイト・広告の運用支援"}, "mainEntityOfPage": "https://afimakase.ixs-llc.com/column/affiliate-hajimekata/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://afimakase.ixs-llc.com/"}, {"@type": "ListItem", "position": 2, "name": "コラム", "item": "https://afimakase.ixs-llc.com/column/"}, {"@type": "ListItem", "position": 3, "name": "広告主のアフィリエイトの始め方：ASP選び・報酬設計・計測・規約づくりの手順", "item": "https://afimakase.ixs-llc.com/column/affiliate-hajimekata/"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "アフィリエイトを始めるのに、どれくらいの費用がかかりますか", "acceptedAnswer": {"@type": "Answer", "text": "ASPによって、初期費用、月額費用、成果報酬に対する手数料がかかります。成果報酬は成果が出た分だけ支払う仕組みなので、予算の上限を決めておけば、使いすぎを防げます。"}}, {"@type": "Question", "name": "ASPはいくつ使えばよいですか", "acceptedAnswer": {"@type": "Answer", "text": "最初は自社の分野に強いASPを1〜2社に絞るのがおすすめです。ASPが増えるほど、担当者とのやり取りや数字の集計に手間がかかるためです。"}}, {"@type": "Question", "name": "始めてから成果が出るまで、どれくらいかかりますか", "acceptedAnswer": {"@type": "Answer", "text": "メディアに掲載されるまでに時間がかかるため、数か月単位で見るのが一般的です。メディアへの掲載依頼を自社から積極的に行うと、立ち上がりが早くなります。"}}]}</script>
 <script src="/assets/config.js"></script>
 </head><body data-page-id="col-affiliate-hajimekata">
-<header><div class="w"><a href="/">アフィまかせ</a><nav><a href="/column/">コラム</a><a href="/#price">料金</a><a href="/#diagnosis">無料診断</a></nav></div></header>
-<main class="w">
-<div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
+<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
 <h1>広告主のアフィリエイトの始め方：ASP選び・報酬設計・計測・規約づくりの手順</h1>
-<p class="meta">公開: 2026-11-27　更新: 2026-11-27　運営: アフィまかせ</p>
-<div class="lead"><strong>結論</strong>広告主がアフィリエイトを始めるときは、<strong>①目標とCPAの上限を決める → ②ASPを選ぶ → ③成果地点と報酬を決める → ④計測を確認する → ⑤規約と承認基準を作る → ⑥メディアを集める</strong> の順に進めると、始めてからの手戻りが少なくなります。最初に「1件の成果にいくらまで払えるか」を決めておくことが、すべての判断の基準になります。</div>
+<p class="meta">公開: 2026-11-27　更新: 2026-11-27　運営: アフィまかせ（合同会社IXS）</p></div></div>
+<main><article class="w"><div class="lead"><strong>結論</strong>広告主がアフィリエイトを始めるときは、<strong>①目標とCPAの上限を決める → ②ASPを選ぶ → ③成果地点と報酬を決める → ④計測を確認する → ⑤規約と承認基準を作る → ⑥メディアを集める</strong> の順に進めると、始めてからの手戻りが少なくなります。最初に「1件の成果にいくらまで払えるか」を決めておくことが、すべての判断の基準になります。</div>
 <nav class="toc"><strong>目次</strong><ol><li><a href="#s1">① 目標と、1件あたりに払える上限を決める</a></li><li><a href="#s2">② ASPを選ぶ</a></li><li><a href="#s3">③ 成果地点と報酬を決める</a></li><li><a href="#s4">④ 計測を確認する</a></li><li><a href="#s5">⑤ プログラム規約と承認基準を作る</a></li><li><a href="#s6">⑥ メディアを集める</a></li><li><a href="#s7">よくある質問</a></li><li><a href="#s8">まとめ</a></li></ol></nav>
 <h2 id="s1">① 目標と、1件あたりに払える上限を決める</h2>
 <p>最初に、次の数字を決めます。</p>
@@ -40,8 +50,8 @@ blockquote{margin:16px 0;padding:12px 16px;background:#fff8f0;border-radius:8px;
 <p>ASP（アフィリエイト・サービス・プロバイダ）は、広告主とメディアをつなぐプラットフォームです。選ぶときは次の点を比べます。</p>
 <ul><li><strong>ジャンルの強さ</strong>: 自社の分野で実績のあるメディアが多く登録しているか</li><li><strong>費用</strong>: 初期費用・月額費用・成果報酬に対する手数料</li><li><strong>担当者の支援</strong>: メディアの紹介や、特集・メルマガ枠の相談に乗ってくれるか</li><li><strong>計測の方法</strong>: 自社サイトの仕組みと相性がよいか</li></ul>
 <p>最初から多くのASPに出稿すると、管理の手間が増えます。まずは自社の分野に強いASPを1〜2社選び、成果を見ながら広げるのが一般的です。</p>
-<div class="cta"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">③ 成果地点と報酬を決める</h2>
+<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
+<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">③ 成果地点と報酬を決める</h2>
 <p>報酬には、1件あたり決まった金額を払う「定額」と、売上の一定割合を払う「定率」があります。メディアは、<strong>報酬単価 × 成約率（CVR）× 承認率</strong>、つまり1クリックあたりの報酬（EPC）で、どの案件を掲載するかを判断します。</p>
 <ul><li>単価が競合より低くても、CVRが高ければEPCで勝てることがある</li><li>承認率が低い（否認が多い）案件は、メディアから敬遠されやすい</li><li>特定のメディアにだけ高い単価を出す「特別単価（特単）」は、成果を見てから使う</li></ul>
 <h2 id="s4">④ 計測を確認する</h2>
@@ -62,8 +72,11 @@ blockquote{margin:16px 0;padding:12px 16px;background:#fff8f0;border-radius:8px;
 <h3>始めてから成果が出るまで、どれくらいかかりますか</h3>
 <p>メディアに掲載されるまでに時間がかかるため、数か月単位で見るのが一般的です。メディアへの掲載依頼を自社から積極的に行うと、立ち上がりが早くなります。</p>
 <h2 id="s8">まとめ</h2>
-<p>アフィリエイトは「ASPに出稿すれば成果が来る」ものではなく、報酬設計、計測、規約、メディア集めを順番に整える必要があります。最初に1件あたりに払える上限を決め、それを基準に判断していくのがポイントです。</p><div class="cta"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></main>
-<footer><div class="w"><p>運営: アフィまかせ ／ <a href="/privacy.html">プライバシーポリシー</a> ／ <a href="/column/">コラム一覧</a></p><p>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p></div></footer>
+<p>アフィリエイトは「ASPに出稿すれば成果が来る」ものではなく、報酬設計、計測、規約、メディア集めを順番に整える必要があります。最初に1件あたりに払える上限を決め、それを基準に判断していくのがポイントです。</p><div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
+<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="copy">© IXS LLC.</p>
+</div></footer>
 <script src="/assets/track.js"></script>
 </body></html>

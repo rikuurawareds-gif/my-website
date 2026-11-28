@@ -17,4 +17,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://afimakase.pages.dev/sitemap.xml
+Sitemap: https://afimakase.ixs-llc.com/sitemap.xml

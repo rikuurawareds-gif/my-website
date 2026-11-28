@@ -19,7 +19,7 @@ import html, json, re, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-BASE = "https://afimakase.pages.dev"
+BASE = "https://afimakase.ixs-llc.com"
 SITE = "アフィまかせ"
 
 
@@ -85,43 +85,56 @@ def parse(path):
 
 
 CSS = """
-:root{--bg:#fff;--surface:#f5f7fa;--ink:#14181f;--muted:#5a6271;--line:#e2e6ec;--brand:#0f5bd8;--accent:#e8590c}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.9 system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
-header,footer{border-bottom:1px solid var(--line)}footer{border-top:1px solid var(--line);border-bottom:0;margin-top:64px;font-size:13px;color:var(--muted)}
-.w{max-width:760px;margin:0 auto;padding:0 16px}header .w{display:flex;justify-content:space-between;align-items:center;height:56px}
-header a{color:var(--ink);text-decoration:none;font-weight:800}header nav a{font-weight:600;font-size:14px;margin-left:16px}
-.crumb{font-size:13px;color:var(--muted);margin:16px 0}.crumb a{color:var(--muted)}
-h1{font-size:clamp(26px,4.5vw,34px);line-height:1.4;margin:8px 0 12px}h2{font-size:23px;line-height:1.5;margin:48px 0 12px;padding-top:8px;border-top:2px solid var(--ink)}h3{font-size:19px;margin:28px 0 8px}
-.meta{font-size:13px;color:var(--muted)}.lead{background:var(--surface);border-left:4px solid var(--brand);padding:16px 20px;border-radius:0 10px 10px 0;margin:20px 0}
-.lead strong:first-child{display:block;font-size:14px;color:var(--brand);margin-bottom:4px}
-.toc{border:1px solid var(--line);border-radius:10px;padding:12px 20px;margin:24px 0;font-size:15px}.toc ol{margin:6px 0;padding-left:20px}.toc a{color:var(--ink)}
-a{color:var(--brand)}.tbl{overflow-x:auto;margin:16px 0}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}th{background:var(--surface)}
-blockquote{margin:16px 0;padding:12px 16px;background:#fff8f0;border-radius:8px;font-size:15px}
-.cta{margin:48px 0;padding:24px;border-radius:14px;background:var(--surface);text-align:center}.cta a.btn{display:inline-block;margin:8px 6px;padding:12px 22px;border-radius:999px;background:var(--accent);color:#fff;font-weight:700;text-decoration:none}
-.cta a.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
-.list a{display:block;padding:16px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}.list a strong{display:block;font-size:18px}.list a span{font-size:14px;color:var(--muted)}
-.note{font-size:13px;color:var(--muted)}
+.col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
+.col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
+.col-hero .w{position:relative}
+.w{max-width:800px;margin:0 auto;padding:0 20px}
+.crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
+.col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
+.meta{font-size:13px;color:var(--text-inv-sub);margin:0}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px}
+article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
+article h3{font-size:19px;margin:30px 0 8px}
+.lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
+.lead strong:first-child{display:inline-block;font-size:12px;letter-spacing:.14em;color:#fff;background:var(--grad);border-radius:999px;padding:2px 12px;margin-bottom:8px}
+.toc{border:1px solid var(--line);border-radius:16px;padding:16px 24px;margin:24px 0;font-size:15px;background:#fff}.toc ol{margin:6px 0;padding-left:20px}.toc a{color:var(--text);text-decoration:none}.toc a:hover{color:var(--blue)}
+.tbl{overflow-x:auto;margin:18px 0}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}th{background:var(--bg-sub)}
+blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px solid var(--blue);border-radius:0 12px 12px 0;font-size:15px}
+.cta-box{margin:48px 0;padding:32px 24px;border-radius:20px;background:var(--navy);color:var(--text-inv);text-align:center;position:relative;overflow:hidden}
+.cta-box:before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 100% 0%,rgba(51,102,255,.35),transparent 70%)}
+.cta-box>*{position:relative}.cta-box p{margin:0 0 16px}.cta-box strong{color:#fff;font-size:18px}
+.cta-box .btn{margin:6px}
+.list{display:grid;gap:14px;padding:32px 0}
+.list a{display:block;padding:22px 24px;border:1px solid var(--line);border-radius:16px;color:var(--text);text-decoration:none;background:#fff;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.list a:hover{transform:translateY(-2px);box-shadow:0 18px 36px -24px rgba(15,20,36,.3)}
+.list a strong{display:block;font-size:18px;line-height:1.5;margin-bottom:6px}.list a span{font-size:14px;color:var(--text-sub)}
 """
 
 HEAD = """<!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title><meta name="description" content="{desc}"><link rel="canonical" href="{url}">
 <meta property="og:type" content="{ogtype}"><meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:url" content="{url}"><meta property="og:site_name" content="アフィまかせ"><meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#070b18">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
 <style>{css}</style>
 {jsonld}
 <script src="/assets/config.js"></script>
 </head><body data-page-id="{pageid}">
-<header><div class="w"><a href="/">アフィまかせ</a><nav><a href="/column/">コラム</a><a href="/#price">料金</a><a href="/#diagnosis">無料診断</a></nav></div></header>
-<main class="w">
+<header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
 """
-FOOT = """</main>
-<footer><div class="w"><p>運営: アフィまかせ ／ <a href="/privacy.html">プライバシーポリシー</a> ／ <a href="/column/">コラム一覧</a></p><p>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p></div></footer>
+FOOT = """<footer class="site-footer"><div class="wrap">
+<div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。</p>
+<p class="copy">© IXS LLC.</p>
+</div></footer>
 <script src="/assets/track.js"></script>
 </body></html>"""
-CTA = """<div class="cta"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
-<a class="btn" href="/#diagnosis">無料で工数を診断する</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div>"""
+CTA = """<div class="cta-box"><p><strong>アフィリエイトの運用、月にどれくらいの時間がかかっていますか？</strong><br>8問・1分の無料診断で、工数と手離れできる時間の目安が分かります。</p>
+<a class="btn" href="/#diagnosis">無料で工数を診断する →</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div>"""
 
-ORG = {"@type": "Organization", "name": SITE, "url": BASE + "/", "description": "広告主・広告代理店向けのアフィリエイト運用支援サービス"}
+ORG = {"@type": "Organization", "name": "合同会社IXS", "alternateName": "IXS LLC", "url": "https://ixs-llc.com/", "description": "Webマーケティングのコンサルティング、アフィリエイト・広告の運用支援"}
 
 
 def article_page(a):
@@ -149,9 +162,9 @@ def article_page(a):
         body_html = "<h2".join(parts[:3]) + CTA + "<h2" + parts[3]
     page = HEAD.format(title=html.escape(a["title"]) + "｜アフィまかせ", desc=html.escape(a["description"]), url=url, ogtype="article",
                        css=CSS, jsonld=jsonld, pageid="col-" + a["slug"])
-    page += f'<div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>\n<h1>{html.escape(a["title"])}</h1>\n'
-    page += f'<p class="meta">公開: {a["date"]}　更新: {a.get("updated", a["date"])}　運営: アフィまかせ</p>\n'
-    page += body_html + CTA + FOOT
+    page += f'<div class="col-hero"><div class="w"><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>\n<h1>{html.escape(a["title"])}</h1>\n'
+    page += f'<p class="meta">公開: {a["date"]}　更新: {a.get("updated", a["date"])}　運営: アフィまかせ（合同会社IXS）</p></div></div>\n'
+    page += '<main><article class="w">' + body_html + CTA + '</article></main>' + FOOT
     return page
 
 
@@ -164,9 +177,9 @@ def main():
     ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "アフィリエイト運用コラム", "url": BASE + "/column/", "publisher": ORG}
     idx = HEAD.format(title="アフィリエイト運用コラム｜アフィまかせ", desc="広告主・代理店のためのアフィリエイト運用の実務、ステマ規制・表記の注意点、工数を減らす方法を解説します。",
                       url=BASE + "/column/", ogtype="website", css=CSS, jsonld=f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>', pageid="col-index")
-    idx += '<h1>アフィリエイト運用コラム</h1><p class="meta">広告主・代理店のための、アフィリエイト運用の実務と表記の注意点。</p><div class="list">'
+    idx += '<div class="col-hero"><div class="w"><span class="en">Column</span><h1>アフィリエイト運用コラム</h1><p class="meta">広告主・代理店のための、アフィリエイト運用の実務と表記の注意点。</p></div></div><main class="w"><div class="list">'
     idx += "".join(f'<a href="/column/{a["slug"]}/"><strong>{html.escape(a["title"])}</strong><span>{html.escape(a["description"])}</span></a>' for a in arts)
-    idx += "</div>" + CTA + FOOT
+    idx += "</div>" + CTA + "</main>" + FOOT
     (ROOT / "column" / "index.html").write_text(idx, encoding="utf-8")
     # sitemap
     today = datetime.date.today().isoformat()
@@ -174,7 +187,7 @@ def main():
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{u}</loc><lastmod>{d}</lastmod></url>\n" for u, d in urls) + "</urlset>\n"
     (ROOT / "sitemap.xml").write_text(sm, encoding="utf-8")
     # llms.txt（AI 向けのサイト案内）
-    llms = ["# アフィまかせ", "", "> 広告主・アフィリエイト代理店向けのアフィリエイト運用支援サービス。ASP・メディア対応、成果承認、記事の表記チェック（ステマ規制・景品表示法・薬機法の一次チェック）、月次レポートまでを、AIと担当者で引き受ける。料金は月5万円（税別）から。", "",
+    llms = ["# アフィまかせ", "", "> 広告主・アフィリエイト代理店向けのアフィリエイト運用支援サービス。ASP・メディア対応、成果承認、記事の表記チェック（ステマ規制・景品表示法・薬機法の一次チェック）、月次レポートまでを、AIと担当者で引き受ける。料金は月5万円（税別）から。運営は合同会社IXS（https://ixs-llc.com/）。", "",
             "## サービス", f"- [サービス概要・料金・無料診断]({BASE}/): 運用プラン月5万円、大規模プラン月15万円〜、代理店プラン1アカウント月5万円、表記チェックのみ月3万円（いずれも税別・初期費用0円・最低3か月）", f"- [プライバシーポリシー]({BASE}/privacy.html)", "", "## コラム"]
     llms += [f"- [{a['title']}]({BASE}/column/{a['slug']}/): {a['description']}" for a in arts]
     (ROOT / "llms.txt").write_text("\n".join(llms) + "\n", encoding="utf-8")
