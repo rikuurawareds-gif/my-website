@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#070b18">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=20261128b">
+<link rel="stylesheet" href="/assets/site.css?v=20261128c">
 <style>
 .col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
 .col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
@@ -50,6 +50,7 @@ blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px so
 <nav class="toc"><strong>目次</strong><ol><li><a href="#s1">成果承認の流れ</a></li><li><a href="#s2">否認してよいケースと、注意点</a></li><li><a href="#s3">工数を減らす方法</a></li><li><a href="#s4">よくある質問</a></li><li><a href="#s5">まとめ</a></li></ol></nav>
 <h2 id="s1">成果承認の流れ</h2>
 <ol><li>ASPの管理画面から、承認待ちの成果の一覧（CSV）を取り出す</li><li>自社の注文・申込データと、注文番号や申込IDで突き合わせる</li><li>承認基準に照らして、承認・否認を判定する</li><li>判定結果をASPの管理画面に反映する（CSVのアップロードなど）</li><li>メディアからの問い合わせ（否認理由の確認など）に答える</li></ol>
+<figure class="dia"><img src="/assets/img/diagrams/shonin-flow.svg" alt="成果承認の流れ。ASPの数だけくり返す" loading="lazy"><figcaption aria-hidden="true">成果承認の流れ。ASPの数だけくり返す</figcaption></figure>
 <p>ASPが複数あると、この作業がASPの数だけ発生します。</p>
 <h2 id="s2">否認してよいケースと、注意点</h2>
 <div class="tbl"><table><thead><tr><th>否認の理由の例</th><th>確認の方法</th></tr></thead><tbody><tr><td>重複（同じ人が何度も申し込んだ）</td><td>注文番号・申込IDの重複、同一人物の判定ルール</td></tr><tr><td>キャンセル・返品</td><td>注文データの状態</td></tr><tr><td>テスト・いたずら</td><td>明らかに不正な入力内容</td></tr><tr><td>成果条件を満たしていない</td><td>承認基準に書いた条件（対象地域、年齢など）</td></tr><tr><td>不正な手段による成果</td><td>禁止しているリスティング出稿、自己アフィリエイトなど</td></tr></tbody></table></div>
