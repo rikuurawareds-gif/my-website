@@ -78,7 +78,8 @@
 2. コラムを週2本（`marketing/content-plan.md` の順）
 3. 最初の顧客の前に M1（Chatwork 窓口の自動化）を設計 → Superpowers の brainstorming → writing-plans → TDD で作る
 4. ASP の CSV 形式（05）が来たら、`automation/asp-formats/<ASP名>.md` と変換表をテスト付きで作る
-5. X の翌月分の投稿を `X投稿キュー_YYYYMM.csv` として Drive に置く（既存ファイルは書き換えない）
+5. X の翌月分の投稿を `X投稿キュー_YYYYMM.csv` として Drive に置く（既存ファイルは書き換えない）。手順は `marketing/x-account.md` の「毎月の投稿づくり」（`x-researcher` → `x-post-writer` → チェック）。**次回は 2026-12-20 ごろ、2027-01-15 以降の分**
+6. X: @afimakase は開設済み。07（自動投稿）は開発者コンソールの規約同意待ち（状態は `marketing/x-account.md`）
 
 ---
 
