@@ -146,3 +146,12 @@ affiliate/
 - Claude（PM）が作業できるのは会話中だけ。オーナーには、作業が終わったら「終わった」と言ってもらう
 - `git push` で LP・コラムは自動公開される。公開前に `checker/check.py` で自社の表現を確認し、LP はヘッドレスブラウザで動作を確認する
 - Superpowers の使い方は `affiliate/CLAUDE.md` の表のとおり（大きい仕組みは brainstorming → writing-plans、コードは TDD、完了報告の前に検証）
+---
+
+## 9. 2026-11-29 時点の要点（PM セッションの引き継ぎ）
+- 体制: PM（このセッション「アフィリエイト運用」。X も担当）／SEO・AIO（SEO AIO）／サイトデザイン（AFFデザイン）／有料note（Note memo）／IXS 会社サイト（IXS）。分担とルールは `docs/workstreams.md`、決めたことは `docs/decisions.md`、料金は `docs/pricing.md`
+- 経営ダッシュボードとオーナーのタスクボード（URL はメモリ `exec-dashboard` と `owner-task-board`）を、作業の区切りで更新する
+- 売り方: 窓口代行 月3万円が主力＋オプション。LP は新料金で公開済み。相談フォームはつながった（リード管理シート＋Gmail 通知）
+- 集客はインバウンド中心（SEO 毎日・X 平日毎日・有料 note・比較サイト）。ASP 担当への紹介依頼は、サービスが立ち上がるまで保留
+- 進行中: **GA4 の設定（11/29 朝、PM）**／テストケース01（`docs/simulations/2026-11-29-case01-dainishinsotsu.md`）で見つかった穴の修正。**表記チェックの20サイト超の料金をオーナーが決める待ち**（案A 段階制／案B 初月まとめて＋翌月から巡回）。決まったら、人材のチェッカールール（ad-compliance-checker）、ヒアリングシートに申込番号の確認、試算と決裁シートの改善（AFFデザイン）を振り分ける
+- note: 本 29,800円＋月額 3,980円。オーナーの note 本人情報の登録待ち
