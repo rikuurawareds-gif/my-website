@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img"><title>返信待ちの連絡が積み上がる</title><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="240" y2="120"><stop offset="0" stop-color="#3366ff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<g fill="none" stroke="#0f1424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 148h100"/><rect x="34" y="116" width="54" height="30" rx="4"/></g><g fill="none" stroke="#0f1424" stroke-width="2" stroke-linecap="round" transform="translate(61 108) scale(1.1)"><circle cx="0" cy="-26" r="11"/><path d="M-19 8c1-14 8-21 19-21s18 7 19 21"/></g>
+<g fill="#fff" stroke="#9aa4bf" stroke-width="2" stroke-linejoin="round">
+<path d="M112 104h56a8 8 0 0 1 8 8v10a8 8 0 0 1-8 8h-44l-10 8v-8h-2a8 8 0 0 1-8-8v-10a8 8 0 0 1 8-8z"/>
+<path d="M128 72h62a8 8 0 0 1 8 8v10a8 8 0 0 1-8 8h-48l-10 8v-8h-4a8 8 0 0 1-8-8v-10a8 8 0 0 1 8-8z"/>
+<path d="M148 40h62a8 8 0 0 1 8 8v10a8 8 0 0 1-8 8h-48l-10 8v-8h-4a8 8 0 0 1-8-8v-10a8 8 0 0 1 8-8z"/>
+<path d="M164 10h52a8 8 0 0 1 8 8v6a8 8 0 0 1-8 8h-52a8 8 0 0 1-8-8v-6a8 8 0 0 1 8-8z"/></g>
+<g stroke="#c5ccdd" stroke-width="2" stroke-linecap="round"><path d="M120 117h34M138 85h40M158 53h40M170 21h30"/></g>
+<circle cx="222" cy="12" r="11" fill="#b54708"/><text x="222" y="16" font-family="Noto Sans JP,sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">12</text></svg>

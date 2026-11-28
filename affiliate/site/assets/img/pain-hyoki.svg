@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img"><title>外部の記事に広告の表記が欠けていないかを探す</title><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="240" y2="120"><stop offset="0" stop-color="#3366ff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<g fill="none" stroke="#0f1424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="26" y="12" width="128" height="138" rx="6"/></g>
+<path d="M40 30h66" stroke="#0f1424" stroke-width="3" stroke-linecap="round"/>
+<rect x="116" y="21" width="28" height="17" rx="3" fill="#fff" stroke="#b54708" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="130" y="33.5" font-family="Noto Sans JP,sans-serif" font-size="9" font-weight="700" fill="#b54708" text-anchor="middle">PR?</text>
+<rect x="40" y="48" width="100" height="34" rx="3" fill="#eef1f8"/>
+<g stroke="#c5ccdd" stroke-width="2" stroke-linecap="round"><path d="M40 96h98M40 108h84M40 120h98M40 132h60"/></g>
+<circle cx="174" cy="78" r="30" fill="#fff" fill-opacity=".75" stroke="#0f1424" stroke-width="2"/>
+<path d="M196 100l26 26" stroke="#0f1424" stroke-width="6" stroke-linecap="round"/>
+<g stroke="#b54708" stroke-width="2.4" stroke-linecap="round"><path d="M160 72h28M160 84h16"/></g></svg>

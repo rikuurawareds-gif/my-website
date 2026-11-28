@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EPCとは？アフィリエイトの単価交渉で使う計算方法と考え方｜アフィまかせ</title><meta name="description" content="アフィリエイトのEPC（1クリックあたりの報酬）の意味と計算方法、メディアがEPCで案件を選ぶ理由、広告主が単価・CVR・承認率をどう組み合わせて交渉すればよいかを、計算例つきで解説します。"><link rel="canonical" href="https://afimakase.ixs-llc.com/column/epc/">
+<meta property="og:type" content="article"><meta property="og:title" content="EPCとは？アフィリエイトの単価交渉で使う計算方法と考え方｜アフィまかせ"><meta property="og:description" content="アフィリエイトのEPC（1クリックあたりの報酬）の意味と計算方法、メディアがEPCで案件を選ぶ理由、広告主が単価・CVR・承認率をどう組み合わせて交渉すればよいかを、計算例つきで解説します。"><meta property="og:url" content="https://afimakase.ixs-llc.com/column/epc/"><meta property="og:site_name" content="アフィまかせ"><meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#070b18">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
+.col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
+.w{max-width:800px;margin:0 auto;padding:0 20px}
+.crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
+.col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
+.meta{font-size:13px;color:var(--text-inv-sub);margin:0}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
+article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
+article h3{font-size:19px;margin:30px 0 8px}
+.lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
+.lead strong:first-child{display:inline-block;font-size:12px;letter-spacing:.14em;color:#fff;background:var(--grad);border-radius:999px;padding:2px 12px;margin-bottom:8px}
+.toc{border:1px solid var(--line);border-radius:16px;padding:16px 24px;margin:24px 0;font-size:15px;background:#fff}.toc ol{margin:6px 0;padding-left:20px}.toc a{color:var(--text);text-decoration:none}.toc a:hover{color:var(--blue)}
+.tbl{overflow-x:auto;margin:18px 0}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}th{background:var(--bg-sub)}
+blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px solid var(--blue);border-radius:0 12px 12px 0;font-size:15px}
+.cta-box{margin:48px 0;padding:32px 24px;border-radius:20px;background:var(--navy);color:var(--text-inv);text-align:center;position:relative;overflow:hidden}
+.cta-box:before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 100% 0%,rgba(51,102,255,.35),transparent 70%)}
+.cta-box>*{position:relative}.cta-box p{margin:0 0 16px}.cta-box strong{color:#fff;font-size:18px}
+.cta-box .btn{margin:6px}
+.list{display:grid;gap:14px;padding:32px 0}
+.list a{display:block;padding:22px 24px;border:1px solid var(--line);border-radius:16px;color:var(--text);text-decoration:none;background:#fff;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.list a:hover{transform:translateY(-2px);box-shadow:0 18px 36px -24px rgba(15,20,36,.3)}
+.list a strong{display:block;font-size:18px;line-height:1.5;margin-bottom:6px}.list a span{font-size:14px;color:var(--text-sub)}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EPCとは？アフィリエイトの単価交渉で使う計算方法と考え方", "description": "アフィリエイトのEPC（1クリックあたりの報酬）の意味と計算方法、メディアがEPCで案件を選ぶ理由、広告主が単価・CVR・承認率をどう組み合わせて交渉すればよいかを、計算例つきで解説します。", "datePublished": "2026-11-27", "dateModified": "2026-11-27", "inLanguage": "ja", "author": {"@type": "Organization", "name": "合同会社IXS", "alternateName": "IXS LLC", "url": "https://ixs-llc.com/", "description": "Webマーケティングのコンサルティング、アフィリエイト・広告の運用支援"}, "publisher": {"@type": "Organization", "name": "合同会社IXS", "alternateName": "IXS LLC", "url": "https://ixs-llc.com/", "description": "Webマーケティングのコンサルティング、アフィリエイト・広告の運用支援"}, "mainEntityOfPage": "https://afimakase.ixs-llc.com/column/epc/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://afimakase.ixs-llc.com/"}, {"@type": "ListItem", "position": 2, "name": "コラム", "item": "https://afimakase.ixs-llc.com/column/"}, {"@type": "ListItem", "position": 3, "name": "EPCとは？アフィリエイトの単価交渉で使う計算方法と考え方", "item": "https://afimakase.ixs-llc.com/column/epc/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "EPCとCPAの違いは何ですか", "acceptedAnswer": {"@type": "Answer", "text": "EPCはメディアから見た「1クリックあたりの報酬」、CPAは広告主から見た「1件の成果を得るのにかかった費用」です。同じ報酬単価でも、CVRや承認率によってEPCは変わります。"}}, {"@type": "Question", "name": "EPCはどこで確認できますか", "acceptedAnswer": {"@type": "Answer", "text": "ASPによっては、管理画面で案件ごとのEPCや、それに近い指標（クリック単価など）を表示しています。表示がない場合は、クリック数・成果件数・承認件数・報酬額から計算できます。"}}, {"@type": "Question", "name": "EPCが低いと、どうなりますか", "acceptedAnswer": {"@type": "Answer", "text": "メディアがほかの案件を優先し、掲載順位が下がったり、掲載をやめられたりすることがあります。EPCが競合より低い場合は、CVRと承認率の改善、成果の良いメディアへの特別単価などを検討します。"}}]}</script>
+<script src="/assets/config.js"></script>
+</head><body data-page-id="col-epc">
+<header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
+<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<h1>EPCとは？アフィリエイトの単価交渉で使う計算方法と考え方</h1>
+<p class="meta">公開: 2026-11-27　更新: 2026-11-27　運営: アフィまかせ（合同会社IXS）</p></div><img class="art" src="/assets/img/cat-jitsumu.svg" alt="" width="150" height="60"></div></div>
+<main><article class="w"><div class="lead"><strong>結論</strong>EPC（Earnings Per Click）とは、アフィリエイトで <strong>1クリックあたりにメディアが得られる報酬</strong> のことで、「報酬単価 × 成約率（CVR）× 承認率」で計算します。メディアは同じ掲載枠に載せる案件をEPCで比べるため、広告主は単価だけでなく、CVRや承認率を高めることでも、メディアに選ばれやすくなります。</div>
+<nav class="toc"><strong>目次</strong><ol><li><a href="#s1">EPCの計算方法</a></li><li><a href="#s2">メディアがEPCで案件を選ぶ理由</a></li><li><a href="#s3">広告主がEPCを上げる方法</a></li><li><a href="#s4">単価交渉での使い方</a></li><li><a href="#s5">よくある質問</a></li><li><a href="#s6">まとめ</a></li></ol></nav>
+<h2 id="s1">EPCの計算方法</h2>
+<blockquote>EPC ＝ 報酬単価 × CVR（クリックのうち成果になった割合）× 承認率</blockquote>
+<div class="tbl"><table><thead><tr><th>項目</th><th>案件A</th><th>案件B</th></tr></thead><tbody><tr><td>報酬単価</td><td>10,000円</td><td>12,000円</td></tr><tr><td>CVR</td><td>12%</td><td>8%</td></tr><tr><td>承認率</td><td>90%</td><td>80%</td></tr><tr><td><strong>EPC</strong></td><td><strong>1,080円</strong></td><td><strong>768円</strong></td></tr></tbody></table></div>
+<p>案件Aは単価が低いものの、CVRと承認率が高いため、メディアにとっては案件Aのほうが1クリックあたりの収益が大きくなります。</p>
+<h2 id="s2">メディアがEPCで案件を選ぶ理由</h2>
+<p>比較サイトやランキング記事の掲載枠は限られています。メディアは、限られた枠と読者のクリックから最大の収益を得たいので、EPCの高い案件を上位に載せる傾向があります。比較サイトの上位の掲載枠が、実質的に「単価の入札」のようになるのはこのためです。</p>
+<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">広告主がEPCを上げる方法</h2>
+<div class="tbl"><table><thead><tr><th>方法</th><th>例</th></tr></thead><tbody><tr><td>CVRを上げる</td><td>申込フォームの入力項目を減らす、LPの訴求を検索意図に合わせる</td></tr><tr><td>承認率を上げる</td><td>承認基準を明確にしてメディアに伝える、条件に合わない読者が来にくい訴求にしてもらう</td></tr><tr><td>単価を上げる</td><td>成果の質が高いメディアにだけ特別単価（特単）を出す</td></tr></tbody></table></div>
+<p>単価を上げるのは分かりやすい手段ですが、費用が増えます。CVRと承認率の改善は、費用を増やさずにEPCを上げられるため、先に検討する価値があります。</p>
+<h2 id="s4">単価交渉での使い方</h2>
+<p>メディアやASPに掲載を依頼するときは、単価だけでなくEPCの見込みを伝えると話が進みやすくなります。</p>
+<ul><li>「競合より単価は低いが、CVRが高いのでEPCは上回る見込み」と数字で示す</li><li>CVRが高い理由（フォームが短い、強みが明確など）を添える</li><li>上位の掲載枠を取りにいくときは、事前に <strong>自社が払える単価の上限</strong> を決めておく（入札が過熱しやすいため）</li><li>新しい掲載枠は、いきなり最上位を狙わず、中位で実際のCVRを確かめてから順位を判断する</li></ul>
+<h2 id="s5">よくある質問</h2>
+<h3>EPCとCPAの違いは何ですか</h3>
+<p>EPCはメディアから見た「1クリックあたりの報酬」、CPAは広告主から見た「1件の成果を得るのにかかった費用」です。同じ報酬単価でも、CVRや承認率によってEPCは変わります。</p>
+<h3>EPCはどこで確認できますか</h3>
+<p>ASPによっては、管理画面で案件ごとのEPCや、それに近い指標（クリック単価など）を表示しています。表示がない場合は、クリック数・成果件数・承認件数・報酬額から計算できます。</p>
+<h3>EPCが低いと、どうなりますか</h3>
+<p>メディアがほかの案件を優先し、掲載順位が下がったり、掲載をやめられたりすることがあります。EPCが競合より低い場合は、CVRと承認率の改善、成果の良いメディアへの特別単価などを検討します。</p>
+<h2 id="s6">まとめ</h2>
+<p>EPCは「報酬単価 × CVR × 承認率」で決まり、メディアが案件を選ぶ基準になります。広告主は単価だけで勝負せず、CVRと承認率を高め、数字でEPCの見込みを示すことで、費用を抑えながらメディアに選ばれやすくなります。</p><div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
+<p class="copy">© IXS LLC.</p>
+</div></footer>
+<script src="/assets/track.js"></script>
+</body></html>

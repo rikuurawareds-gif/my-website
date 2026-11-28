@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img"><title>ASPの成果と注文データを1件ずつ突き合わせる</title><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="240" y2="120"><stop offset="0" stop-color="#3366ff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<g fill="none" stroke="#0f1424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="20" width="90" height="120" rx="6"/><rect x="138" y="20" width="90" height="120" rx="6"/><path d="M12 42h90M138 42h90"/></g>
+<g font-family="Noto Sans JP,sans-serif" font-size="10" font-weight="700" fill="#5b6378" text-anchor="middle"><text x="57" y="35">ASPの成果</text><text x="183" y="35">注文データ</text></g>
+<rect x="18" y="86" width="204" height="18" rx="4" fill="#b54708" fill-opacity=".1"/>
+<g stroke="#c5ccdd" stroke-width="2" stroke-linecap="round"><path d="M24 58h62M24 76h52M24 95h62M24 116h46M150 58h62M150 76h52M150 95h62M150 116h46"/></g>
+<g stroke="#9aa4bf" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"><path d="M106 58h28M106 76h28M106 116h28"/></g>
+<g stroke="#b54708" stroke-width="2.4" stroke-linecap="round"><path d="M114 90l10 10M124 90l-10 10"/></g></svg>

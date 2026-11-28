@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img"><title>比較記事に競合は載っていて、自社だけ載っていない</title><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="240" y2="120"><stop offset="0" stop-color="#3366ff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<g fill="none" stroke="#0f1424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="38" y="8" width="164" height="146" rx="6"/></g>
+<path d="M52 26h96" stroke="#0f1424" stroke-width="3" stroke-linecap="round"/>
+<g font-family="Noto Sans JP,sans-serif" font-size="11" font-weight="700" fill="#5b6378"><text x="54" y="57">1</text><text x="54" y="87">2</text><text x="54" y="117">3</text><text x="54" y="144">4</text></g>
+<g fill="#eef1f8"><rect x="68" y="42" width="26" height="20" rx="3"/><rect x="68" y="72" width="26" height="20" rx="3"/><rect x="68" y="102" width="26" height="20" rx="3"/></g>
+<g stroke="#c5ccdd" stroke-width="2" stroke-linecap="round"><path d="M102 48h76M102 57h50M102 78h76M102 87h44M102 108h76M102 117h56"/></g>
+<rect x="68" y="130" width="120" height="19" rx="4" fill="#eef3ff" stroke="#3366ff" stroke-width="2" stroke-dasharray="4 4"/>
+<text x="128" y="143.5" font-family="Noto Sans JP,sans-serif" font-size="10" font-weight="700" fill="#3366ff" text-anchor="middle">御社はまだ載っていない</text></svg>

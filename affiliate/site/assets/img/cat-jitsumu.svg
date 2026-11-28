@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img"><title>運用の実務</title><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="240" y2="120"><stop offset="0" stop-color="#3366ff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<g fill="#fff" stroke="#0f1424" stroke-width="2" stroke-linejoin="round"><path d="M30 18h52a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8h-36l-10 8v-8h-6a8 8 0 0 1-8-8v-12a8 8 0 0 1 8-8z"/></g>
+<g fill="#fff" stroke="url(#g)" stroke-width="2.5" stroke-linejoin="round"><path d="M170 34h-52a8 8 0 0 0-8 8v12a8 8 0 0 0 8 8h36l10 8v-8h6a8 8 0 0 0 8-8v-12a8 8 0 0 0-8-8z"/></g>
+<g stroke="#c5ccdd" stroke-width="2" stroke-linecap="round"><path d="M34 32h40M122 48h40"/></g></svg>

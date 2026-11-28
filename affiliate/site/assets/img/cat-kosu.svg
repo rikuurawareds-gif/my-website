@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img"><title>工数を減らす</title><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="240" y2="120"><stop offset="0" stop-color="#3366ff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<g fill="none" stroke="#0f1424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="44" cy="40" r="22"/><path d="M44 28v12l8 6"/></g>
+<path d="M78 26h96" stroke="#9aa4bf" stroke-width="2" stroke-linecap="round"/><path d="M78 40h70" stroke="#9aa4bf" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+<path d="M78 54h30" stroke="url(#g)" stroke-width="4" stroke-linecap="round"/></svg>

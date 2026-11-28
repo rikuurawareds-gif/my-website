@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>アフィリエイトの月次レポートの作り方：数字が動いた理由の書き方と、作る手間の減らし方｜アフィまかせ</title><meta name="description" content="広告主がアフィリエイトの月次レポート（社内報告や代理店との定例資料）を作るときの構成、数字が動いた理由を分けて書く方法、外部環境の書き方、着地見込みとのずれの見せ方、作る手間を減らすコツを解説します。"><link rel="canonical" href="https://afimakase.ixs-llc.com/column/report/">
+<meta property="og:type" content="article"><meta property="og:title" content="アフィリエイトの月次レポートの作り方：数字が動いた理由の書き方と、作る手間の減らし方｜アフィまかせ"><meta property="og:description" content="広告主がアフィリエイトの月次レポート（社内報告や代理店との定例資料）を作るときの構成、数字が動いた理由を分けて書く方法、外部環境の書き方、着地見込みとのずれの見せ方、作る手間を減らすコツを解説します。"><meta property="og:url" content="https://afimakase.ixs-llc.com/column/report/"><meta property="og:site_name" content="アフィまかせ"><meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#070b18">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.col-hero{background:var(--navy);color:var(--text-inv);padding:40px 0 44px;position:relative;overflow:hidden}
+.col-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 0%,rgba(51,102,255,.35),transparent 70%)}
+.col-hero .w{position:relative;display:grid;grid-template-columns:1fr 150px;gap:24px;align-items:end}
+.col-hero .w>div{min-width:0}.col-hero .art{width:150px;background:#fff;border-radius:14px;padding:6px;margin-bottom:4px}
+@media (max-width:640px){.col-hero .w{grid-template-columns:1fr}.col-hero .art{display:none}}
+.w{max-width:800px;margin:0 auto;padding:0 20px}
+.crumb{font-size:13px;color:var(--text-inv-sub);margin:0 0 14px}.crumb a{color:var(--text-inv-sub);text-decoration:none}.crumb a:hover{color:#fff}
+.col-hero h1{font-weight:900;font-size:clamp(26px,4.4vw,38px);line-height:1.45;margin:6px 0 14px;color:#fff;text-wrap:balance}
+.meta{font-size:13px;color:var(--text-inv-sub);margin:0}
+article.w{padding-top:36px;padding-bottom:24px;font-size:17px;line-height:1.9}
+article.w>p,article.w>ul,article.w>ol{max-width:42em}
+article h2{font-size:clamp(22px,3vw,26px);line-height:1.5;margin:56px 0 14px;padding-left:16px;border-left:5px solid;border-image:var(--grad) 1}
+article h3{font-size:19px;margin:30px 0 8px}
+.lead{background:var(--bg-sub);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin:0 0 8px}
+.lead strong:first-child{display:inline-block;font-size:12px;letter-spacing:.14em;color:#fff;background:var(--grad);border-radius:999px;padding:2px 12px;margin-bottom:8px}
+.toc{border:1px solid var(--line);border-radius:16px;padding:16px 24px;margin:24px 0;font-size:15px;background:#fff}.toc ol{margin:6px 0;padding-left:20px}.toc a{color:var(--text);text-decoration:none}.toc a:hover{color:var(--blue)}
+.tbl{overflow-x:auto;margin:18px 0}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}th{background:var(--bg-sub)}
+blockquote{margin:18px 0;padding:14px 18px;background:#f7f9ff;border-left:4px solid var(--blue);border-radius:0 12px 12px 0;font-size:15px}
+.cta-box{margin:48px 0;padding:32px 24px;border-radius:20px;background:var(--navy);color:var(--text-inv);text-align:center;position:relative;overflow:hidden}
+.cta-box:before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 100% 0%,rgba(51,102,255,.35),transparent 70%)}
+.cta-box>*{position:relative}.cta-box p{margin:0 0 16px}.cta-box strong{color:#fff;font-size:18px}
+.cta-box .btn{margin:6px}
+.list{display:grid;gap:14px;padding:32px 0}
+.list a{display:block;padding:22px 24px;border:1px solid var(--line);border-radius:16px;color:var(--text);text-decoration:none;background:#fff;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.list a:hover{transform:translateY(-2px);box-shadow:0 18px 36px -24px rgba(15,20,36,.3)}
+.list a strong{display:block;font-size:18px;line-height:1.5;margin-bottom:6px}.list a span{font-size:14px;color:var(--text-sub)}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "アフィリエイトの月次レポートの作り方：数字が動いた理由の書き方と、作る手間の減らし方", "description": "広告主がアフィリエイトの月次レポート（社内報告や代理店との定例資料）を作るときの構成、数字が動いた理由を分けて書く方法、外部環境の書き方、着地見込みとのずれの見せ方、作る手間を減らすコツを解説します。", "datePublished": "2026-11-28", "dateModified": "2026-11-28", "inLanguage": "ja", "author": {"@type": "Organization", "name": "合同会社IXS", "alternateName": "IXS LLC", "url": "https://ixs-llc.com/", "description": "Webマーケティングのコンサルティング、アフィリエイト・広告の運用支援"}, "publisher": {"@type": "Organization", "name": "合同会社IXS", "alternateName": "IXS LLC", "url": "https://ixs-llc.com/", "description": "Webマーケティングのコンサルティング、アフィリエイト・広告の運用支援"}, "mainEntityOfPage": "https://afimakase.ixs-llc.com/column/report/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://afimakase.ixs-llc.com/"}, {"@type": "ListItem", "position": 2, "name": "コラム", "item": "https://afimakase.ixs-llc.com/column/"}, {"@type": "ListItem", "position": 3, "name": "アフィリエイトの月次レポートの作り方：数字が動いた理由の書き方と、作る手間の減らし方", "item": "https://afimakase.ixs-llc.com/column/report/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "アフィリエイトの月次レポートには、何を書けばよいですか", "acceptedAnswer": {"@type": "Answer", "text": "結論、全体の数字（件数・費用・獲得単価など）、数字が動いた理由、外部環境、メディアごとの実績、次の月の打ち手、判断してほしいことを、毎月同じ順番で書くのがおすすめです。"}}, {"@type": "Question", "name": "数字が落ちた理由は、どう説明すればよいですか", "acceptedAnswer": {"@type": "Answer", "text": "成約率、市況・季節、競合の動き、個別のメディア、自社の施策のように理由を分け、それぞれがどれくらい影響したかを並べます。誰の動きか、何の数字が変わったかをはっきり書くと、次の打ち手につながります。"}}, {"@type": "Question", "name": "レポート作りの手間を減らすには、どうすればよいですか", "acceptedAnswer": {"@type": "Answer", "text": "構成を固定し、複数のASPの数字の集計を自動化するのが効果的です。報告先の資料の形で最初から作ると、作り直しの手間も減らせます。"}}]}</script>
+<script src="/assets/config.js"></script>
+</head><body data-page-id="col-report">
+<header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span><small>by IXS</small></a><nav class="nav" aria-label="メイン"><a class="hide-sm" href="/#service">サービス</a><a class="hide-sm" href="/#price">料金</a><a href="/column/">コラム</a><a class="btn sm" href="/#diagnosis">無料で診断</a></nav></div></header>
+<div class="col-hero"><div class="w"><div><div class="crumb"><a href="/">ホーム</a> › <a href="/column/">コラム</a></div>
+<h1>アフィリエイトの月次レポートの作り方：数字が動いた理由の書き方と、作る手間の減らし方</h1>
+<p class="meta">公開: 2026-11-28　更新: 2026-11-28　運営: アフィまかせ（合同会社IXS）</p></div><img class="art" src="/assets/img/cat-jitsumu.svg" alt="" width="150" height="60"></div></div>
+<main><article class="w"><div class="lead"><strong>結論</strong>アフィリエイトの月次レポートは、<strong>結果の数字、数字が動いた理由、次の月の打ち手と判断してほしいこと</strong> の3つを、毎月同じ順番でまとめるのが基本です。特に大切なのは、数字が動いた理由を「成約率」「市況」「競合」「個別のメディア」のように分けて書くことです。理由が分かれていると、次に何をすればよいかが読み手にも伝わります。構成を固定し、集計を自動化すると、作る手間も減らせます。</div>
+<nav class="toc"><strong>目次</strong><ol><li><a href="#s1">月次レポートに入れる項目</a></li><li><a href="#s2">数字が動いた理由の書き方</a></li><li><a href="#s3">外部環境の書き方</a></li><li><a href="#s4">着地見込みとのずれの見せ方</a></li><li><a href="#s5">レポートの品質を保つためのルール</a></li><li><a href="#s6">作る手間を減らすコツ</a></li><li><a href="#s7">よくある質問</a></li><li><a href="#s8">まとめ</a></li></ol></nav>
+<h2 id="s1">月次レポートに入れる項目</h2>
+<p>毎月、次の順番でまとめると、読み手が前の月と比べやすくなります。</p>
+<div class="tbl"><table><thead><tr><th>順番</th><th>項目</th><th>中身</th></tr></thead><tbody><tr><td>1</td><td>結論</td><td>今月の結果を一言で。目標に対してどうだったか</td></tr><tr><td>2</td><td>全体の数字</td><td>件数、費用、獲得単価（CPA）、承認率など。目標・前月・前年との比較</td></tr><tr><td>3</td><td>数字が動いた理由</td><td>何が、どれくらい影響したか</td></tr><tr><td>4</td><td>外部環境</td><td>競合の動き、メディアの動き、季節や市況の変化</td></tr><tr><td>5</td><td>メディアごとの実績</td><td>伸びたメディア、落ちたメディアと、その理由</td></tr><tr><td>6</td><td>次の月の打ち手</td><td>新しいメディア、単価の見直し、訴求の変更など</td></tr><tr><td>7</td><td>判断してほしいこと</td><td>上長や関係者に決めてほしいこと</td></tr></tbody></table></div>
+<p>社内向けなら、7の「判断してほしいこと」を、「〜の方針で進めてよいでしょうか」のように、答えやすい問いの形で書くと、話が早く進みます。</p>
+<h2 id="s2">数字が動いた理由の書き方</h2>
+<p>「今月は件数が落ちました」だけでは、次に何をすればよいかが分かりません。理由を分けて書きます。</p>
+<ul><li><strong>成約率の変化</strong>: サイトやフォームの変更、訴求の変更など、自社側の要因</li><li><strong>市況・季節</strong>: 検索の量や、見込み客の動きの変化</li><li><strong>競合の動き</strong>: 競合の単価の引き上げや、広告の強化</li><li><strong>個別のメディア</strong>: 特定のメディアの掲載停止、順位の変化、新規の掲載</li><li><strong>自社の施策</strong>: 特単や新しいメディアの追加などの効果</li></ul>
+<p>それぞれが目標に対してどれくらい影響したかを並べると、「どこに手を打てば戻せるか」が見えます。書くときは、次の点に気をつけます。</p>
+<ul><li><strong>主語をはっきりさせる</strong>: 「競合の広告」「競合のアフィリエイトメディア」「競合の自社サイト」のように、誰の動きかを分ける</li><li><strong>何の数字が変わったかを書く</strong>: 表示の回数、クリック、成約率のどれが変わったのか</li><li><strong>「好調」「苦戦」には基準を添える</strong>: 何に対して何%か</li><li><strong>件数が少ないときは「参考値」と書く</strong>: 少ない件数から言い切らない</li></ul>
+<div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div><h2 id="s3">外部環境の書き方</h2>
+<p>外部環境は、日付をつけて、時系列で書くと伝わりやすくなります。</p>
+<ul><li>競合の動き: 「○日から、競合の比較ページでの露出が強まった」</li><li>メディアの動き: 「○日から、主要な比較ページの掲載順位が入れ替わった」</li><li>見込み客の動き: 「月初は活発 → 中旬から鈍化 → 連休で低下」</li></ul>
+<p>競合の動きは、公開されている情報や、ASP担当者・メディアから聞ける範囲の情報をもとに整理します。確かめられなかったことは「推定」と書き、事実と分けます。</p>
+<h2 id="s4">着地見込みとのずれの見せ方</h2>
+<p>月の途中のレポートでは、月末の着地見込みと目標のずれを見せます。「目標」「現状」「ずれ」「消化のペース」「調整できる予算」を並べると、追加の打ち手が必要かどうかを判断しやすくなります。着地見込みの出し方は<a href="/column/seikyu-yosan/">請求・予算・着地見込みの管理方法</a>で解説しています。</p>
+<h2 id="s5">レポートの品質を保つためのルール</h2>
+<ul><li><strong>見込みの数字と確定した数字を分ける</strong></li><li><strong>件数は「ASPの成果」「請求」「自社の計測」でそろえる</strong>。ずれる場合は理由を注記する</li><li><strong>締め日と、数える対象（発生か承認か）を明記する</strong></li><li><strong>前の月の数字も最新のデータで更新する</strong>（あとから承認や成約の結果が戻るため）</li></ul>
+<h2 id="s6">作る手間を減らすコツ</h2>
+<ul><li><strong>構成を固定する</strong>: 毎月同じ項目・同じ順番にすると、作る時間も読む時間も短くなります</li><li><strong>集計を自動化する</strong>: 複数のASPの数字を共通の形にそろえて集計する作業は、自動化に向いています</li><li><strong>報告先の形に合わせて作る</strong>: 上長や経営層に出す資料の形で最初から作れば、作り直しの手間がなくなります</li><li><strong>月次と四半期で役割を分ける</strong>: 月次は「次の月の打ち手と単価の判断」、四半期は「年間の方針とのすり合わせ」と分けると、毎月の資料が軽くなります</li></ul>
+<p>運用全体の工数の減らし方は<a href="/column/kosu-sakugen/">アフィリエイト運用の工数を減らす方法</a>にまとめています。</p>
+<h2 id="s7">よくある質問</h2>
+<h3>アフィリエイトの月次レポートには、何を書けばよいですか</h3>
+<p>結論、全体の数字（件数・費用・獲得単価など）、数字が動いた理由、外部環境、メディアごとの実績、次の月の打ち手、判断してほしいことを、毎月同じ順番で書くのがおすすめです。</p>
+<h3>数字が落ちた理由は、どう説明すればよいですか</h3>
+<p>成約率、市況・季節、競合の動き、個別のメディア、自社の施策のように理由を分け、それぞれがどれくらい影響したかを並べます。誰の動きか、何の数字が変わったかをはっきり書くと、次の打ち手につながります。</p>
+<h3>レポート作りの手間を減らすには、どうすればよいですか</h3>
+<p>構成を固定し、複数のASPの数字の集計を自動化するのが効果的です。報告先の資料の形で最初から作ると、作り直しの手間も減らせます。</p>
+<h2 id="s8">まとめ</h2>
+<p>アフィリエイトの月次レポートは、結果・理由・次の打ち手を毎月同じ順番でまとめ、数字が動いた理由を分けて書くことで、読み手が判断しやすいものになります。構成の固定と集計の自動化で、作る手間も減らしましょう。</p><div class="cta-box"><p><strong>任せた場合の費用対効果を、上長に見せられる1枚に</strong><br>8問・1分の無料の工数診断で、いまの工数と、委託費を差し引いた効果の目安（決裁用の試算）が出ます。</p>
+<a class="btn" href="/#diagnosis">工数を診断して試算を作る</a><a class="btn ghost" href="/#contact">無料の伸びしろ診断・表記チェック</a></div></article></main><footer class="site-footer"><div class="wrap">
+<div class="top"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>アフィまかせ</span></a><nav aria-label="フッター"><a href="/#service">サービス</a><a href="/#price">料金</a><a href="/column/">コラム</a><a href="/#contact">お問い合わせ</a><a href="/privacy.html">プライバシーポリシー</a></nav></div>
+<p class="op">アフィまかせは、合同会社IXS（イクス）が運営するアフィリエイト運用支援サービスです。運営会社: <a href="https://ixs-llc.com/" rel="noopener">合同会社IXS</a><br>本サイトの記事は一般的な情報の提供を目的としたもので、個別の事案についての法的な助言ではありません。<br>アフィまかせは、連絡の下書きやデータの判定に AI を使っています。はじめはすべて担当者が確認してから送り、自動にするのは御社と合意した定型の連絡だけです。金額や契約に関わる連絡は、必ず人が確認します。</p>
+<p class="copy">© IXS LLC.</p>
+</div></footer>
+<script src="/assets/track.js"></script>
+</body></html>
