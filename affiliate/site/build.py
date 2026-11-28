@@ -168,6 +168,93 @@ def article_page(a):
     return page
 
 
+# ---- コラム一覧（2026-11-28 SEO・AIO がオーナーの依頼で作り直し。持ち主は PM） ----
+# 記事の category（下の CATS のキー）でテーマ別に並べる。category がない・未知の記事は "etc"（その他）。
+# featured: true の記事は「まずはここから」に大きく出す（なければ出さない）。
+CATS = [("kosu", "工数を減らす"), ("jitsumu", "運用の実務"), ("hourei", "表記・法令"), ("hajime", "始め方"), ("etc", "その他")]
+
+IDX_CSS = """
+.col-hero .wrap{position:relative}.col-hero h1{font-size:clamp(28px,5vw,40px);line-height:1.3;margin:6px 0 8px}
+.col-hero .count{display:inline-block;margin-top:14px;font-size:13px;color:var(--text-inv-sub);border:1px solid var(--line-inv);border-radius:999px;padding:3px 12px}
+.col-main{padding-bottom:16px}
+.col-feat{position:relative;display:grid;gap:10px;margin:32px 0 0;padding:32px clamp(20px,4vw,40px);border-radius:20px;background:var(--navy-2);color:var(--text-inv);text-decoration:none;overflow:hidden;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.col-feat:before{content:"";position:absolute;inset:0;background:radial-gradient(55% 90% at 100% 0%,rgba(51,102,255,.45),transparent 70%),radial-gradient(40% 70% at 0% 100%,rgba(34,211,238,.18),transparent 70%)}
+.col-feat>*{position:relative}.col-feat:hover{transform:translateY(-2px);box-shadow:0 24px 48px -28px rgba(15,20,36,.6)}
+.col-feat .tag{justify-self:start;background:var(--grad);color:#fff}
+.col-feat strong{font-size:clamp(21px,3.2vw,28px);line-height:1.45;color:#fff}
+.col-feat .sub{color:var(--text-inv);font-weight:700}
+.col-feat .desc{color:var(--text-inv-sub);font-size:15px;max-width:760px}
+.col-feat .more{font-weight:700;color:var(--cyan);font-size:15px}
+.col-filter{display:flex;flex-wrap:wrap;gap:8px;margin:36px 0 4px}
+.col-filter button{font:inherit;font-size:14px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--text);border-radius:999px;padding:6px 16px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.col-filter button span{font-weight:400;color:var(--text-sub);margin-left:4px}
+.col-filter button:hover{border-color:#c5cbdc}
+.col-filter button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}.col-filter button[aria-pressed="true"] span{color:var(--text-inv-sub)}
+.col-main .col-sec{padding:0}
+@media (max-width:640px){.col-feat{padding:26px 20px}.col-feat .desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}}
+.col-sec h2{display:flex;align-items:center;gap:12px;font-size:20px;margin:36px 0 14px}
+.col-sec h2:before{content:"";width:6px;height:22px;border-radius:3px;background:var(--grad)}
+.col-sec h2 small{font-size:13px;font-weight:400;color:var(--text-sub)}
+.col-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:16px}
+.col-card{display:flex;flex-direction:column;gap:8px;min-width:0;padding:22px 22px 18px;border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--text);text-decoration:none;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s}
+.col-card:hover{transform:translateY(-2px);border-color:#d3d8e6;box-shadow:0 18px 36px -24px rgba(15,20,36,.3)}
+.col-card strong{font-size:17px;line-height:1.5;overflow-wrap:anywhere}
+.col-card .sub{font-size:14px;line-height:1.6;color:var(--text-sub);font-weight:700;overflow-wrap:anywhere}
+.col-card .desc{font-size:14px;line-height:1.75;color:var(--text-sub);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.col-card time{margin-top:auto;padding-top:6px;font-size:12px;color:var(--text-sub)}
+.tag{align-self:flex-start;display:inline-block;font-size:12px;font-weight:700;line-height:1.6;padding:2px 10px;border-radius:999px;background:#eef2ff;color:#2952cc}
+.t-jitsumu{background:#e6f7fb;color:#0e6f86}.t-hourei{background:#fff4e5;color:var(--warn)}.t-hajime{background:#e7f6ef;color:var(--ok)}.t-etc{background:var(--bg-sub);color:var(--text-sub)}
+.col-sec[hidden]{display:none}
+"""
+
+IDX_JS = """<script>
+(function(){var b=document.querySelectorAll('.col-filter button'),s=document.querySelectorAll('.col-sec');
+b.forEach(function(x){x.addEventListener('click',function(){var f=x.getAttribute('data-f');
+b.forEach(function(y){y.setAttribute('aria-pressed',y===x?'true':'false')});
+s.forEach(function(z){z.hidden=!(f==='all'||z.getAttribute('data-cat')===f)});});});})();
+</script>"""
+
+
+def split_title(t):
+    """「主題：副題」を2つに分ける。区切りがなければ副題は空。"""
+    main, sep, sub = t.partition("：")
+    return (main, sub) if sep else (t, "")
+
+
+def fmt_date(d):
+    return d.replace("-", ".")
+
+
+def index_body(arts):
+    labels = dict(CATS)
+    for a in arts:
+        if a.get("category") not in labels:
+            a["category"] = "etc"
+
+    def card(a):
+        m, s = split_title(a["title"])
+        d = a.get("updated", a["date"])
+        return (f'<a class="col-card" href="/column/{a["slug"]}/"><span class="tag t-{a["category"]}">{labels[a["category"]]}</span>'
+                f'<strong>{html.escape(m)}</strong>' + (f'<span class="sub">{html.escape(s)}</span>' if s else "") +
+                f'<span class="desc">{html.escape(a["description"])}</span><time datetime="{d}">{fmt_date(d)} 更新</time></a>')
+
+    out = ('<div class="col-hero"><div class="wrap"><span class="en">Column</span><h1>アフィリエイト運用コラム</h1>'
+           '<p class="meta">広告主・代理店のための、アフィリエイト運用の実務と表記の注意点。</p>'
+           f'<span class="count">全{len(arts)}本</span></div></div><main class="wrap col-main">')
+    feat = next((a for a in arts if str(a.get("featured", "")).lower() == "true"), None)
+    if feat:
+        m, s = split_title(feat["title"])
+        out += (f'<a class="col-feat" href="/column/{feat["slug"]}/"><span class="tag">まずはここから</span><strong>{html.escape(m)}</strong>'
+                + (f'<span class="sub">{html.escape(s)}</span>' if s else "") +
+                f'<span class="desc">{html.escape(feat["description"])}</span><span class="more">記事を読む →</span></a>')
+    used = [(k, v, [a for a in arts if a["category"] == k]) for k, v in CATS]
+    used = [u for u in used if u[2]]
+    out += '<nav class="col-filter" aria-label="テーマで絞り込む"><button type="button" data-f="all" aria-pressed="true">すべて<span>' + str(len(arts)) + "</span></button>"
+    out += "".join(f'<button type="button" data-f="{k}" aria-pressed="false">{v}<span>{len(lst)}</span></button>' for k, v, lst in used) + "</nav>"
+    out += "".join(f'<section class="col-sec" data-cat="{k}"><h2>{v}<small>{len(lst)}本</small></h2><div class="col-grid">' + "".join(card(a) for a in lst) + "</div></section>" for k, v, lst in used)
+    return out + IDX_JS
+
+
 def main():
     arts = sorted((parse(p) for p in (ROOT / "content").glob("*.md")), key=lambda a: a["date"], reverse=True)
     for a in arts:
@@ -176,10 +263,8 @@ def main():
     # 一覧
     ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "アフィリエイト運用コラム", "url": BASE + "/column/", "publisher": ORG}
     idx = HEAD.format(title="アフィリエイト運用コラム｜アフィまかせ", desc="広告主・代理店のためのアフィリエイト運用の実務、ステマ規制・表記の注意点、工数を減らす方法を解説します。",
-                      url=BASE + "/column/", ogtype="website", css=CSS, jsonld=f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>', pageid="col-index")
-    idx += '<div class="col-hero"><div class="w"><span class="en">Column</span><h1>アフィリエイト運用コラム</h1><p class="meta">広告主・代理店のための、アフィリエイト運用の実務と表記の注意点。</p></div></div><main class="w"><div class="list">'
-    idx += "".join(f'<a href="/column/{a["slug"]}/"><strong>{html.escape(a["title"])}</strong><span>{html.escape(a["description"])}</span></a>' for a in arts)
-    idx += "</div>" + CTA + "</main>" + FOOT
+                      url=BASE + "/column/", ogtype="website", css=CSS + IDX_CSS, jsonld=f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>', pageid="col-index")
+    idx += index_body(arts) + CTA + "</main>" + FOOT
     (ROOT / "column" / "index.html").write_text(idx, encoding="utf-8")
     # sitemap
     today = datetime.date.today().isoformat()

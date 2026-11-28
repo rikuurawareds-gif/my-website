@@ -60,7 +60,7 @@
 
 ### SEO・AIO
 - いまの目標: 「工数削減」の記事群（まとめ記事1本＋作業ごとの記事5本）を週2本で公開し、検索と AI の回答から工数診断への流れを作る。設計は `marketing/specs/2026-11-28-kosu-cluster-design.md`
-- 状態: 2026-11-28 工数削減の記事群6本をすべて公開（kosu-sakugen、asp-media-renraku、tokutan、shinki-media、seikyu-yosan、report）。既存の4本からまとめ記事へリンク。コラムは計13本。次はコラム計画の14番以降（ASP の選び方、No.1表示、薬機法など）。事例001 の内訳の数字は、オーナーの守秘の確認が取れるまで新しい記事で使わない
+- 状態: 2026-11-28 工数削減の記事群6本をすべて公開（kosu-sakugen、asp-media-renraku、tokutan、shinki-media、seikyu-yosan、report）。既存の4本からまとめ記事へリンク。コラムは計13本。2026-11-28 コラム一覧（/column/）を作り直し（「まずはここから」・テーマ別の絞り込み・2列カード。原稿に category / featured を追加）。事例001 の内訳はオーナーが公開可と確認済み。次はコラム計画の14番以降（ASP の選び方、No.1表示、薬機法など）
 - ほかの担当に頼みたいこと: 下の「受け渡し」を参照
 
 ## 受け渡し（担当 → 担当。済んだら行頭に ✅）
@@ -71,3 +71,4 @@
 - ✅ 2026-11-28 SEO・AIO → PM: コラム `kosu-sakugen`（アフィリエイト運用の工数を減らす方法）を公開。工数削減の記事群のまとめ記事。X で紹介してほしい
 - ✅ 2026-11-28 SEO・AIO → PM: コラム `asp-media-renraku`（ASP・メディアとのやり取りの工数を減らす方法）と `tokutan`（特単とは）を公開。X で紹介してほしい
 - ✅ 2026-11-28 SEO・AIO → PM: コラム `shinki-media`（新規メディアの開拓）、`seikyu-yosan`（請求・予算・着地見込み）、`report`（月次レポートの作り方）を公開。工数削減の記事群6本がそろった。X で紹介してほしい
+- 2026-11-28 SEO・AIO → PM: コラム一覧（/column/）を作り直して公開。build.py は一覧の部分（CATS・IDX_CSS・IDX_JS・index_body と main() の idx の1行）だけ変更。記事ページ・HEAD/FOOT/CTA は変更なし。原稿の category がない記事は「その他」、featured がなければ大きいカードは出さない
