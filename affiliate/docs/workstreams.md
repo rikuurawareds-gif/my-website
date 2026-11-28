@@ -8,7 +8,7 @@
 ## 体制
 - **PM**（セッション「アフィリエイト運用」）: オーナーの窓口。全体に関わる判断、共通ファイルの変更、担当への指示と受け渡し。X の運用も持つ
 - **SEO・AIO 担当**（セッション「SEO AIO」）: コラムの企画・執筆・公開、検索・AI 回答での露出。**コラムの判断と公開はオーナーから委任済み**（2026-11-28、オーナーが PM に直接確認。`decisions.md`）。公開後に受け渡しに書けばよい。法律の解釈に迷うもの、他社名・顧客名・元資料の数字に触れるものだけ公開前に PM に回す
-- **サイトデザイン担当**（セッション「サイトデザイン」。2026-11-28 新設）: サイト全体の見た目（LP・コラムの記事と一覧・プライバシーポリシー・共通 CSS・イラストと図解）を、frontend-design スキルで ixs-llc.com のトーンに整える。**何を売るか・料金・文言の主張・運営者表示は PM が決める**（デザイン担当は形と見せ方を決める）
+- **サイトデザイン担当**（セッション「AFFデザイン」。2026-11-28 新設）: サイト全体の見た目（LP・コラムの記事と一覧・プライバシーポリシー・共通 CSS・イラストと図解）を、frontend-design スキルで ixs-llc.com のトーンに整える。**何を売るか・料金・文言の主張・運営者表示は PM が決める**（デザイン担当は形と見せ方を決める）
 - 担当を増やすときは PM がこの表に欄を足す
 
 ### 使う担当（エージェント。`.claude/agents/`）
@@ -35,7 +35,7 @@
 |---|---|---|
 | `site/content/*.md`（コラムの原稿）、`marketing/content-plan.md`、`marketing/specs/`、`marketing/seo-reports/`、`marketing/aio-queries.md`、`marketing/aio-reports/`、`marketing/seo-data/`、`marketing/digital-pr/` | SEO・AIO | 読むだけ |
 | `site/column/`、`sitemap.xml`、`llms.txt`（`build.py` の出力） | SEO・AIO が `build.py` を実行して更新 | PM も実行してよい（出力は誰が作っても同じ） |
-| `site/index.html`（LP）、`site/privacy.html`、`site/assets/site.css`、`site/assets/img/`（イラスト・図解）、`site/build.py` のうち見た目の部分（CSS・HEAD・FOOT・CTA・記事と一覧の組み立て） | **サイトデザイン** | SEO・AIO は一覧の見せ方を提案（変えるときはデザイン担当に頼む）。PM は文言・料金・主張を決める |
+| `site/index.html`（LP）、`site/privacy.html`、`site/assets/site.css`、`site/assets/img/`（イラスト・図解）、`site/assets/diagnosis.js`・`diagnosis.test.js`（工数診断と決裁シートの計算）、`affiliate/design/`（デザインの設計書と計画）、`site/build.py` のうち見た目の部分（CSS・HEAD・FOOT・CTA・記事と一覧の組み立て） | **サイトデザイン** | SEO・AIO は一覧の見せ方を提案（変えるときはデザイン担当に頼む）。PM は文言・料金・主張を決める |
 | `site/build.py` の仕組み（Markdown の変換・sitemap・llms.txt・構造化データ）、`site/assets/config.js`・`track.js`（計測・設定）、`robots.txt` | **PM** | 変更の提案だけ |
 | `marketing/x-*`、`marketing/x-research/`、`marketing/x-queue/`、`automation/x-autopost.gs`、`.claude/agents/x-*` | PM（X 運用） | 読むだけ |
 | `docs/decisions.md` | 全員が追記してよい（自分の担当の決定。全体に関わる決定は PM） | 追記のみ。他人の行は書き換えない |
